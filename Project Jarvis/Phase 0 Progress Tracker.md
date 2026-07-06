@@ -16,7 +16,7 @@ source: "n/a — living note, tracks execution of [[Implementation Roadmap]] Pha
 - [ ] **Provision the VPS** (Hetzner/DigitalOcean) — see [[Layer 1 - Host Infrastructure]].
 - [ ] **Harden the VPS** — non-root user, firewall, Tailscale, disk encryption.
 - [ ] **Install the Claude Agent SDK runtime** — see [[Layer 2 - Agentic Harness]].
-- [ ] **Stand up a private git repo for Skills/knowledge files** (separate from this vault's own repo, or same — decide and note here).
+- [x] **Stand up a private git repo for Skills/knowledge files** — decided **separate** from this vault's repo (`kitdea/project-jarvis`), since Skills/knowledge files are runtime agent assets, not wiki/planning content. Created locally at `~/Documents/project-jarvis-skills` (`skills/`, `knowledge/` dirs) with an initial commit; no GitHub remote yet by choice — push later once ready. See [[Layer 6 - Skills and Knowledge Injection]].
 - [ ] **Create a secrets vault** (env vars or managed secrets store — never hardcode credentials).
 
 ## Re-verify (per [[Caveats]])
@@ -31,6 +31,7 @@ Pricing/rate-limit figures were "current as of mid-2026" — that window is now.
 | 2026-07-01 | Note created. No Phase 0 items confirmed started yet — flagged by vault analysis. |
 | 2026-07-01 | Go-live target set: 2026-07-15 (2-week sprint). Google Ads token confirmed not yet submitted — descoped from day-1 launch per [[Accelerated Launch Plan (2-Week Sprint)]]; submit today to start the fast-follow clock. |
 | 2026-07-03 | Connected Google Ads to this Claude session via Supermetrics MCP (Shumaker Roofing account, ID `8531416360`) — live ad hoc reporting now possible. See [[Google Ads API]] "Interim option" section. Developer-token application status unchanged — still not submitted. |
+| 2026-07-05 | Decided Skills/knowledge repo is separate from this vault. Created locally at `~/Documents/project-jarvis-skills`, no remote yet. Remaining Phase 0 items (Google Ads token, VPS provisioning/hardening, Agent SDK install, secrets vault, rate-limit re-verification) are still open — they require real-world accounts/access an AI session can't complete unattended. |
 
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]
