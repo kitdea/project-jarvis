@@ -43,5 +43,8 @@ Build it as **[[Layer 2 - Agentic Harness|Claude Agent SDK]]** (orchestrator + s
 - [[Recommendations]] — the 7 top-line action items
 - [[Caveats]] — source quality, drift risk, unverified assumptions
 
+## Other wikis in this vault
+- [[Marketing/Marketing - Overview|Marketing — Overview]] — channel audits and competitive/tactical playbooks for Shumaker Roofing's marketing operations. Separate second-brain wiki from this one; feeds the Marketing sub-agent described above but isn't architecture-planning content itself.
+
 ---
 *Source: "Project Jarvis: A Production-Ready Multi-Agent AI Architecture for Shumaker Roofing Co. (Marketing, Sales & Reporting)" PDF, pp. 1–8.*

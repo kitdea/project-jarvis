@@ -1,13 +1,12 @@
 ---
-title: "How I Built a Second Brain That Maintains Itself"
-source: "https://x.com/wandermist/status/2070454234189893747"
+title: How I Built a Second Brain That Maintains Itself
+source: https://x.com/wandermist/status/2070454234189893747
 author:
-  - "[[@wandermist]]"
 published: 2026-06-26
 created: 2026-07-03
-description: "Most people use AI the same way every time. Upload a document. Ask a question. Get an answer. Close the tab.Tomorrow, you upload the same do..."
+description: Most people use AI the same way every time. Upload a document. Ask a question. Get an answer. Close the tab.Tomorrow, you upload the same do...
 tags:
-  - "clippings"
+  - clippings
 ---
 ![Image](https://pbs.twimg.com/media/HLu40WjXwAASj0i?format=jpg&name=large)
 
