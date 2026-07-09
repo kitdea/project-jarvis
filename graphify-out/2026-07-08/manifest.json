@@ -80,9 +80,9 @@
     "semantic_hash": "ec4a00af4131601d130ba9eae4da5d39"
   },
   "Marketing/Marketing - Overview.md": {
-    "mtime": 1783457375.4907608,
-    "ast_hash": "5e8045bfe435c45cc39a40d270611ccb",
-    "semantic_hash": "5e8045bfe435c45cc39a40d270611ccb"
+    "mtime": 1783388760.4852076,
+    "ast_hash": "fdecdcf231b21ef8f1fee48430edbaf0",
+    "semantic_hash": "fdecdcf231b21ef8f1fee48430edbaf0"
   },
   "Project Jarvis/Accelerated Launch Plan (2-Week Sprint).md": {
     "mtime": 1783227280.1386611,
@@ -120,9 +120,9 @@
     "semantic_hash": "89bd7c93083871007631825d65404bda"
   },
   "Project Jarvis/Ingestion Log.md": {
-    "mtime": 1783457384.1549158,
-    "ast_hash": "3ed855f71d238893ecbb039f8173f534",
-    "semantic_hash": "3ed855f71d238893ecbb039f8173f534"
+    "mtime": 1783388471.473445,
+    "ast_hash": "be206966c927b0ec94cf9d88d54a46e5",
+    "semantic_hash": "be206966c927b0ec94cf9d88d54a46e5"
   },
   "Project Jarvis/Layer 1 - Host Infrastructure.md": {
     "mtime": 1783227280.1396954,
@@ -243,35 +243,5 @@
     "mtime": 1783425667.63,
     "ast_hash": "c31c394d6b3f6ae6a89cea4c8f917e0b",
     "semantic_hash": "c31c394d6b3f6ae6a89cea4c8f917e0b"
-  },
-  "mcp-servers/ghl-mcp-server/package.json": {
-    "mtime": 1783454925.9037864,
-    "ast_hash": "63847ed96f7f23999e5809e1c2c54b39",
-    "semantic_hash": "63847ed96f7f23999e5809e1c2c54b39"
-  },
-  "mcp-servers/ghl-mcp-server/src/ghl-client.ts": {
-    "mtime": 1783454947.8621705,
-    "ast_hash": "e80ccc8561596e0c742af8ba4126c30d",
-    "semantic_hash": "e80ccc8561596e0c742af8ba4126c30d"
-  },
-  "mcp-servers/ghl-mcp-server/src/index.ts": {
-    "mtime": 1783454976.1146648,
-    "ast_hash": "84b3362368f29ca85dbe168601653cce",
-    "semantic_hash": "84b3362368f29ca85dbe168601653cce"
-  },
-  "mcp-servers/ghl-mcp-server/tsconfig.json": {
-    "mtime": 1783454933.9569273,
-    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
-    "semantic_hash": "75a299456a990866e9d2fa1f9d72282b"
-  },
-  "mcp-servers/ghl-mcp-server/README.md": {
-    "mtime": 1783455007.5682163,
-    "ast_hash": "30aa821debfc731c614e4dffcccbadfe",
-    "semantic_hash": "30aa821debfc731c614e4dffcccbadfe"
-  },
-  "Marketing/AI Search Visibility Measurement.md": {
-    "mtime": 1783457368.1706297,
-    "ast_hash": "ac60a577bd449e572b02da2712936242",
-    "semantic_hash": "ac60a577bd449e572b02da2712936242"
   }
 }

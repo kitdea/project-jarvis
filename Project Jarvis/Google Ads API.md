@@ -24,6 +24,11 @@ Google's official targets are roughly **two business days** for a Basic Access r
 ## Worked usage
 See [[Routing Example]] for a GAQL query against campaign cost/conversion data used in a real Marketing-vs-Sales comparison.
 
+## OAuth Client ID received (2026-07-10)
+*(Source: credential handoff via this Claude/Obsidian session, not from the Project Jarvis PDF.)*
+
+The OAuth 2.0 **Client ID** for the Google Ads API connector has been received and stored in `project-jarvis-skills/.env` (git-ignored, never in this vault) as `GOOGLE_ADS_CLIENT_ID` — same pattern as the CallRail key in [[CallRail v3]]. This is a distinct credential from the **developer token**, which is still pending Google's review per [[Phase 0 Progress Tracker]]; the client ID alone does not unblock production API access.
+
 ## Interim option: Supermetrics (connected 2026-07-03)
 *(Source: live discovery via the Supermetrics MCP connector available in this Claude session, 2026-07-03 — not from the Project Jarvis PDF.)*
 

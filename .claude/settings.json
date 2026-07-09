@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash($\\(cat graphify-out/.graphify_python\\) -c \"\nimport json\nfrom pathlib import Path\nfrom graphify.diagnostics import diagnose_extraction, format_diagnostic_report\n\nextraction = json.loads\\(Path\\('graphify-out/.graphify_extract.json'\\).read_text\\(encoding='utf-8'\\)\\)\nsummary = diagnose_extraction\\(extraction, directed=False, root='.'\\)\nprint\\(format_diagnostic_report\\(summary\\)\\)\nflags = [f'{summary[k]} {label}' for k, label in \\(\n    \\('dangling_endpoint_edges', 'dangling-endpoint edges'\\),\n    \\('missing_endpoint_edges', 'missing-endpoint edges'\\),\n    \\('self_loop_edges', 'self-loop edges'\\),\n    \\('directed_same_endpoint_collapsed_edges', 'collapsed \\(directed\\) edges'\\),\n    \\('undirected_same_endpoint_collapsed_edges', 'collapsed \\(undirected\\) edges'\\),\n\\) if summary.get\\(k, 0\\)]\nprint\\('GRAPH HEALTH WARNING: ' + '; '.join\\(flags\\) + ' - graph may be incomplete/corrupt.' if flags else 'Graph health: OK \\(no dangling/missing/collapsed edges\\).'\\)\n\")",
+      "Bash(graphify query *)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {

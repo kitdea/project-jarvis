@@ -44,5 +44,8 @@ Audited 370 calls (88% answered). Two documented fields above are **not actually
 
 Calls made through CallRail's native Google/Meta/HubSpot integrations do **not** count toward usage. This is a real recurring cost to budget — see [[Recommendations]] #6.
 
+## MCP tool layer (built 2026-07-10)
+A local stdio MCP server now exists at `mcp-servers/callrail-mcp-server` (Node/TypeScript, `@modelcontextprotocol/sdk`), exposing 6 read-only tools: `list_accounts`, `list_calls`, `get_call`, `list_tags`, `list_companies`, `list_form_submissions`. Only `list_accounts` and `list_calls` are confirmed live against the Shumaker Roofing account (same auth path as `scripts/test-callrail-auth.sh` / `scripts/callrail-monthly-audit.py` in `project-jarvis-skills`); the other four wrap documented-but-not-yet-live-tested endpoints from CallRail's public API reference. The server's own tool instructions bake in the "Live audit" caveat above (`lead_status`/`value` unused; `tags`/`lead_score` are the real signals) so an agent calling these tools sees it without re-reading this note. Not yet wired into Claude Code and not yet committed to the vault's git repo.
+
 ---
 ⬅ Back to [[Layer 4 - Connectors Overview]] · [[Project Jarvis - Agentic OS]]

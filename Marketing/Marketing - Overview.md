@@ -17,6 +17,9 @@ source: "n/a — synthesized index for the Marketing/ folder, not derived from a
 - [[Marketing/Invalid Click Mitigation - Audience Targeting Tactic|Invalid Click Mitigation - Audience Targeting Tactic]] — predefined-audience "Targeting" filter that cut one advertiser's invalid-click rate 50%; relevant to Shumaker's high-CPC, competitive local vertical.
 - [[Marketing/Defending Branded Search from Competitor Google Ads Tactics|Defending Branded Search from Competitor Google Ads Tactics]] — DKI, comparison landing pages, brand modifier keywords, and a proportionate response framework. Directly relevant given 70% of call volume is branded traffic.
 
+## Measurement frameworks
+- [[Marketing/AI Search Visibility Measurement|AI Search Visibility Measurement]] — 5-step framework for tracking brand presence in AI search (ChatGPT, Google AI Mode): inclusion rate, prompt clusters, brand framing, competitive share of voice. Not yet actioned — no prompt library or baseline established.
+
 ## Related in Project Jarvis/
 - [[Google Ads API]] — the connector both tactical playbooks above will eventually run through, once the developer token clears (see [[Phase 0 Progress Tracker]])
 - [[CallRail v3]] — the connector behind the channel audits above
