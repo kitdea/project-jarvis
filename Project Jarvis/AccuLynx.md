@@ -40,6 +40,12 @@ A full webhook subscription API exists (topics include `job-milestone-changed`, 
 3. **Keys are write-capable** — AccuLynx warns *"Your API Key can be used by anyone to expose or manipulate your company data"* — there is no read-only key scope, so read-only must be enforced in the MCP tool layer by only implementing GET tools. See [[Security and Guardrails]].
 4. AccuLynx published **no detailed pagination/back-pressure guidance** beyond the above — implement exponential backoff with jitter.
 
+## Credential status
+A per-location API key has been issued and is stored locally in `.env.local` (`ACCULYNX_API_KEY`, gitignored — never committed).
+
+## MCP tool layer (built 2026-07-10)
+A local stdio MCP server now exists at `mcp-servers/acculynx-mcp-server` (Node/TypeScript, `@modelcontextprotocol/sdk`), exposing 9 read-only tools: `list_jobs`, `search_jobs`, `get_job_milestones`, `get_job_financials`, `get_job_invoices`, `get_job_payments`, `get_job_payments_overview`, `get_job_sales_owner`, `get_job_representatives`, `list_users` — one GET tool per endpoint in the "Read endpoints" section above, minus lead sources/trade types/custom fields (paths unconfirmed, see [[Caveats]]). Per the blocker above, only GET endpoints are implemented — enforced at this tool layer, not by the key itself. Not yet wired into Claude Code (`claude mcp add` not run) and not yet committed to the vault's git repo.
+
 ## Open question
 Field-level depth is unverified for Shumaker's specific account — see [[Caveats]].
 
