@@ -90,14 +90,14 @@
     "semantic_hash": "04f8b3aa069c01b68e385c959f64f24b"
   },
   "Project Jarvis/AccuLynx.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "8d38f1fc406e376d5bcd61c8cd5619dc",
-    "semantic_hash": "8d38f1fc406e376d5bcd61c8cd5619dc"
+    "mtime": 1783635012.1504502,
+    "ast_hash": "dc74da05714ce89590b52343b40c64ac",
+    "semantic_hash": "dc74da05714ce89590b52343b40c64ac"
   },
   "Project Jarvis/CallRail v3.md": {
-    "mtime": 1783386885.2003343,
-    "ast_hash": "c8e5e9ace0a9aa75dd65e98f86b249ab",
-    "semantic_hash": "c8e5e9ace0a9aa75dd65e98f86b249ab"
+    "mtime": 1783635313.901665,
+    "ast_hash": "47f7f9bfeb0e48d02260ad56b01d53a7",
+    "semantic_hash": "47f7f9bfeb0e48d02260ad56b01d53a7"
   },
   "Project Jarvis/Caveats.md": {
     "mtime": 1783227280.1396954,
@@ -105,14 +105,14 @@
     "semantic_hash": "103a5af3fc574447c741415c2b2631cf"
   },
   "Project Jarvis/GoHighLevel v2.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "2a98270a31c84d6dbb0e63833e71cb91",
-    "semantic_hash": "2a98270a31c84d6dbb0e63833e71cb91"
+    "mtime": 1783635019.4725769,
+    "ast_hash": "38f6ad2af83ef4bd86dd8ec80f66abad",
+    "semantic_hash": "38f6ad2af83ef4bd86dd8ec80f66abad"
   },
   "Project Jarvis/Google Ads API.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "b77269c7eca1453f0d0a540f8cf9d9e7",
-    "semantic_hash": "b77269c7eca1453f0d0a540f8cf9d9e7"
+    "mtime": 1783624313.321558,
+    "ast_hash": "6a447c456a957cc0815d61483b0b0f64",
+    "semantic_hash": "6a447c456a957cc0815d61483b0b0f64"
   },
   "Project Jarvis/Implementation Roadmap.md": {
     "mtime": 1783227280.1396954,
@@ -155,9 +155,9 @@
     "semantic_hash": "351c26d19cea41a8e19f158d8335c221"
   },
   "Project Jarvis/Phase 0 Progress Tracker.md": {
-    "mtime": 1783386304.6757596,
-    "ast_hash": "fcf106bd7bc90c6f5b144a28fb99371b",
-    "semantic_hash": "fcf106bd7bc90c6f5b144a28fb99371b"
+    "mtime": 1783635323.287827,
+    "ast_hash": "fe4f5eb5a0138df038d1aa950b7aee5c",
+    "semantic_hash": "fe4f5eb5a0138df038d1aa950b7aee5c"
   },
   "Project Jarvis/PostgreSQL Reporting.md": {
     "mtime": 1783227280.1396954,
@@ -273,5 +273,55 @@
     "mtime": 1783457368.1706297,
     "ast_hash": "ac60a577bd449e572b02da2712936242",
     "semantic_hash": "ac60a577bd449e572b02da2712936242"
+  },
+  "mcp-servers/acculynx-mcp-server/package.json": {
+    "mtime": 1783634289.2608304,
+    "ast_hash": "8b8db8b21ba9ce1db1e91e851bbc4e0d",
+    "semantic_hash": "8b8db8b21ba9ce1db1e91e851bbc4e0d"
+  },
+  "mcp-servers/acculynx-mcp-server/src/acculynx-client.ts": {
+    "mtime": 1783634662.4164066,
+    "ast_hash": "09fe0b92a87104ae16a3ded74cb30dd7",
+    "semantic_hash": "09fe0b92a87104ae16a3ded74cb30dd7"
+  },
+  "mcp-servers/acculynx-mcp-server/src/index.ts": {
+    "mtime": 1783634367.5672147,
+    "ast_hash": "577a0e1c3d0de6a4d2dfdafa14aab276",
+    "semantic_hash": "577a0e1c3d0de6a4d2dfdafa14aab276"
+  },
+  "mcp-servers/acculynx-mcp-server/tsconfig.json": {
+    "mtime": 1783634293.6589081,
+    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
+    "semantic_hash": "75a299456a990866e9d2fa1f9d72282b"
+  },
+  "mcp-servers/callrail-mcp-server/package.json": {
+    "mtime": 1783635209.165855,
+    "ast_hash": "c4c37a6de8f3e5d8cbf54e23b9ecbf0a",
+    "semantic_hash": "c4c37a6de8f3e5d8cbf54e23b9ecbf0a"
+  },
+  "mcp-servers/callrail-mcp-server/src/callrail-client.ts": {
+    "mtime": 1783635229.887213,
+    "ast_hash": "5a211053dd576141b81e78cf47b908a9",
+    "semantic_hash": "5a211053dd576141b81e78cf47b908a9"
+  },
+  "mcp-servers/callrail-mcp-server/src/index.ts": {
+    "mtime": 1783635255.3326528,
+    "ast_hash": "37709cfda4495e9289b7e213d2f3c401",
+    "semantic_hash": "37709cfda4495e9289b7e213d2f3c401"
+  },
+  "mcp-servers/callrail-mcp-server/tsconfig.json": {
+    "mtime": 1783635203.374755,
+    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
+    "semantic_hash": "75a299456a990866e9d2fa1f9d72282b"
+  },
+  "mcp-servers/acculynx-mcp-server/README.md": {
+    "mtime": 1783634383.8055017,
+    "ast_hash": "0e241b65dcc2a092e013b3e6a52bf848",
+    "semantic_hash": "0e241b65dcc2a092e013b3e6a52bf848"
+  },
+  "mcp-servers/callrail-mcp-server/README.md": {
+    "mtime": 1783635277.041028,
+    "ast_hash": "31a8531db261d18ad3489211bc17f3ce",
+    "semantic_hash": "31a8531db261d18ad3489211bc17f3ce"
   }
 }
