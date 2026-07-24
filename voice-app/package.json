@@ -1,0 +1,16 @@
+{
+  "name": "jarvis-voice-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local desktop chat+voice prototype for Project Jarvis, scoped to Marketing/Strategy/Info.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.218"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

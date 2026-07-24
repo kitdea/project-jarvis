@@ -14,12 +14,12 @@ Mature, fully public API (v24+). Used by the **Marketing sub-agent** — see [[L
 - **Auth:** OAuth2 (3-legged or service account) + developer token
 - **Key read endpoints:** `GoogleAdsService.SearchStream` with GAQL: `campaign`, `metrics.cost_micros`, `metrics.conversions_value` (ROAS), PMax via `asset_group`
 - **Rate limits:** 10k ops/batch; access-level quotas (Basic = 15,000 ops/day)
-- **Known roadblock:** Developer token requires Google approval (Basic→Standard); token cannot hit production accounts until approved; cost is reported in micros (÷1e6 to get dollars)
+- **Known roadblock (still open as of 2026-07-24):** Developer token requires Google approval (Basic→Standard) before it can hit production accounts at production quota. Token is currently at **Explorer Access** (confirmed via API Center screenshot, see below) — this tier does not clear the roadblock. Cost is still reported in micros (÷1e6 to get dollars).
 
-## Critical path: developer token approval
+## Critical path: developer token approval — still open, tier corrected 2026-07-24
 Google's official targets are roughly **two business days** for a Basic Access review and up to **~10 business days** for Standard Access. As of early 2026, Google acknowledged a backlog and longer review times on developer-token applications.
 
-**Plan for two business days as the optimistic case but weeks in practice** — this is the single longest external dependency on the entire build. **Submit the application on day one** ([[Implementation Roadmap]] Phase 0).
+**Correction:** this note briefly stated "Standard Access confirmed" earlier on 2026-07-24, based on an unverified operator report. A screenshot of the actual Google Ads API Center (Admin → API Center) shows the token's **Access level: Explorer Access** — not Standard. Explorer Access is Google's current-generation equivalent of the old "Test Access" tier and does not grant production-account/production-quota access. Treat the developer-token roadblock as **still open**; see "Developer token access level" below for the corrected, screenshot-sourced status.
 
 ## Worked usage
 See [[Routing Example]] for a GAQL query against campaign cost/conversion data used in a real Marketing-vs-Sales comparison.
@@ -27,7 +27,7 @@ See [[Routing Example]] for a GAQL query against campaign cost/conversion data u
 ## OAuth Client ID received (2026-07-10)
 *(Source: credential handoff via this Claude/Obsidian session, not from the Project Jarvis PDF.)*
 
-The OAuth 2.0 **Client ID** for the Google Ads API connector has been received and stored in `project-jarvis-skills/.env` (git-ignored, never in this vault) as `GOOGLE_ADS_CLIENT_ID` — same pattern as the CallRail key in [[CallRail v3]]. This is a distinct credential from the **developer token**, which is still pending Google's review per [[Phase 0 Progress Tracker]]; the client ID alone does not unblock production API access.
+The OAuth 2.0 **Client ID** for the Google Ads API connector has been received and stored in `project-jarvis-skills/.env` (git-ignored, never in this vault) as `GOOGLE_ADS_CLIENT_ID` — same pattern as the CallRail key in [[CallRail v3]]. This is a distinct credential from the **developer token**, which is present but at Explorer Access only (not yet Basic/Standard) — see "Developer token access level" below; the client ID alone does not unblock production API access.
 
 ## Interim option: Supermetrics (connected 2026-07-03)
 *(Source: live discovery via the Supermetrics MCP connector available in this Claude session, 2026-07-03 — not from the Project Jarvis PDF.)*
@@ -36,7 +36,14 @@ Independent of the developer-token application above, **live Google Ads data is 
 - Authenticated against the **Shumaker Roofing** ad account (account ID `8531416360`), connected via `francismarrosales@gmail.com`.
 - Lets Claude pull real campaign spend, conversions, ROAS, etc. into chat/notes on request — no developer token, no custom MCP server, no waiting on Google's review.
 
-**This is not a substitute for the production Jarvis connector described above.** Supermetrics is tied to this personal Claude session/account, not a credential-scoped MCP server the Jarvis orchestrator can call under the read-only tool-allowlist enforcement described in [[Security and Guardrails]]. Treat it as a stand-in for ad hoc reporting/analysis while the real developer token application (still open per [[Phase 0 Progress Tracker]]) works through Google's review.
+**This is still not a substitute for the production Jarvis connector described above.** Supermetrics is tied to this personal Claude session/account, not a credential-scoped MCP server the Jarvis orchestrator can call under the read-only tool-allowlist enforcement described in [[Security and Guardrails]]. Treat it as the stand-in for ad hoc reporting/analysis while the developer token remains below production access level (see below).
+
+## Developer token access level: Explorer Access, not yet Basic/Standard (corrected 2026-07-24)
+*(Source: screenshot of the live Google Ads API Center — Admin → API Center, account "SRC Ads" 862-825-5035 — provided by the operator 2026-07-24. Supersedes an earlier same-day note in this section that incorrectly stated "Standard Access confirmed" based on an unverified operator report.)*
+
+The `GOOGLE_ADS_DEVELOPER_TOKEN` value present in this repo's `.env.local` (git-ignored, never committed to this vault) matches the token shown in the API Center screenshot (`QYJr2xcro6xm9QWNMnVFMg`), confirming it's the right credential. However, the screenshot's **Access level field reads "Explorer Access"** — Google's current tier naming, roughly equivalent to the legacy "Test Access" tier this note previously described, and **not** Basic or Standard. Explorer Access does not unlock production-account/production-quota use.
+
+**This does not resolve the [[Phase 0 Progress Tracker]] developer-token checklist item.** To reach production access, request an upgrade from Explorer/Test to Basic Access from the same API Center page, then Standard once Basic clears — see "Critical path" above for expected review timelines. Also visible in the screenshot: API contact `tyler@shumakerroofing.com`, company "Shumaker Roofing," intended use "tracking leads" — useful if the upgrade application needs this detail confirmed or resubmitted.
 
 ## Local Services Ads folding into Google Ads via Performance Max (announced 2026-07-20)
 *(Source: Search Engine Land, "Local Services Ads come to Google Ads via Performance Max," Anu Adegbola, published 2026-07-20 — https://searchengineland.com/local-services-ads-come-to-google-ads-via-performance-max-482692. Clipping was short/partial as saved; treat specifics below as preliminary.)*

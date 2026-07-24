@@ -44,6 +44,7 @@ Build it as **[[Layer 2 - Agentic Harness|Claude Agent SDK]]** (orchestrator + s
 - [[Security and Guardrails]] — defense-in-depth for read-only enforcement, credentials, prompt injection
 - [[Recommendations]] — the 9 top-line action items (7 original + 2 from 2026-07-10 live-validation findings)
 - [[Caveats]] — source quality, drift risk, unverified assumptions
+- [[Voice App (Local Prototype)]] — local Electron chat+voice app scoped to Marketing/Strategy/Info, rehearsing Phase 5 ahead of the VPS
 
 ## Other wikis in this vault
 - [[Marketing/Marketing - Overview|Marketing — Overview]] — channel audits and competitive/tactical playbooks for Shumaker Roofing's marketing operations. Separate second-brain wiki from this one; feeds the Marketing sub-agent described above but isn't architecture-planning content itself.
