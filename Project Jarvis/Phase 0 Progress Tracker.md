@@ -8,7 +8,7 @@ source: "n/a — living note, tracks execution of [[Implementation Roadmap]] Pha
 
 ⬅ Back to [[Project Jarvis - Agentic OS]]
 
-> Tracks real-world execution status against the infra items in [[Implementation Roadmap]] Phase 0, now running on the compressed timeline in [[Accelerated Launch Plan (2-Week Sprint)]] (go-live target 2026-07-15). Update the checkboxes and dates as items move — this note is the "reality" layer on top of the plan.
+> Tracks real-world execution status against the infra items in [[Implementation Roadmap]] Phase 0, now running on the compressed timeline in [[Accelerated Launch Plan (2-Week Sprint)]] (go-live target 2026-07-15). Update the checkboxes and dates as items move — this note is the "reality" layer on top of the plan. For the two current blockers as single ownable next-actions, see [[Action Items]].
 
 ## Checklist
 
@@ -40,6 +40,7 @@ Pricing/rate-limit figures were "current as of mid-2026" — that window is now.
 | 2026-07-10 | Built local MCP tool layers for two connectors: `mcp-servers/acculynx-mcp-server` (9 read-only tools) and `mcp-servers/ghl-mcp-server` (6 read-only tools), both stdio Node/TypeScript servers under `mcp-servers/` in this vault's own repo (not `project-jarvis-skills`). See [[AccuLynx]] and [[GoHighLevel v2]] "MCP tool layer" sections. Neither is wired into Claude Code yet (`claude mcp add` not run) and neither is committed — currently untracked working-tree files. |
 | 2026-07-10 | Added a third MCP tool layer, `mcp-servers/callrail-mcp-server` (6 read-only tools). Same pattern/repo location as the two above; also not wired into Claude Code and not committed. See [[CallRail v3]] "MCP tool layer" section. |
 | 2026-07-10 | Smoke-tested all three newly-wired MCP tool layers (GHL, CallRail, AccuLynx) with a live read call each. **GHL and CallRail passed** (real pipeline/account data returned). **AccuLynx failed**: `list_users` → `401 API Key is invalid or deactivated`. Server is wired and reachable — this is a bad/expired key, not a config problem. See [[AccuLynx]] "Credential status." Need a fresh AccuLynx API key before that connector is usable. |
+| 2026-07-22 | **Operator instruction: stop flagging the VPS budget approval item.** No progress since the 2026-07-07 hold; the 2026-07-15 go-live target has now passed with the item still unresolved (surfaced across three consecutive lint passes — see [[Ingestion Log]]). Operator has explicitly deferred this: they will report back once budget approval lands. Per that instruction, this item and the go-live-date staleness it causes across [[GOALS]], [[Action Items]], and [[Accelerated Launch Plan (2-Week Sprint)]] should be treated as **intentionally parked, not silently stale** — don't re-chase or re-surface as a fresh finding until the operator updates it. |
 
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]

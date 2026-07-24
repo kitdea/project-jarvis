@@ -27,5 +27,8 @@ source: "Project Jarvis PDF, pp.2-3"
 
 **Hermes:** best considered as an optional channel-gateway shell, not the reasoning core — see the warning in [[Caveats]] about its self-improving memory.
 
+## Prompting the model underneath the harness
+Choosing Claude Agent SDK as the harness is separate from how the underlying model gets prompted. See [[Fable 5 Prompting Patterns]] for effort calibration, the progress-verification and proactivity-constraint patterns, and the sub-agent delegation pattern — all directly applicable to how the Jarvis orchestrator and its sub-agents should be prompted once this harness gets built.
+
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]

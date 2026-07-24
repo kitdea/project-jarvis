@@ -31,5 +31,8 @@ Author business logic as **Markdown "Skills" / knowledge files**, version-contro
 3. For any metric (ROAS, CAC, "qualified lead count"), the agent must **compute** from retrieved raw figures + the canonical formula file, not estimate.
 4. Keep the **"qualified lead" definition identical** across the Marketing agent (CallRail `lead_status`/GHL stage) and Sales agent (AccuLynx milestone) so the two never diverge. See [[Recommendations]] #7.
 
+## Related: general-purpose reliability prompting
+The anti-hallucination patterns above are about business-logic claims specifically. See [[Fable 5 Prompting Patterns]] for the equivalent discipline applied to *progress* claims (the "audit each claim against a tool result" pattern) and for a persistent cross-session memory-file pattern that mirrors this vault's own second-brain design.
+
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]
