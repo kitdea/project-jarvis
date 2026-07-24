@@ -22,5 +22,11 @@ source: "Project Jarvis PDF, pp.7-8"
 - Switch the harness to LangGraph if you require model-agnosticism or strict deterministic/auditable cyclic workflows.
 - Introduce the Mac Mini only when iMessage or local screen automation becomes mandatory.
 
+## Findings from live validation (2026-07-10, GHL + CallRail only, no AccuLynx/Google Ads)
+A manual cross-connector join (CallRail high-scoring calls ↔ GHL opportunities, week of 07-03–07-10) confirmed the Marketing+Sales agent's core value proposition works end-to-end today on just these two connectors. It also surfaced two gaps not in the original PDF:
+
+8. **GHL's `list_opportunities` has no server-side date-range filter and returns unbounded payloads.** A single call against Shumaker's live account (1,107 total opportunities) returned 296K characters and had to be paginated/filtered client-side by `createdAt`. A production sub-agent will hit this same ceiling on any location with real pipeline volume — needs either a narrower default `limit`, client-side date filtering in the [[GoHighLevel v2]] MCP tool layer, or a summarization step before results reach the orchestrator's context. Same risk applies to CallRail's `list_calls` at scale, though its `startDate`/`endDate` params at least let you narrow server-side.
+9. **Only ~19% (8 of 43) of this week's high-scoring CallRail calls (`lead_score` ≥ 50) had a matching GHL opportunity by phone number.** This is live evidence for Recommendation #7, not a new problem — the two systems' notions of "qualified" visibly diverge in production data, either from real drop-off between call and booking or from a join gap the phone-number match can't see (name-only entries, alternate numbers, manual bookings). Worth a quick manual audit of a sample of the unmatched 35 before treating the standardized definition file as sufficient — if the gap is a join/data problem rather than a definition problem, the shared file won't fix it alone.
+
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]

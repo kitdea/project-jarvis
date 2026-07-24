@@ -35,12 +35,14 @@ Build it as **[[Layer 2 - Agentic Harness|Claude Agent SDK]]** (orchestrator + s
 
 ## Execution
 - [[Routing Example]] — worked example: "How is Victor's pipeline looking vs. Google Ads spend this week?"
+- [[Fable 5 Prompting Patterns]] — engineering guidance for prompting the model underneath the Claude Agent SDK harness (effort calibration, progress verification, proactivity constraints, sub-agent delegation)
 - [[Implementation Roadmap]] — Phase 0 through Phase 5 (original 7-week pace)
 - [[Accelerated Launch Plan (2-Week Sprint)]] — compressed plan for the 2026-07-15 go-live target: what ships day 1, what's cut, what fast-follows
 - [[Phase 0 Progress Tracker]] — living checklist tracking real-world execution against Phase 0
+- [[Action Items]] — open blockers with a single owner-actionable next step (VPS budget approval, AccuLynx key reactivation)
 - [[Ingestion Log]] — record of raw-source ingestion/verification passes against this wiki
 - [[Security and Guardrails]] — defense-in-depth for read-only enforcement, credentials, prompt injection
-- [[Recommendations]] — the 7 top-line action items
+- [[Recommendations]] — the 9 top-line action items (7 original + 2 from 2026-07-10 live-validation findings)
 - [[Caveats]] — source quality, drift risk, unverified assumptions
 
 ## Other wikis in this vault

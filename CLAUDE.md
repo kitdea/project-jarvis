@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is an **Obsidian vault**, not a software codebase — there is no build, test, or package-manager tooling here. ("Lint" below means a wiki health-check, not code linting.) It is a personal knowledge base of linked Markdown notes, currently centered on **Project Jarvis**, a proposed multi-agent AI architecture for Shumaker Roofing Co. (Marketing, Sales & Reporting). Obsidian config lives in `.obsidian/` and should generally be left alone unless the user asks for a settings change.
 
-This vault is built as a **self-maintaining wiki** (Karpathy's "LLM Wiki" pattern — see `Clippings/Karpathy - LLM Knowledge Bases (X thread).md`), not a RAG store. New sources get read once and integrated into the wiki pages that already exist, rather than chunked and retrieved on demand. See "Second-brain / wiki maintenance pattern" below.
+This vault is built as a **self-maintaining wiki** (Karpathy's "LLM Wiki" pattern — see `Clippings/Karpathy - LLM Wiki (Gist).md`, the canonical source; also `Clippings/Karpathy - LLM Knowledge Bases (X thread).md`), not a RAG store. New sources get read once and integrated into the wiki pages that already exist, rather than chunked and retrieved on demand. See "Second-brain / wiki maintenance pattern" below.
 
 ## Working with notes here
 
@@ -19,7 +19,7 @@ This vault is built as a **self-maintaining wiki** (Karpathy's "LLM Wiki" patter
 
 ## Second-brain / wiki maintenance pattern
 
-Three layers (Karpathy's model — see the two notes in `Clippings/` for the full writeup):
+Three layers (Karpathy's model — see the three Karpathy notes in `Clippings/` for the full writeup, primarily `Karpathy - LLM Wiki (Gist).md`):
 
 1. **Raw Sources** (`Clippings/`) — immutable originals: PDFs, web clippings, saved threads. **Read-only.** Never edit a file in this folder; only read from it. Obsidian's Web Clipper drops new items here automatically.
 2. **Wiki** (`Project Jarvis/`, and any future project folders) — the AI-maintained layer: hub, layer notes, connector notes, summaries, trackers, logs. This is what changes.
