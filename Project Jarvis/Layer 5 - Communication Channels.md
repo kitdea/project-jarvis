@@ -23,5 +23,19 @@ Recommended later stack:
 
 Vapi's BYO-model approach lets Jarvis remain the LLM brain while Vapi manages the audio plumbing. Budget **~$0.23–0.33/min all-in** for a BYOK Vapi stack. See [[Implementation Roadmap]] Phase 5.
 
+## Local prototype: `voice-app` / "Jarvis Lite" (built 2026-07-24)
+*(Source: this vault's own `voice-app/` directory, not the Project Jarvis PDF.)*
+
+A working local rehearsal of the voice bolt-on exists today, ahead of the VPS/Vapi production build above. It's an Electron desktop app (`voice-app/main.js` + `renderer/`) that talks to a **scoped slice of Jarvis by chat or voice — Marketing/Strategy/Info only**, via the Claude Agent SDK running locally.
+
+**How voice actually works in it:**
+- **Speech-in:** the browser's built-in `webkitSpeechRecognition` (Web Speech API) — no separate STT service or key. Note this isn't fully offline: Chromium sends the audio to Google's recognition servers under the hood, so it needs internet even though no STT credential is configured anywhere.
+- **Speech-out:** the OS's built-in `speechSynthesis` — every reply is read aloud automatically, no setup needed.
+- **Scope enforcement:** only `mcp-servers/ghl-mcp-server` and `mcp-servers/callrail-mcp-server` are ever registered with the Agent SDK session — AccuLynx and any reporting/infra server are physically unreachable, not just discouraged, plus `system-prompt.md` instructs it to decline out-of-scope questions.
+
+**Bug found and fixed (2026-08-05):** `main.js` originally left `permissionMode` at the SDK default (`'default'`, which prompts for interactive tool-use approval), but the renderer has no UI to answer that prompt — a real GHL/CallRail question would have silently stalled. Fixed by setting `permissionMode: 'bypassPermissions'` (+ required `allowDangerouslySkipPermissions: true`). Safe specifically because read-only enforcement already lives one layer down, at the connector level (GET-only tools only) — the bypass doesn't grant anything new. Verified live post-fix: real data returned (10 GHL pipelines, 102 CallRail calls).
+
+**Relationship to the production plan above:** this is explicitly the local rehearsal for the Vapi/ElevenLabs bolt-on — same core pattern (Agent SDK + restricted MCP tool set + scoped system prompt), running on a dev machine instead of the VPS. Known limitations: no auth/login (single-user only), secrets read from each MCP server's own gitignored `.env` rather than a managed store, and no persistent conversation memory across turns (each request is a fresh Agent SDK query). See `voice-app/README.md` for setup/run instructions.
+
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]
