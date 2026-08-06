@@ -89,6 +89,15 @@ ipcMain.handle('jarvis:ask', async (_event, prompt) => {
       systemPrompt: SYSTEM_PROMPT,
       mcpServers: MCP_SERVERS,
       cwd: VAULT_ROOT,
+      // This app has no permission-approval UI (renderer.js is chat/mic only),
+      // so the SDK's default interactive prompt would hang forever with no
+      // way to grant it. Safe to bypass here specifically because read-only
+      // enforcement already happens one layer down, at the connector level:
+      // ghl-mcp-server and callrail-mcp-server only expose GET-only tools
+      // (see Project Jarvis/Security and Guardrails.md), so there is nothing
+      // a bypassed prompt newly permits beyond what those servers can do.
+      permissionMode: 'bypassPermissions',
+      allowDangerouslySkipPermissions: true,
     },
   });
 
