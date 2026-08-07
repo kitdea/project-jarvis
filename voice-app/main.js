@@ -61,6 +61,13 @@ const MCP_SERVERS = {
 
 let mainWindow;
 
+// Cross-turn memory: the Agent SDK's `resume` option threads a prior
+// session's history into a new query() call by session_id, so each new
+// request carries the full conversation instead of starting cold. We grab
+// session_id off the stream's 'system'/'init' message the first time and
+// reuse it on every subsequent call until the renderer asks for a reset.
+let currentSessionId = null;
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 480,
@@ -89,6 +96,9 @@ ipcMain.handle('jarvis:ask', async (_event, prompt) => {
       systemPrompt: SYSTEM_PROMPT,
       mcpServers: MCP_SERVERS,
       cwd: VAULT_ROOT,
+      // Resume the running conversation (if any) so this turn has the prior
+      // turns' context instead of starting fresh every message.
+      ...(currentSessionId ? { resume: currentSessionId } : {}),
       // This app has no permission-approval UI (renderer.js is chat/mic only),
       // so the SDK's default interactive prompt would hang forever with no
       // way to grant it. Safe to bypass here specifically because read-only
@@ -102,6 +112,9 @@ ipcMain.handle('jarvis:ask', async (_event, prompt) => {
   });
 
   for await (const message of stream) {
+    if (message.type === 'system' && message.subtype === 'init') {
+      currentSessionId = message.session_id;
+    }
     if (message.type === 'assistant') {
       for (const block of message.message.content) {
         if (block.type === 'text') finalText += block.text;
@@ -110,4 +123,9 @@ ipcMain.handle('jarvis:ask', async (_event, prompt) => {
   }
 
   return finalText.trim();
+});
+
+ipcMain.handle('jarvis:reset', async () => {
+  currentSessionId = null;
+  return true;
 });

@@ -26,7 +26,10 @@
       "Bash(./node_modules/electron/dist/electron . --no-sandbox)",
       "Bash(cd \"/home/keith/Documents/project-jarvis\"\necho \"=== Keys present in .env.local \\(names only, values redacted\\) ===\"\ngrep -oE '^[A-Z_][A-Z0-9_]*=' .env.local | sed 's/=$//'\necho\necho \"=== Line count / rough shape check ===\"\nwc -l .env.local\necho\necho \"=== Redacted preview \\(first/last 4 chars of each value only\\) ===\"\nwhile IFS='=' read -r key val; do\n  [ -z \"$key\" ] && continue\n  case \"$key\" in \\\\#*\\) continue;; esac\n  len=${#val}\n  if [ \"$len\" -gt 8 ]; then\n    redacted=\"${val:0:4}...${val: -4} \\(len $len\\)\"\n  else\n    redacted=\"\\(len $len, too short to preview safely\\)\"\n  fi\n  echo \"$key = $redacted\"\ndone < .env.local)",
       "Bash(git status *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(nohup ./node_modules/.bin/electron . --no-sandbox)",
+      "Bash(pkill -f \"voice-app\")",
+      "Bash(pkill -f \"node_modules/.bin/electron\")"
     ]
   },
   "hooks": {
