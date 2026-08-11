@@ -21,6 +21,7 @@ source: "Search Engine Land, \"How to evaluate Google Ads creative before testin
 A free scoring matrix exists for this (referenced in the source article) — score each candidate ad against the four pillars before it enters testing. Deliberately does not auto-score creative; the exercise itself is meant to build the evaluator's own creative judgment, not outsource it.
 
 ## Relevance to Shumaker Roofing
+<<<<<<< HEAD
 
 ### First MOCA pass run (2026-08-05)
 *(Source: live pull via the Supermetrics MCP connector, Google Ads account `8531416360` — not the Project Jarvis PDF.)*
@@ -39,6 +40,9 @@ A free scoring matrix exists for this (referenced in the source article) — sco
 **Also worth flagging to whoever owns the Google Ads connector build:** pulling full ad-level detail for a single campaign returned a **573,812-character response** that exceeded this session's tool output limit and had to be redirected to a file and queried with `jq`. This is the same unbounded-payload risk already documented for GHL's `list_opportunities` in [[Project Jarvis/Recommendations.md]] #8 — worth designing the eventual Google Ads MCP connector with the same narrower-default-fields/pagination discipline from the start, not discovering it live in production.
 
 Still not yet paired with [[Marketing/Defending Branded Search from Competitor Google Ads Tactics]] or [[Marketing/Invalid Click Mitigation - Audience Targeting Tactic]] in practice — those remain unactioned.
+=======
+Not yet actioned — no MOCA pass has been run against Shumaker's current or draft Google Ads creative. Directly usable once [[Google Ads API]] access is live (developer token still pending per [[Phase 0 Progress Tracker]]), but doesn't require API access to start — it's a manual creative-review framework applicable to any ad copy today, independent of the connector-build timeline. Worth pairing with [[Marketing/Defending Branded Search from Competitor Google Ads Tactics]] and [[Marketing/Invalid Click Mitigation - Audience Targeting Tactic]] — both are about *who* sees Shumaker's ads; MOCA is about whether the creative itself, once seen, earns a qualified click.
+>>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
 
 ---
 ⬅ Back to [[Marketing/Marketing - Overview|Marketing — Overview]] · [[Project Jarvis - Agentic OS]]

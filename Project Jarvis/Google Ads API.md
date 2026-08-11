@@ -54,5 +54,12 @@ Google is retiring the standalone Local Services Ads (LSA) dashboard and moving 
 
 **Confirmed 2026-08-05: Shumaker does run LSAs.** A live campaign pull via Supermetrics (account `8531416360`) found **only one `ENABLED` campaign on the entire account** — `LocalServicesCampaign:SystemGenerated:0005d4fa4fe38d5f`, $342.86/day. Every Search/PMax campaign with actual ad copy is currently `PAUSED`. LSA is presently Shumaker's *only* live paid-search channel, which raises the practical importance of this PMax-merger migration beyond "worth watching" — see [[Marketing/MOCA Ad Creative Evaluation Framework]] for the first real creative evaluation pass against the paused Search inventory.
 
+## Local Services Ads folding into Google Ads via Performance Max (announced 2026-07-20)
+*(Source: Search Engine Land, "Local Services Ads come to Google Ads via Performance Max," Anu Adegbola, published 2026-07-20 — https://searchengineland.com/local-services-ads-come-to-google-ads-via-performance-max-482692. Clipping was short/partial as saved; treat specifics below as preliminary.)*
+
+Google is retiring the standalone Local Services Ads (LSA) dashboard and moving LSA management into the main Google Ads interface, via a new Performance Max campaign type built for pay-per-lead local service businesses. Phased rollout begins **August 2026**. The new campaign type reportedly retains LSA's core characteristics (e.g. pay-per-lead, Google Business Profile sync) but runs through standard Google Ads infrastructure.
+
+**Why this matters for the Jarvis connector, if Shumaker runs LSAs:** LSAs have historically required a *separate* Local Services Ads API, not the `GoogleAdsService`/GAQL surface this connector note otherwise describes. If LSA campaigns genuinely move into standard Google Ads PMax campaigns, that could mean LSA lead/spend data becomes queryable through the same `GoogleAdsService.SearchStream` GAQL surface already planned for this connector — no second API/connector needed. **Not yet confirmed or actioned:** unclear whether Shumaker Roofing currently runs LSAs at all, and the source clipping didn't capture full technical/API details of the migration. Flag for follow-up once the August 2026 rollout details are clearer, and confirm with the operator whether Shumaker has an active LSA account.
+
 ---
 ⬅ Back to [[Layer 4 - Connectors Overview]] · [[Project Jarvis - Agentic OS]]

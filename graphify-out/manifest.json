@@ -120,9 +120,15 @@
     "semantic_hash": "89bd7c93083871007631825d65404bda"
   },
   "Project Jarvis/Ingestion Log.md": {
+<<<<<<< HEAD
     "mtime": 1786051441.311656,
     "ast_hash": "fbe8561477ade07bba43a1317be08d35",
     "semantic_hash": ""
+=======
+    "mtime": 1783805795.3204756,
+    "ast_hash": "4ca23370d685afba1f798ce747405d9f",
+    "semantic_hash": "4ca23370d685afba1f798ce747405d9f"
+>>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
   },
   "Project Jarvis/Layer 1 - Host Infrastructure.md": {
     "mtime": 1783227280.1396954,
@@ -155,9 +161,15 @@
     "semantic_hash": ""
   },
   "Project Jarvis/Phase 0 Progress Tracker.md": {
+<<<<<<< HEAD
     "mtime": 1786050817.0231135,
     "ast_hash": "ff8b09fc498299ad2c77e14364ae619f",
     "semantic_hash": ""
+=======
+    "mtime": 1783674088.858525,
+    "ast_hash": "79b64ab639845aafabbccbdce4432f26",
+    "semantic_hash": "79b64ab639845aafabbccbdce4432f26"
+>>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
   },
   "Project Jarvis/PostgreSQL Reporting.md": {
     "mtime": 1783227280.1396954,
@@ -165,9 +177,15 @@
     "semantic_hash": "4ea84aa550c9991f1269921c0912159f"
   },
   "Project Jarvis/Project Jarvis - Agentic OS.md": {
+<<<<<<< HEAD
     "mtime": 1784879342.588905,
     "ast_hash": "68ada816b266031d2e086a185dcd60a7",
     "semantic_hash": ""
+=======
+    "mtime": 1783672648.3524652,
+    "ast_hash": "f69a39206b137ccad87f9d2720d1bc73",
+    "semantic_hash": "f69a39206b137ccad87f9d2720d1bc73"
+>>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
   },
   "Project Jarvis/Recommendations.md": {
     "mtime": 1783685241.4757357,
@@ -335,6 +353,7 @@
     "semantic_hash": "b74d3f77b0fc90c4e46b37a3bf2f9c4a"
   },
   "Project Jarvis/Action Items.md": {
+<<<<<<< HEAD
     "mtime": 1784676788.3595083,
     "ast_hash": "f6633393d99a09217dc72ddca7a179c9",
     "semantic_hash": ""
@@ -568,5 +587,10 @@
     "mtime": 1784878870.3237724,
     "ast_hash": "55d66221f2f7c7d3291405eb987df29a",
     "semantic_hash": ""
+=======
+    "mtime": 1783672341.276338,
+    "ast_hash": "bd4751b262ae7977c8ec479581b8e1ba",
+    "semantic_hash": "bd4751b262ae7977c8ec479581b8e1ba"
+>>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
   }
 }

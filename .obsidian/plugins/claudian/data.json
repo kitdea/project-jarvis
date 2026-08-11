@@ -4,7 +4,11 @@
       {
         "draftModel": "sonnet",
         "tabId": "tab-1783425741983-eup2kg6",
+<<<<<<< HEAD
         "conversationId": null
+=======
+        "conversationId": "conv-1784290225504-j26yrm94i"
+>>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
       }
     ],
     "activeTabId": "tab-1783425741983-eup2kg6"
