@@ -80,9 +80,9 @@
     "semantic_hash": "ec4a00af4131601d130ba9eae4da5d39"
   },
   "Marketing/Marketing - Overview.md": {
-    "mtime": 1786051428.7934446,
-    "ast_hash": "d52086faaa128faf9f76210667e73eb9",
-    "semantic_hash": ""
+    "mtime": 1783457375.4907608,
+    "ast_hash": "5e8045bfe435c45cc39a40d270611ccb",
+    "semantic_hash": "5e8045bfe435c45cc39a40d270611ccb"
   },
   "Project Jarvis/Accelerated Launch Plan (2-Week Sprint).md": {
     "mtime": 1783227280.1386611,
@@ -110,9 +110,9 @@
     "semantic_hash": "38f6ad2af83ef4bd86dd8ec80f66abad"
   },
   "Project Jarvis/Google Ads API.md": {
-    "mtime": 1786051422.7043417,
-    "ast_hash": "1679c5c7d8168352707ff3eb18555474",
-    "semantic_hash": ""
+    "mtime": 1783624313.321558,
+    "ast_hash": "6a447c456a957cc0815d61483b0b0f64",
+    "semantic_hash": "6a447c456a957cc0815d61483b0b0f64"
   },
   "Project Jarvis/Implementation Roadmap.md": {
     "mtime": 1783227280.1396954,
@@ -120,9 +120,9 @@
     "semantic_hash": "89bd7c93083871007631825d65404bda"
   },
   "Project Jarvis/Ingestion Log.md": {
-    "mtime": 1786051441.311656,
-    "ast_hash": "fbe8561477ade07bba43a1317be08d35",
-    "semantic_hash": ""
+    "mtime": 1783805795.3204756,
+    "ast_hash": "4ca23370d685afba1f798ce747405d9f",
+    "semantic_hash": "4ca23370d685afba1f798ce747405d9f"
   },
   "Project Jarvis/Layer 1 - Host Infrastructure.md": {
     "mtime": 1783227280.1396954,
@@ -130,9 +130,9 @@
     "semantic_hash": "a9c92a1f5ca26004ff39a9d75fbbe64a"
   },
   "Project Jarvis/Layer 2 - Agentic Harness.md": {
-    "mtime": 1784664020.906546,
-    "ast_hash": "2c0233251f4db356eb90843af1e6c68d",
-    "semantic_hash": ""
+    "mtime": 1783227280.1396954,
+    "ast_hash": "f9c898a775444e551d18ab630f50c439",
+    "semantic_hash": "f9c898a775444e551d18ab630f50c439"
   },
   "Project Jarvis/Layer 3 - Orchestrator Topology.md": {
     "mtime": 1783227280.1396954,
@@ -145,19 +145,19 @@
     "semantic_hash": "9fe27c203789e0d13e41a540b064a5ef"
   },
   "Project Jarvis/Layer 5 - Communication Channels.md": {
-    "mtime": 1786050796.442766,
-    "ast_hash": "568e17cd2b7cb99bc7bf1df1f772d621",
-    "semantic_hash": ""
+    "mtime": 1783227280.1396954,
+    "ast_hash": "ededc24c2c4925f710bae766be8b885a",
+    "semantic_hash": "ededc24c2c4925f710bae766be8b885a"
   },
   "Project Jarvis/Layer 6 - Skills and Knowledge Injection.md": {
-    "mtime": 1784664026.4216561,
-    "ast_hash": "3a7065b6132cb2ed0761508cca24c8ef",
-    "semantic_hash": ""
+    "mtime": 1783227280.1396954,
+    "ast_hash": "351c26d19cea41a8e19f158d8335c221",
+    "semantic_hash": "351c26d19cea41a8e19f158d8335c221"
   },
   "Project Jarvis/Phase 0 Progress Tracker.md": {
-    "mtime": 1786050817.0231135,
-    "ast_hash": "ff8b09fc498299ad2c77e14364ae619f",
-    "semantic_hash": ""
+    "mtime": 1783674088.858525,
+    "ast_hash": "79b64ab639845aafabbccbdce4432f26",
+    "semantic_hash": "79b64ab639845aafabbccbdce4432f26"
   },
   "Project Jarvis/PostgreSQL Reporting.md": {
     "mtime": 1783227280.1396954,
@@ -165,9 +165,9 @@
     "semantic_hash": "4ea84aa550c9991f1269921c0912159f"
   },
   "Project Jarvis/Project Jarvis - Agentic OS.md": {
-    "mtime": 1784879342.588905,
-    "ast_hash": "68ada816b266031d2e086a185dcd60a7",
-    "semantic_hash": ""
+    "mtime": 1783672648.3524652,
+    "ast_hash": "f69a39206b137ccad87f9d2720d1bc73",
+    "semantic_hash": "f69a39206b137ccad87f9d2720d1bc73"
   },
   "Project Jarvis/Recommendations.md": {
     "mtime": 1783685241.4757357,
@@ -335,238 +335,8 @@
     "semantic_hash": "b74d3f77b0fc90c4e46b37a3bf2f9c4a"
   },
   "Project Jarvis/Action Items.md": {
-    "mtime": 1784676788.3595083,
-    "ast_hash": "f6633393d99a09217dc72ddca7a179c9",
-    "semantic_hash": ""
-  },
-  "build.py": {
-    "mtime": 1786402975.5600162,
-    "ast_hash": "0a6691a6878f745e2a916b9bcf3adec3",
-    "semantic_hash": ""
-  },
-  "config.json": {
-    "mtime": 1786419839.7091694,
-    "ast_hash": "4dfb0619577138e931aff4c33dee469d",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/briefs-data.json": {
-    "mtime": 1786401545.879498,
-    "ast_hash": "d751713988987e9331980363e24189ce",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/briefs.js": {
-    "mtime": 1786090946.304654,
-    "ast_hash": "2a44f805176cabdc6c397fb79aa2bc40",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/graph.js": {
-    "mtime": 1786088780.4101627,
-    "ast_hash": "f48a1f805ef4dba2792829504652d649",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/package.json": {
-    "mtime": 1786088401.9404929,
-    "ast_hash": "55aa404057e5243ca314f6ea2f464944",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/public/app.js": {
-    "mtime": 1786367678.249752,
-    "ast_hash": "84d27f1fdae3ba4aa9ea14546310bb98",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/public/brief-cards.js": {
-    "mtime": 1786091106.571323,
-    "ast_hash": "1bc385ada4830cf4e12988c311ce5855",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/public/graph-panel.js": {
-    "mtime": 1786089255.8580294,
-    "ast_hash": "54138fe06689a4f46ec9739719550ddc",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/server.js": {
-    "mtime": 1786090965.1249352,
-    "ast_hash": "a56da4c8c74f063fa2455f482424df21",
-    "semantic_hash": ""
-  },
-  "mcp-servers/semrush-mcp-server/package.json": {
-    "mtime": 1786087813.435679,
-    "ast_hash": "8e5a5965834505f836a0e8a1faddfc55",
-    "semantic_hash": ""
-  },
-  "mcp-servers/semrush-mcp-server/src/index.ts": {
-    "mtime": 1786087862.0644062,
-    "ast_hash": "661fbdba7d18028180280a10b0bbbfaa",
-    "semantic_hash": ""
-  },
-  "mcp-servers/semrush-mcp-server/src/semrush-client.ts": {
-    "mtime": 1786087844.346141,
-    "ast_hash": "07c3691823d1d4faa907d2c58850c648",
-    "semantic_hash": ""
-  },
-  "mcp-servers/semrush-mcp-server/tsconfig.json": {
-    "mtime": 1786087816.305722,
-    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
-    "semantic_hash": ""
-  },
-  "mcp-servers/supermetrics-mcp-server/package.json": {
-    "mtime": 1786087883.5717278,
-    "ast_hash": "ee94b6a6610c266df2e5d0f68ef0b7d6",
-    "semantic_hash": ""
-  },
-  "mcp-servers/supermetrics-mcp-server/src/index.ts": {
-    "mtime": 1786087915.1482003,
-    "ast_hash": "02c7c634491a721b585a268513ed5def",
-    "semantic_hash": ""
-  },
-  "mcp-servers/supermetrics-mcp-server/src/supermetrics-client.ts": {
-    "mtime": 1786087899.5309663,
-    "ast_hash": "cfb64dd93a9a2a07d638cadcb4f43e7b",
-    "semantic_hash": ""
-  },
-  "mcp-servers/supermetrics-mcp-server/tsconfig.json": {
-    "mtime": 1786087886.8587768,
-    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
-    "semantic_hash": ""
-  },
-  "server.py": {
-    "mtime": 1786419846.5926404,
-    "ast_hash": "77e1c062fe5affbefc9bd6e765d77abf",
-    "semantic_hash": ""
-  },
-  "viewer/graph-data.js": {
-    "mtime": 1786403073.6886983,
-    "ast_hash": "c11bdb9b88c3e4afa5bd7d7fe2b9dc47",
-    "semantic_hash": ""
-  },
-  "voice-app/main.js": {
-    "mtime": 1786076874.113559,
-    "ast_hash": "335ce19959bd9856fea9790206dbc436",
-    "semantic_hash": ""
-  },
-  "voice-app/package.json": {
-    "mtime": 1785360421.792772,
-    "ast_hash": "9b9d1ff87e145dc4aeaabf2d48613b89",
-    "semantic_hash": ""
-  },
-  "voice-app/preload.js": {
-    "mtime": 1786076877.8476186,
-    "ast_hash": "71873107bf3c728960ca542f98571498",
-    "semantic_hash": ""
-  },
-  "voice-app/renderer/renderer.js": {
-    "mtime": 1786077196.7517183,
-    "ast_hash": "37ae46f0bf1c73ba84eea32dcba7a4b1",
-    "semantic_hash": ""
-  },
-  "Clippings/Google June 2026 Spam Update Is Rolling Out.md": {
-    "mtime": 1784593559.2461426,
-    "ast_hash": "e9910e658efb73daa746a4583f19ebda",
-    "semantic_hash": ""
-  },
-  "Clippings/Google May 2026 Core Update Rolling Out.md": {
-    "mtime": 1784593573.4673798,
-    "ast_hash": "02949ded3ba5d4399e328e67c84d3072",
-    "semantic_hash": ""
-  },
-  "Clippings/Google Search Ranking Volatility This Weekend (July 18th).md": {
-    "mtime": 1784593510.8753355,
-    "ast_hash": "6b3eeaf8a9341e8cf78ede4ce5dcab38",
-    "semantic_hash": ""
-  },
-  "Clippings/How to build an AI-powered content gap analysis workflow.md": {
-    "mtime": 1784593138.0231154,
-    "ast_hash": "d05ae76f9060be95320d6ed3b2912974",
-    "semantic_hash": ""
-  },
-  "Clippings/How to evaluate Google Ads creative before testing it.md": {
-    "mtime": 1784593634.982406,
-    "ast_hash": "a2076c251aa8bf492672d6e4abf4cd2a",
-    "semantic_hash": ""
-  },
-  "Clippings/Local Services Ads come to Google Ads via Performance Max.md": {
-    "mtime": 1784593606.868937,
-    "ast_hash": "927ca03696cd2c706141631863d77dcf",
-    "semantic_hash": ""
-  },
-  "Clippings/The new SEO rules for bloggers in 2026 Why clarity matters in AI search.md": {
-    "mtime": 1784663492.1772196,
-    "ast_hash": "6f4d330ba0881a703baa52e66d708140",
-    "semantic_hash": ""
-  },
-  "Clippings/Web Push advertising in 2026 Market trends and challenges.md": {
-    "mtime": 1784593699.1654768,
-    "ast_hash": "02a06b505bdd5bf8dd96897ed910078e",
-    "semantic_hash": ""
-  },
-  "Marketing/AI-Powered Content Gap Analysis Workflow.md": {
-    "mtime": 1784593249.1759698,
-    "ast_hash": "b130f33594f740bf6076d169dd5aa53b",
-    "semantic_hash": ""
-  },
-  "Marketing/Google Algorithm Updates Tracker.md": {
-    "mtime": 1784594083.9838946,
-    "ast_hash": "3d3b9af812dbc0fe60a41f4c27a7f857",
-    "semantic_hash": ""
-  },
-  "Marketing/MOCA Ad Creative Evaluation Framework.md": {
-    "mtime": 1786051406.7450721,
-    "ast_hash": "31daed6064c3d0dd64dd6536c109a14b",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Fable 5 Prompting Patterns.md": {
-    "mtime": 1784664015.1154308,
-    "ast_hash": "292d59911ffc201fb508ea45a12a8fcc",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Voice App (Local Prototype).md": {
-    "mtime": 1784879328.182657,
-    "ast_hash": "734b6c7922eb283f4b2107852c2a8304",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/README.md": {
-    "mtime": 1786086824.6288912,
-    "ast_hash": "e733c7085f065a7efa41d988eced8ff8",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/public/index.html": {
-    "mtime": 1786103190.1195037,
-    "ast_hash": "1e4c107ad84551f3afe1e22912bb0412",
-    "semantic_hash": ""
-  },
-  "jarvis-dashboard/system-prompt.md": {
-    "mtime": 1786087998.0234418,
-    "ast_hash": "af7492c20094d0c27b2d1a8a4e844d52",
-    "semantic_hash": ""
-  },
-  "mcp-servers/semrush-mcp-server/README.md": {
-    "mtime": 1786087878.442651,
-    "ast_hash": "c01a0e8225641ca0cd7635616f6f4632",
-    "semantic_hash": ""
-  },
-  "mcp-servers/supermetrics-mcp-server/README.md": {
-    "mtime": 1786087932.7764645,
-    "ast_hash": "933ed1281d63a3754adeafeab5cea221",
-    "semantic_hash": ""
-  },
-  "viewer/index.html": {
-    "mtime": 1786419906.1205192,
-    "ast_hash": "7db0a2cdf85846d36a1efa149ab79629",
-    "semantic_hash": ""
-  },
-  "voice-app/README.md": {
-    "mtime": 1784879091.623414,
-    "ast_hash": "440c0db0857075919d3771ab2021a2d6",
-    "semantic_hash": ""
-  },
-  "voice-app/renderer/index.html": {
-    "mtime": 1786077204.99885,
-    "ast_hash": "bb548f01161c9f1e06442f3da9851100",
-    "semantic_hash": ""
-  },
-  "voice-app/system-prompt.md": {
-    "mtime": 1784878870.3237724,
-    "ast_hash": "55d66221f2f7c7d3291405eb987df29a",
-    "semantic_hash": ""
+    "mtime": 1783672341.276338,
+    "ast_hash": "bd4751b262ae7977c8ec479581b8e1ba",
+    "semantic_hash": "bd4751b262ae7977c8ec479581b8e1ba"
   }
 }

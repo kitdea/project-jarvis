@@ -1,0 +1,47 @@
+{
+  "_comment": "Server-side only. Lives in the project root, NOT in viewer/, so the static file server (which is rooted at viewer/) can never serve it.",
+
+  "backend": "claude-cli",
+  "model": "claude-sonnet-4-5",
+
+  "claude_cli": {
+    "_comment": "Runs /chat through the `claude -p` CLI on your Claude Code subscription: slower than the HTTP API, but no per-token API billing and no API key anywhere.",
+    "command": "claude",
+    "timeout_seconds": 120
+  },
+
+  "anthropic_api": {
+    "_comment": "Unused while backend is 'claude-cli'. To switch: set backend to 'anthropic-api' and put the key in the ANTHROPIC_API_KEY environment variable — never in this file, so it cannot leak by someone copying config.json around.",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "base_url": "https://api.anthropic.com/v1/messages",
+    "max_tokens": 400
+  },
+
+  "retrieval": {
+    "top_k": 6,
+    "title_weight": 3.0,
+    "note_chars": 1800,
+    "_capture_links_comment": "How many existing notes a new /remember capture is wired to. The first is also where its star is born in the galaxy.",
+    "capture_links": 3
+  },
+
+  "tts": {
+    "_comment": "Local Piper neural voice for /speak. The browser's own speechSynthesis falls back to espeak-ng on this machine, which sounds robotic; Piper is a real neural voice, offline, with no API key and no per-word cost. Set enabled to false to go back to browser speech.",
+    "enabled": true,
+
+    "_python_comment": "Piper is installed in a pipx venv, so it is not importable from the python running server.py — the worker runs under this interpreter instead. Reinstall with: pipx install piper-tts",
+    "python": "~/.local/share/pipx/venvs/piper-tts/bin/python",
+
+    "_model_comment": "en_GB-alan-medium: natural British male, ~0.55s per answer once warm. en_GB-cori-high is slightly richer but ~2.4s, which is too slow to feel conversational. Models live in ~/.local/share/piper-voices/ (from huggingface.co/rhasspy/piper-voices).",
+    "model": "~/.local/share/piper-voices/en_GB-alan-medium.onnx",
+
+    "_length_scale_comment": "Phoneme duration multiplier; >1 is slower. A touch above 1 reads as measured rather than rushed.",
+    "length_scale": 1.04
+  },
+
+  "history": {
+    "_comment": "Per-session conversation memory, kept server-side in RAM only.",
+    "max_turns": 6,
+    "max_sessions": 50
+  }
+}
