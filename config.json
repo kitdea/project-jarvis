@@ -10,6 +10,24 @@
     "timeout_seconds": 120
   },
 
+  "mcp": {
+    "_comment": "Same scope as jarvis-dashboard: GHL + CallRail only, both read-only connectors. AccuLynx and any Postgres/reporting/infra server are never wired in here. Each server dir has its own gitignored .env with its credentials.",
+    "servers": {
+      "ghl": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["mcp-servers/ghl-mcp-server/dist/index.js"],
+        "env_file": "mcp-servers/ghl-mcp-server/.env"
+      },
+      "callrail": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["mcp-servers/callrail-mcp-server/dist/index.js"],
+        "env_file": "mcp-servers/callrail-mcp-server/.env"
+      }
+    }
+  },
+
   "anthropic_api": {
     "_comment": "Unused while backend is 'claude-cli'. To switch: set backend to 'anthropic-api' and put the key in the ANTHROPIC_API_KEY environment variable — never in this file, so it cannot leak by someone copying config.json around.",
     "api_key_env": "ANTHROPIC_API_KEY",

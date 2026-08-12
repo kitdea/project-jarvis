@@ -6,15 +6,17 @@
 <title>Knowledge Galaxy</title>
 <style>
   :root {
-    --panel: rgba(10, 14, 26, 0.82);
-    --edge: rgba(120, 170, 255, 0.22);
-    --text: #dCE6FF;
-    --dim: #7f90b5;
+    --bg: #0a0e17;
+    --panel: rgba(14, 19, 30, 0.88);
+    --edge: rgba(255, 255, 255, 0.09);
+    --text: #dde5f4;
+    --dim: #8592ad;
+    --accent: #4ecf8f;
   }
   * { box-sizing: border-box; }
   html, body {
     margin: 0; height: 100%; overflow: hidden;
-    background: #000; color: var(--text);
+    background: var(--bg); color: var(--text);
     font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
   }
   #graph { position: fixed; inset: 0; }
@@ -26,29 +28,64 @@
   #title h1 {
     margin: 0; font-size: 19px; font-weight: 600; letter-spacing: .18em;
     text-transform: uppercase;
-    text-shadow: 0 0 22px rgba(120, 180, 255, .55);
   }
   #title p { margin: 5px 0 0; font-size: 12px; color: var(--dim); letter-spacing: .05em; }
 
-  /* ---- legend ---- */
-  #legend {
-    position: fixed; bottom: 24px; left: 32px; z-index: 5;
-    display: flex; flex-direction: column; gap: 7px;
-    padding: 14px 16px; border-radius: 12px;
+  /* ---- left sidebar: how-to, hub ranking, force sliders ---- */
+  #sidebar {
+    position: fixed; top: 96px; left: 24px; bottom: 24px; z-index: 5;
+    width: 232px; display: flex; flex-direction: column; gap: 14px;
+    pointer-events: none;   /* re-enabled per card, so the graph stays draggable */
+  }
+  #howto, .side-block {
+    pointer-events: auto;
+    padding: 13px 15px; border-radius: 10px;
     background: var(--panel); border: 1px solid var(--edge);
-    backdrop-filter: blur(9px); max-height: 42vh; overflow-y: auto;
+    backdrop-filter: blur(9px);
+  }
+  #howto { font-size: 11.5px; line-height: 1.6; color: var(--dim); }
+  .side-head {
+    font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 11px;
+  }
+  #legend {
+    display: flex; flex-direction: column; gap: 8px;
+    max-height: 34vh; overflow-y: auto;
   }
   .legend-row {
     display: flex; align-items: center; gap: 9px;
-    font-size: 12px; color: var(--dim); cursor: pointer;
-    transition: color .18s;
+    font-size: 12px; color: var(--text); cursor: pointer;
+    transition: opacity .18s; opacity: .82;
   }
-  .legend-row:hover { color: var(--text); }
-  .legend-dot {
-    width: 9px; height: 9px; border-radius: 50%; flex: none;
-    box-shadow: 0 0 9px currentColor;
+  .legend-row:hover { opacity: 1; }
+  /* Flat swatch, no bloom — it has to match how the nodes actually render. */
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .legend-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend-count {
+    margin-left: auto; padding-left: 12px; color: var(--dim);
+    font-variant-numeric: tabular-nums; font-size: 11.5px;
   }
-  .legend-count { margin-left: auto; padding-left: 14px; opacity: .6; font-variant-numeric: tabular-nums; }
+
+  .slider-row {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11.5px; color: var(--dim); margin-bottom: 9px;
+  }
+  .slider-row:last-child { margin-bottom: 0; }
+  .slider-row span { width: 68px; flex: none; }
+  .slider-row input {
+    flex: 1; min-width: 0; -webkit-appearance: none; appearance: none;
+    height: 3px; border-radius: 2px; background: rgba(255,255,255,.14);
+    outline: none; cursor: pointer;
+  }
+  .slider-row input::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); cursor: pointer;
+  }
+  .slider-row input::-moz-range-thumb {
+    width: 12px; height: 12px; border: 0; border-radius: 50%;
+    background: var(--accent); cursor: pointer;
+  }
 
   /* ---- side panel ---- */
   #panel {
@@ -209,99 +246,181 @@
     initial-value: 0;
   }
 
-  #reactor {
+  #hud {
     --level: 0;
-    --hue: 205;
+    --hue: 186;
+    /* One dial for the whole instrument: every ring inset, the tick radius and
+       the core all derive from this, so the HUD can be resized here alone
+       without the internals drifting out of proportion. */
+    --size: 168px;
     position: fixed;
-    right: 26px;
-    bottom: 26px;
-    width: 74px;
-    height: 74px;
+    right: 30px;
+    /* #hint sits at bottom: 26px on the same side, so the HUD is lifted clear
+       of it rather than letting the status line overlap the hint text. */
+    bottom: 62px;
     z-index: 6;
-    border-radius: 50%;
     pointer-events: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    /* Scale and glow both ride the level so a loud syllable physically swells
-       the reactor rather than only brightening it. */
-    transform: scale(calc(1 + var(--level) * .07));
-    filter: drop-shadow(0 0 calc(8px + var(--level) * 24px)
-                        hsla(var(--hue), 100%, 66%, calc(.25 + var(--level) * .5)));
+    gap: 12px;
   }
-  /* The graph canvas sits behind everything; on very narrow screens the
-     reactor would collide with the centred ask bar, so stand it down. */
-  @media (max-width: 620px) { #reactor { display: none; } }
+  /* The graph canvas sits behind everything; on very narrow screens the HUD
+     would collide with the centred ask bar, so shrink it first and stand it
+     down entirely once there is genuinely no room. */
+  @media (max-width: 1000px) { #hud { --size: 132px; } }
+  @media (max-width: 620px)  { #hud { display: none; } }
 
-  #reactor .reactor-housing {
-    position: absolute; inset: 0; border-radius: 50%;
-    background: radial-gradient(circle, #080d16 56%, #121a28 74%, #05080e 100%);
-    border: 1px solid hsla(var(--hue), 55%, 60%, .3);
-    box-shadow: inset 0 0 10px 2px #03060a, inset 0 0 0 5px #0a1018;
+  #reactor {
+    position: relative;
+    width: var(--size); height: var(--size);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
   }
 
-  /* Ring of light coils around the core. */
-  #reactor .reactor-coils { position: absolute; inset: 10px; border-radius: 50%; }
-  #reactor .reactor-coils span {
+  /* Every layer is drawn as a stroked ring rather than a lit sprite — the dial
+     should read as an instrument, so the amplitude moves opacity and thickness,
+     never a blur radius. There is deliberately no box-shadow anywhere here. */
+  #reactor .ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid hsla(var(--hue), 70%, 62%, .3);
+  }
+  #reactor .ring-outer { inset: 0; border-width: 2px; }
+  #reactor .ring-mid   { inset: 12.5%; border-style: dashed; opacity: .55; }
+  #reactor .ring-inner { inset: 23.4%; border-color: hsla(var(--hue), 70%, 62%, .5); }
+
+  /* Tick marks around the rim, brightening with the voice level. The tick
+     radius is a share of --size rather than a fixed offset, so the ring of
+     ticks grows with the dial instead of collapsing toward its centre. */
+  #reactor .ticks { position: absolute; inset: 3.1%; border-radius: 50%; }
+  #reactor .ticks span {
     position: absolute; top: 50%; left: 50%;
-    width: 6px; height: 10px; margin: -5px 0 0 -3px; border-radius: 2px;
-    background: linear-gradient(180deg,
-      hsla(var(--hue), 95%, 85%, .95), hsla(var(--hue), 90%, 55%, .5));
-    transform: rotate(calc(var(--c) * 36deg)) translateY(-22px);
-    opacity: calc(.35 + var(--level) * .65);
-    box-shadow: 0 0 calc(2px + var(--level) * 7px) hsla(var(--hue), 100%, 72%, .8);
+    width: 2px; height: calc(var(--size) * .055); border-radius: 1px;
+    margin: calc(var(--size) * -.0275) 0 0 -1px;
+    background: hsla(var(--hue), 80%, 70%, calc(.3 + var(--level) * .7));
+    transform: rotate(calc(var(--c) * 15deg)) translateY(calc(var(--size) * -.453));
   }
 
-  /* Triangular inner frame — the reactor's signature silhouette. */
-  #reactor .reactor-triangle {
-    position: absolute; inset: 20px;
-    clip-path: polygon(50% 3%, 96% 79%, 4% 79%);
-    background: hsla(var(--hue), 92%, 72%, calc(.16 + var(--level) * .34));
-  }
-  #reactor .reactor-triangle::after {
-    content: ''; position: absolute; inset: 6px;
-    clip-path: polygon(50% 3%, 96% 79%, 4% 79%);
-    background: #060a11;
-  }
-
-  /* White-hot centre. */
-  #reactor .reactor-core {
-    position: absolute; width: 21px; height: 21px; border-radius: 50%;
-    background: radial-gradient(circle, #fff 0%,
-      hsla(var(--hue), 100%, 90%, 1) 34%,
-      hsla(var(--hue), 100%, 60%, .9) 68%,
-      hsla(var(--hue), 100%, 48%, 0) 100%);
-    transform: scale(calc(.76 + var(--level) * .44));
-    box-shadow: 0 0 calc(6px + var(--level) * 20px) calc(1px + var(--level) * 4px)
-                hsla(var(--hue), 100%, 72%, .72);
+  /* The level arc: a conic sweep clipped to a thin annulus, so a loud syllable
+     fills more of the dial. This is the main readout. */
+  #reactor .arc {
+    position: absolute; inset: 6.25%; border-radius: 50%;
+    background: conic-gradient(
+      from -90deg,
+      hsla(var(--hue), 85%, 62%, .9) 0turn,
+      hsla(var(--hue), 85%, 62%, .9) calc(var(--level) * .75turn),
+      transparent calc(var(--level) * .75turn));
+    -webkit-mask: radial-gradient(circle, transparent 0 47%, #000 48% 53%, transparent 54%);
+            mask: radial-gradient(circle, transparent 0 47%, #000 48% 53%, transparent 54%);
   }
 
-  /* Halo that washes over the housing on loud syllables. */
-  #reactor .reactor-bloom {
-    position: absolute; inset: -12%; border-radius: 50%;
-    background: radial-gradient(circle,
-      hsla(var(--hue), 100%, 74%, .45) 0%, hsla(var(--hue), 100%, 62%, 0) 65%);
-    opacity: calc(var(--level) * .85);
+  /* Solid core disc — brightness only, no bloom. */
+  #reactor .core {
+    position: relative;
+    width: 26.6%; height: 26.6%; border-radius: 50%;
+    background: hsla(var(--hue), 75%, 58%, calc(.28 + var(--level) * .62));
+    border: 1px solid hsla(var(--hue), 80%, 70%, calc(.4 + var(--level) * .5));
+    transform: scale(calc(.92 + var(--level) * .16));
   }
 
-  /* Standby breath so the reactor never reads as switched off. While speaking
-     the level comes from the analyser, so the breath is dropped rather than
-     have two sources fight over the same property. State hues match the
-     existing #ask-status colours. */
-  #reactor.idle    { animation: reactor-breathe 3.6s ease-in-out infinite; }
-  #reactor.listening { --hue: 335; animation: reactor-breathe 1.5s ease-in-out infinite; }
-  #reactor.thinking  { --hue: 220; animation: reactor-breathe 1s ease-in-out infinite; }
-  #reactor.speaking  { --hue: 152; animation: none; }
-  @keyframes reactor-breathe {
-    0%, 100% { --level: .1; }
-    50%      { --level: .3; }
+  #reactor .wordmark {
+    position: absolute; z-index: 2;
+    font-size: calc(var(--size) * .086); font-weight: 600; letter-spacing: .18em;
+    /* The tracking pushes the last glyph's spacing past the text's right edge;
+       a matching indent keeps the wordmark optically centred in the dial. */
+    text-indent: .18em;
+    color: hsla(var(--hue), 60%, 88%, .92);
+  }
+
+  /* Status readout under the dial — the HUD says what it is doing in words
+     rather than expecting the user to decode a colour. */
+  #hud-status {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: hsla(var(--hue), 45%, 78%, .85);
+  }
+  #hud-status .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: hsla(var(--hue), 80%, 62%, 1);
+  }
+
+  /* Standby breath so the dial never reads as switched off. While speaking the
+     level comes from the analyser, so the breath is dropped rather than have
+     two sources fight over the same property. */
+  #hud.idle      { animation: hud-breathe 4s ease-in-out infinite; }
+  #hud.listening { --hue: 165; animation: hud-breathe 1.8s ease-in-out infinite; }
+  #hud.thinking  { --hue: 210; animation: hud-breathe 1.1s ease-in-out infinite; }
+  #hud.speaking  { --hue: 152; animation: none; }
+  @keyframes hud-breathe {
+    0%, 100% { --level: .08; }
+    50%      { --level: .26; }
+  }
+
+  /* The rings rotate slowly so the instrument reads as live; the arc and core
+     carry the actual data, so freezing this costs no information. */
+  #reactor .ring-mid { animation: hud-spin 26s linear infinite; }
+  #reactor .ticks    { animation: hud-spin 60s linear infinite reverse; }
+  @keyframes hud-spin { to { transform: rotate(360deg); } }
+
+  /* ---- per-state behaviour ----
+     Each state gets its own motion, not just its own hue, so the dial is
+     readable at a glance and from the corner of the eye. Rotation speed is
+     overridden on the existing spin animations rather than by adding new
+     ones, so the rings never restart mid-turn when the state changes. */
+
+  /* Idle: everything slows to near-still and dims — visibly standing by. */
+  #hud.idle #reactor .ring-mid { animation-duration: 44s; }
+  #hud.idle #reactor .ticks    { animation-duration: 90s; }
+  #hud.idle #reactor .ring     { opacity: .5; }
+
+  /* Listening: the outer ring pulses outward like it is reaching for input. */
+  #hud.listening #reactor .ring-mid { animation-duration: 14s; }
+  #hud.listening #reactor .ring-outer { animation: hud-listen 1.8s ease-out infinite; }
+  @keyframes hud-listen {
+    0%   { transform: scale(1);    border-color: hsla(var(--hue), 80%, 66%, .75); }
+    70%  { transform: scale(1.05); border-color: hsla(var(--hue), 80%, 66%, 0); }
+    100% { transform: scale(1.05); border-color: hsla(var(--hue), 80%, 66%, 0); }
+  }
+
+  /* Thinking: rings counter-rotate fast and the arc sweeps the dial on its own,
+     which reads as work in progress rather than as an amplitude reading. */
+  #hud.thinking #reactor .ring-mid { animation-duration: 4s; }
+  #hud.thinking #reactor .ticks    { animation-duration: 9s; }
+  #hud.thinking #reactor .arc {
+    background: conic-gradient(
+      from -90deg,
+      transparent 0turn,
+      hsla(var(--hue), 90%, 68%, .95) .18turn,
+      transparent .3turn,
+      transparent 1turn);
+    animation: hud-spin 1.4s linear infinite;
+  }
+
+  /* Speaking: the level comes from the analyser, so the dial only needs to get
+     out of its way — rings hold steady and the ticks brighten. */
+  #hud.speaking #reactor .ring-mid { animation-duration: 20s; }
+  #hud.speaking #reactor .ring-outer {
+    border-color: hsla(var(--hue), 80%, 66%, calc(.35 + var(--level) * .5));
+  }
+
+  /* The status dot carries the same state cue in miniature, for when the dial
+     itself is off-screen or the eye is on the text instead. */
+  #hud.listening #hud-status .dot { animation: hud-dot 1.8s ease-in-out infinite; }
+  #hud.thinking  #hud-status .dot { animation: hud-dot 1.1s ease-in-out infinite; }
+  #hud.idle      #hud-status .dot { opacity: .45; }
+  #hud.speaking  #hud-status .dot { transform: scale(calc(1 + var(--level) * .5)); }
+  @keyframes hud-dot {
+    0%, 100% { opacity: .35; transform: scale(.85); }
+    50%      { opacity: 1;   transform: scale(1.15); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #reactor, #reactor.idle, #reactor.listening, #reactor.thinking {
+    #hud, #hud.idle, #hud.listening, #hud.thinking,
+    #reactor .ring-mid, #reactor .ticks, #reactor .ring-outer,
+    #hud.thinking #reactor .arc, #hud-status .dot {
       animation: none;
-      transform: none;
     }
+    #reactor .core, #reactor .ring-outer, #hud-status .dot { transform: none; }
   }
 
   /* Keep the hint clear of the centred ask bar on narrow screens. */
@@ -317,8 +436,28 @@
   <p id="subtitle">&nbsp;</p>
 </div>
 
-<div id="legend"></div>
-<div id="hint">drag to orbit &middot; scroll to zoom &middot; click a star</div>
+<div id="sidebar">
+  <div id="howto">
+    Click a node to focus it — only that node and its connections stay lit, and
+    you can read its note here. Shift-click a second node to trace the path.
+  </div>
+  <div class="side-block">
+    <div class="side-head">Top hubs</div>
+    <div id="legend"></div>
+  </div>
+  <div class="side-block">
+    <div class="side-head">Forces</div>
+    <label class="slider-row">
+      <span>Repel</span>
+      <input id="force-repel" type="range" min="40" max="500" step="5" value="165">
+    </label>
+    <label class="slider-row">
+      <span>Link length</span>
+      <input id="force-link" type="range" min="20" max="200" step="2" value="62">
+    </label>
+  </div>
+</div>
+<div id="hint">drag to orbit &middot; scroll to zoom &middot; click a node</div>
 
 <aside id="panel">
   <button id="panel-close" aria-label="Close">&times;</button>
@@ -344,17 +483,26 @@
   </div>
 </div>
 
-<div id="reactor" class="idle" aria-hidden="true">
-  <div class="reactor-housing"></div>
-  <div class="reactor-coils">
-    <span style="--c:0"></span><span style="--c:1"></span><span style="--c:2"></span>
-    <span style="--c:3"></span><span style="--c:4"></span><span style="--c:5"></span>
-    <span style="--c:6"></span><span style="--c:7"></span><span style="--c:8"></span>
-    <span style="--c:9"></span>
+<div id="hud" class="idle" aria-hidden="true">
+  <div id="reactor">
+    <div class="ring ring-outer"></div>
+    <div class="ring ring-mid"></div>
+    <div class="ticks">
+      <span style="--c:0"></span><span style="--c:1"></span><span style="--c:2"></span>
+      <span style="--c:3"></span><span style="--c:4"></span><span style="--c:5"></span>
+      <span style="--c:6"></span><span style="--c:7"></span><span style="--c:8"></span>
+      <span style="--c:9"></span><span style="--c:10"></span><span style="--c:11"></span>
+      <span style="--c:12"></span><span style="--c:13"></span><span style="--c:14"></span>
+      <span style="--c:15"></span><span style="--c:16"></span><span style="--c:17"></span>
+      <span style="--c:18"></span><span style="--c:19"></span><span style="--c:20"></span>
+      <span style="--c:21"></span><span style="--c:22"></span><span style="--c:23"></span>
+    </div>
+    <div class="arc"></div>
+    <div class="ring ring-inner"></div>
+    <div class="core"></div>
+    <div class="wordmark">J.A.R.V.I.S.</div>
   </div>
-  <div class="reactor-triangle"></div>
-  <div class="reactor-core"></div>
-  <div class="reactor-bloom"></div>
+  <div id="hud-status"><span class="dot"></span><span id="hud-label">Standby</span></div>
 </div>
 
 <div id="loading">Mapping the knowledge graph…</div>
@@ -447,91 +595,234 @@ import ForceGraph3D from "3d-force-graph";
   var cluster = [];
   var inCluster = {};
 
-  // ---- starfield ------------------------------------------------------
-  function starfield() {
-    var geo = new THREE.BufferGeometry();
-    var count = 5200, pos = new Float32Array(count * 3);
-    for (var i = 0; i < count; i++) {
-      // Distribute on a wide shell so stars sit well behind the graph.
-      var r = 2600 + Math.random() * 5200;
-      var theta = Math.random() * Math.PI * 2;
-      var phi = Math.acos(2 * Math.random() - 1);
-      pos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = r * Math.cos(phi);
-    }
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    return new THREE.Points(geo, new THREE.PointsMaterial({
-      color: 0xffffff, size: 2.4, sizeAttenuation: false,
-      transparent: true, opacity: 0.75, depthWrite: false
-    }));
-  }
-
-  // ---- glowing node sprite -------------------------------------------
+  // ---- flat node disc --------------------------------------------------
+  // Deliberately NOT a glow: a matte disc with one pixel of antialiasing at the
+  // rim, drawn with normal blending. Additive sprites bloom into each other in
+  // the dense middle of the graph, which is exactly the smear this viewer is
+  // meant to avoid — overlapping discs stay countable, overlapping glows don't.
   var textureCache = {};
-  function glowTexture(hex) {
+  function discTexture(hex) {
     if (textureCache[hex]) return textureCache[hex];
     var size = 128, cv = document.createElement("canvas");
     cv.width = cv.height = size;
     var ctx = cv.getContext("2d");
     var g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-    g.addColorStop(0.00, "rgba(255,255,255,1)");
-    g.addColorStop(0.18, hex);
-    g.addColorStop(0.45, hex);
+    // Solid out to 88% of the radius, then a short ramp to transparent. The
+    // ramp is the antialiasing; any wider and the disc reads as a halo again.
+    g.addColorStop(0.00, hex);
+    g.addColorStop(0.88, hex);
+    g.addColorStop(0.97, hex);
     g.addColorStop(1.00, "rgba(0,0,0,0)");
     ctx.fillStyle = g;
-    ctx.fillRect(0, 0, size, size);
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.fill();
     var tex = new THREE.CanvasTexture(cv);
     textureCache[hex] = tex;
     return tex;
   }
 
-  function nodeObject(node) {
-    var mat = new THREE.SpriteMaterial({
-      map: glowTexture(colorOf[node.group]),
-      transparent: true, depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
-    var sprite = new THREE.Sprite(mat);
-    var scale = 9 + (degree[node.id] / maxDegree) * 17;
-    sprite.scale.set(scale, scale, 1);
-    sprite.__baseScale = scale;
-    node.__sprite = sprite;
+  // ---- node labels ------------------------------------------------------
+  // Labels are baked into their own sprites rather than drawn as DOM overlays,
+  // so they occlude and scale with the graph instead of floating over it.
+  var labelCache = {};
+  function labelTexture(text) {
+    if (labelCache[text]) return labelCache[text];
+    var pad = 8, fontPx = 34;
+    var measure = document.createElement("canvas").getContext("2d");
+    measure.font = "500 " + fontPx + "px Inter, -apple-system, Segoe UI, sans-serif";
+    var w = Math.ceil(measure.measureText(text).width) + pad * 2;
+    var h = fontPx + pad * 2;
+    var cv = document.createElement("canvas");
+    cv.width = w; cv.height = h;
+    var ctx = cv.getContext("2d");
+    ctx.font = "500 " + fontPx + "px Inter, -apple-system, Segoe UI, sans-serif";
+    ctx.textBaseline = "middle";
+    // A dark rim under the glyphs keeps them readable when a label lands on top
+    // of a bright node, without needing a background plate behind the text.
+    ctx.strokeStyle = "rgba(6, 10, 18, .95)";
+    ctx.lineWidth = 5;
+    ctx.strokeText(text, pad, h / 2);
+    ctx.fillStyle = "#e6edfb";
+    ctx.fillText(text, pad, h / 2);
+    var tex = new THREE.CanvasTexture(cv);
+    tex.__aspect = w / h;
+    labelCache[text] = tex;
+    return tex;
+  }
+
+  // Only the graph's hubs carry a standing label; labelling all ~1000 notes
+  // would be unreadable at any zoom. Everything else gets one on selection.
+  var LABEL_HUBS = 26;
+  var labelRank = {};
+  function recomputeLabelRank() {
+    labelRank = {};
+    nodes.slice()
+      .sort(function (a, b) { return degree[b.id] - degree[a.id]; })
+      .slice(0, LABEL_HUBS)
+      .forEach(function (n) { labelRank[n.id] = true; });
+  }
+  recomputeLabelRank();
+
+  function makeLabel(node) {
+    var tex = labelTexture(node.label);
+    var sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: tex, transparent: true, depthWrite: false, depthTest: false
+    }));
+    var h = 7;
+    sprite.scale.set(h * tex.__aspect, h, 1);
+    sprite.__baseH = h;
+    // Sit the label just above the disc rather than centred on it.
+    sprite.position.set(0, 0, 0);
+    sprite.renderOrder = 10;
     return sprite;
+  }
+
+  function nodeObject(node) {
+    var group = new THREE.Group();
+
+    var mat = new THREE.SpriteMaterial({
+      map: discTexture(colorOf[node.group]),
+      transparent: true, depthWrite: false
+    });
+    var disc = new THREE.Sprite(mat);
+    var scale = 5 + (degree[node.id] / maxDegree) * 15;
+    disc.scale.set(scale, scale, 1);
+    disc.__baseScale = scale;
+    group.add(disc);
+
+    var label = makeLabel(node);
+    label.position.y = scale * 0.5 + 5;
+    label.visible = !!labelRank[node.id];
+    group.add(label);
+
+    node.__sprite = disc;   // highlight code drives the disc
+    node.__label = label;
+    return group;
+  }
+
+  // Show a label for the current focus and its immediate neighbours, on top of
+  // the standing hub labels, so clicking into a dense region names what you see.
+  function updateLabels() {
+    var near = {};
+    if (selected !== null) {
+      near[selected] = true;
+      neighbors[selected].forEach(function (id) { near[id] = true; });
+    }
+    cluster.forEach(function (id) { near[id] = true; });
+    nodes.forEach(function (n) {
+      if (!n.__label) return;
+      n.__label.visible = !!(labelRank[n.id] || near[n.id]);
+    });
+  }
+
+  // ---- link glow --------------------------------------------------------
+  // Only the lit links glow; the resting web stays flat. A WebGL line is capped
+  // at 1px on most drivers, so "brighter" can't just mean "thicker" — instead
+  // each hot link gets a wide, faint tube drawn behind it with additive
+  // blending. Additive is safe here in a way it wasn't for the nodes: at most a
+  // couple of dozen links are ever lit at once, so they can't sum into a smear.
+  var HALO_RADIUS = 1.9;
+  var haloGeo = new THREE.CylinderGeometry(HALO_RADIUS, HALO_RADIUS, 1, 6, 1, true);
+  // The cylinder is built along +Y but is positioned by its endpoints below, so
+  // bake in the rotation that points it down +Z once rather than per frame.
+  haloGeo.rotateX(Math.PI / 2);
+  haloGeo.translate(0, 0, 0.5);   // origin at one end, so scaling z spans the link
+
+  function linkObject(link) {
+    var mesh = new THREE.Mesh(haloGeo, new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    }));
+    mesh.visible = false;
+    link.__halo = mesh;
+    return mesh;
+  }
+
+  // 3d-force-graph would otherwise re-centre and re-orient our mesh as if it
+  // were a link label. We want it stretched end-to-end, so take over placement.
+  // Signature is (obj, {start, end}, link). Returning false lets the library
+  // carry on and position the default line itself — we only own the halo.
+  var haloVec = new THREE.Vector3();
+  function placeHalo(mesh, start, end) {
+    mesh.position.set(start.x, start.y, start.z);
+    haloVec.set(end.x - start.x, end.y - start.y, end.z - start.z);
+    var len = haloVec.length() || 0.0001;
+    mesh.scale.set(1, 1, len);
+    mesh.lookAt(end.x, end.y, end.z);
+  }
+
+  function positionLinkObject(mesh, coords) {
+    if (mesh && mesh.visible) placeHalo(mesh, coords.start, coords.end);
+    return false;
+  }
+
+  // Driven from applyHighlight, so the glow tracks exactly the same notion of
+  // "hot" the link colour and width already use.
+  function updateLinkGlow() {
+    links.forEach(function (l) {
+      var mesh = l.__halo;
+      if (!mesh) return;
+      var hot = linkHot(l);
+      mesh.visible = hot;
+      if (!hot) return;
+      var anchor = cluster.length ? cluster[0] : selected;
+      mesh.material.color.set(colorOf[nodes[anchor].group]);
+      mesh.material.opacity = 0.14;
+      // positionLinkObject skips hidden meshes, so one that has just been lit
+      // is still parked wherever it was when it went dark. Place it now rather
+      // than waiting for the next tick — on a settled layout there isn't one.
+      var s = l.source, t = l.target;
+      if (typeof s === "object" && typeof t === "object") {
+        placeHalo(mesh, s, t);
+      }
+    });
   }
 
   // ---- graph ----------------------------------------------------------
   var elem = document.getElementById("graph");
   var Graph = ForceGraph3D()(elem)
-    .backgroundColor("#000004")
+    .backgroundColor("#0a0e17")
     .graphData({ nodes: nodes, links: links })
     .nodeId("id")
     .nodeLabel(function (n) { return n.label; })
     .nodeThreeObject(nodeObject)
+    .showNavInfo(false)
     .linkColor(function (l) {
-      if (selected === null && !cluster.length) return "rgba(120,160,220,0.16)";
-      if (!linkHot(l)) return "rgba(90,110,150,0.05)";
+      if (selected === null && !cluster.length) return "rgba(126, 214, 160, 0.20)";
+      if (!linkHot(l)) return "rgba(110, 130, 160, 0.045)";
       // Colour a hot link by the group of the node anchoring the highlight.
       var anchor = cluster.length ? cluster[0] : selected;
       return colorOf[nodes[anchor].group];
     })
-    .linkWidth(function (l) { return linkHot(l) ? 1.4 : 0.4; })
-    .linkOpacity(0.55)
-    .linkDirectionalParticles(function (l) { return linkHot(l) ? 3 : 0; })
-    .linkDirectionalParticleWidth(1.6)
-    .linkDirectionalParticleSpeed(0.006)
+    .linkWidth(function (l) { return linkHot(l) ? 1.1 : 0.28; })
+    .linkOpacity(0.5)
+    .linkDirectionalParticles(0)
+    // The halo mesh rides alongside the real line rather than replacing it —
+    // the line stays the crisp core, the mesh is the bloom around it.
+    .linkThreeObject(linkObject)
+    .linkThreeObjectExtend(true)
+    .linkPositionUpdate(positionLinkObject)
     .onNodeClick(function (n) { select(n.id, true); })
     .onBackgroundClick(function () { clearSelection(); });
 
-  Graph.d3Force("charge").strength(-165);
-  Graph.d3Force("link").distance(function (l) {
-    return idOf(l.source) === idOf(l.target) ? 40 : 62;
-  });
+  // Force parameters are user-adjustable from the FORCES sliders, so they live
+  // in variables the panel can write and re-apply rather than being inlined.
+  var forceRepel = 165, forceLink = 62;
+  function applyForces(reheat) {
+    Graph.d3Force("charge").strength(-forceRepel);
+    Graph.d3Force("link").distance(function (l) {
+      return idOf(l.source) === idOf(l.target) ? forceLink * 0.65 : forceLink;
+    });
+    if (reheat) Graph.d3ReheatSimulation();
+  }
+  applyForces(false);
 
-  Graph.scene().add(starfield());
-
-  // Soften the default lighting so the additive sprites carry the image.
-  Graph.scene().add(new THREE.AmbientLight(0x666f8a, 1.1));
+  Graph.scene().add(new THREE.AmbientLight(0xffffff, 1.0));
 
   // ---- selection ------------------------------------------------------
   function applyHighlight() {
@@ -560,11 +851,18 @@ import ForceGraph3D from "3d-force-graph";
       }
       sprite.material.opacity = opacity;
       sprite.scale.set(scale, scale, 1);
+      if (n.__label) {
+        // Keep the label riding just above the disc as the disc resizes, and
+        // fade it with the node so dimmed regions don't leave text behind.
+        n.__label.position.y = scale * 0.5 + 5;
+        n.__label.material.opacity = opacity < 1 ? 0.22 : 1;
+      }
     });
+    updateLabels();
+    updateLinkGlow();
     // Re-evaluate link accessors against the new selection.
     Graph.linkColor(Graph.linkColor())
-         .linkWidth(Graph.linkWidth())
-         .linkDirectionalParticles(Graph.linkDirectionalParticles());
+         .linkWidth(Graph.linkWidth());
   }
 
   function flyTo(node) {
@@ -728,6 +1026,10 @@ import ForceGraph3D from "3d-force-graph";
     // nodeObject sizes a sprite against maxDegree, so refresh it before the
     // graph is handed back the enlarged node list.
     maxDegree = Math.max.apply(null, degree.concat([1]));
+    // A new note can displace a hub from the standing-label set, and the note
+    // itself should be named while it settles.
+    recomputeLabelRank();
+    labelRank[node.id] = true;
 
     // Reheat the layout so the new star and its edges settle visibly instead of
     // appearing frozen in place.
@@ -779,7 +1081,6 @@ import ForceGraph3D from "3d-force-graph";
       var li = document.createElement("li");
       var dot = document.createElement("span");
       dot.className = "legend-dot";
-      dot.style.color = colorOf[other.group];
       dot.style.background = colorOf[other.group];
       li.appendChild(dot);
       li.appendChild(document.createTextNode(other.label));
@@ -800,46 +1101,63 @@ import ForceGraph3D from "3d-force-graph";
     }
   });
 
-  // ---- legend ---------------------------------------------------------
+  // ---- top hubs ---------------------------------------------------------
+  // A ranking of the individual best-connected notes, not a colour key for the
+  // groups. Group colours are already legible on the nodes themselves; what you
+  // can't read off the picture is which notes actually anchor the graph, so the
+  // panel answers that and doubles as a jump list.
   var legend = document.getElementById("legend");
-  function legendRow(g, count) {
+  var TOP_HUBS = 10;
+
+  function hubRow(node) {
     var row = document.createElement("div");
     row.className = "legend-row";
     var dot = document.createElement("span");
     dot.className = "legend-dot";
-    dot.style.background = colorOf[g];
-    dot.style.color = colorOf[g];
+    dot.style.background = colorOf[node.group];
     var name = document.createElement("span");
-    name.textContent = g;
+    name.className = "legend-name";
+    name.textContent = node.label;
+    name.title = node.label + " — " + node.group;
     var num = document.createElement("span");
     num.className = "legend-count";
-    num.textContent = count;
+    num.textContent = degree[node.id];
     row.appendChild(dot);
     row.appendChild(name);
     row.appendChild(num);
-    row.addEventListener("click", function () {
-      // Focus the most-connected note in this group.
-      var best = null;
-      nodes.forEach(function (n) {
-        if (n.group === g && (best === null || degree[n.id] > degree[best])) best = n.id;
-      });
-      if (best !== null) select(best, true);
-    });
+    row.addEventListener("click", function () { select(node.id, true); });
     return row;
   }
 
   // Recomputed rather than written once, so a note filed mid-session updates the
-  // counts and can add a legend row for a group that did not exist before.
+  // counts and can enter the hub ranking.
   function updateSubtitle() {
     document.getElementById("subtitle").textContent =
       nodes.length + " notes · " + links.length + " connections · " +
       groups.length + " clusters";
-    var counts = {};
-    nodes.forEach(function (n) { counts[n.group] = (counts[n.group] || 0) + 1; });
     legend.innerHTML = "";
-    groups.forEach(function (g) { legend.appendChild(legendRow(g, counts[g])); });
+    nodes.slice()
+      .sort(function (a, b) { return degree[b.id] - degree[a.id]; })
+      .slice(0, TOP_HUBS)
+      .forEach(function (n) { legend.appendChild(hubRow(n)); });
   }
   updateSubtitle();
+
+  // ---- force sliders ----------------------------------------------------
+  // Reheating on every input event would restart the sim mid-drag; instead the
+  // value is applied live and the layout is nudged once the user settles.
+  function bindForce(id, set) {
+    var el = document.getElementById(id);
+    var timer = null;
+    el.addEventListener("input", function () {
+      set(Number(el.value));
+      applyForces(false);
+      clearTimeout(timer);
+      timer = setTimeout(function () { applyForces(true); }, 140);
+    });
+  }
+  bindForce("force-repel", function (v) { forceRepel = v; });
+  bindForce("force-link",  function (v) { forceLink = v; });
 
   // ---- slow idle drift ------------------------------------------------
   var idleAngle = 0, lastFrame = Date.now(), interacting = false;
@@ -946,12 +1264,18 @@ import ForceGraph3D from "3d-force-graph";
   // The reactor mirrors whatever setStatus already tracks (idle / listening /
   // thinking / speaking) for colour, and while speaking its brightness is
   // driven from the real audio waveform — see driveReactor below.
-  var reactorEl = document.getElementById("reactor");
+  var reactorEl = document.getElementById("hud");
+  var hudLabel = document.getElementById("hud-label");
   var REACTOR_STATES = ["idle", "listening", "thinking", "speaking"];
+  var HUD_WORDS = {
+    idle: "Standby", listening: "Listening",
+    thinking: "Thinking", speaking: "Speaking"
+  };
 
   function setReactor(state) {
     if (REACTOR_STATES.indexOf(state) === -1) state = "idle";
     reactorEl.className = state;
+    hudLabel.textContent = HUD_WORDS[state];
     // Leaving "speaking" hands --level back to the CSS standby breath; pinning
     // an inline value would override the keyframes and freeze the reactor.
     if (state !== "speaking") {

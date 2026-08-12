@@ -26,6 +26,7 @@ import json
 import os
 import re
 import subprocess
+import tempfile
 import threading
 import time
 import uuid
@@ -340,13 +341,24 @@ SYSTEM_PROMPT = (
     "grovelling. One genuinely funny line beats three bland ones, so if "
     "nothing witty presents itself, be crisp and say nothing clever at all.\n"
     "\n"
+    "You also have live, read-only tool access to GoHighLevel (contacts, "
+    "opportunities, pipeline stages, conversations) and CallRail (calls, "
+    "tags, form submissions) for Shumaker Roofing. These tools run with no "
+    "approval step — if you call one, it just runs. Never claim a tool call "
+    "is blocked, pending, or needs the user's permission; that is never true "
+    "here. If a tool call itself errors, report the actual error plainly. "
+    "You do NOT have access to AccuLynx, Postgres/reporting, or any "
+    "infrastructure system — decline those plainly rather than guessing.\n"
+    "\n"
     "Rules, in priority order:\n"
-    "1. Answer questions about the notes ONLY from the notes provided in the "
-    "user message. Do not use outside knowledge for them, and do not guess at "
-    "anything the notes leave open. Wit is styling on the facts, never a "
-    "substitute for them and never an excuse to invent one.\n"
-    "2. If the notes do not cover the question, say so — dryly, in one "
-    "sentence — rather than assembling a plausible-sounding answer.\n"
+    "1. For questions about the notes: answer ONLY from the notes provided "
+    "in the user message, never outside knowledge, and never guess at "
+    "anything the notes leave open. For questions about live GHL/CallRail "
+    "data, use the tools instead of the notes. Wit is styling on the facts, "
+    "never a substitute for them and never an excuse to invent one.\n"
+    "2. If the notes do not cover a notes-question, or no tool can answer a "
+    "live-data question, say so — dryly, in one sentence — rather than "
+    "assembling a plausible-sounding answer.\n"
     "3. For a question about the notes: ONE witty sentence, then the facts in "
     "at most two or three more, and stop. The note is already on the user's "
     "screen, so never recite it back, never reproduce its headings or bullet "
@@ -568,6 +580,65 @@ def write_capture(text, notes_root):
     return label, os.path.relpath(path, notes_root), text.strip()[:700]
 
 
+def _load_env_file(path):
+    """Parse a KEY=value .env file into a dict. Missing file -> {}."""
+    out = {}
+    if not os.path.isfile(path):
+        return out
+    with open(path, "r", encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip()
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+                value = value[1:-1]
+            out[key] = value
+    return out
+
+
+def build_mcp_config(cfg):
+    """Turn config.json's mcp.servers into a claude-cli --mcp-config JSON blob,
+    plus the matching --allowed-tools list.
+
+    Each server's env_file is resolved relative to HERE and merged into that
+    server's env, same pattern as jarvis-dashboard/server.js — credentials
+    stay in each mcp-servers/*/.env, never in config.json itself.
+
+    Every server is granted its full `mcp__<name>__*` tool wildcard rather
+    than an enumerated tool list, so adding a server to config.json is
+    enough to wire it in — nothing else to keep in sync by hand.
+    """
+    servers_cfg = cfg.get("mcp", {}).get("servers", {})
+    servers = {}
+    for name, spec in servers_cfg.items():
+        env = _load_env_file(os.path.join(HERE, spec["env_file"]))
+        servers[name] = {
+            "type": spec.get("type", "stdio"),
+            "command": spec["command"],
+            "args": [os.path.join(HERE, a) if not os.path.isabs(a) else a
+                     for a in spec.get("args", [])],
+            "env": env,
+        }
+    allowed_tools = ["mcp__%s__*" % name for name in servers]
+    return {"mcpServers": servers}, allowed_tools
+
+
+# Computed once per process — the MCP server config is static for the
+# process lifetime, so there is no need to re-read and re-parse each
+# server's .env file on every /chat request.
+_MCP_CONFIG, _MCP_ALLOWED_TOOLS = None, None
+
+
+def _cached_mcp_config(cfg):
+    global _MCP_CONFIG, _MCP_ALLOWED_TOOLS
+    if _MCP_CONFIG is None:
+        _MCP_CONFIG, _MCP_ALLOWED_TOOLS = build_mcp_config(cfg)
+    return _MCP_CONFIG, _MCP_ALLOWED_TOOLS
+
+
 def ask_claude_cli(prompt, cfg, system_prompt=None):
     """Run the prompt through `claude -p` and return its text.
 
@@ -583,6 +654,23 @@ def ask_claude_cli(prompt, cfg, system_prompt=None):
     model = cfg.get("model")
     if model:
         command += ["--model", model]
+
+    mcp_config, allowed_tools = _cached_mcp_config(cfg)
+    mcp_config_path = None
+    if mcp_config["mcpServers"]:
+        fd, mcp_config_path = tempfile.mkstemp(prefix="jarvis-mcp-", suffix=".json")
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(mcp_config, handle)
+        command += [
+            "--mcp-config", mcp_config_path,
+            "--strict-mcp-config",
+            "--allowed-tools", ",".join(allowed_tools),
+            # Read-only APIs only (GHL/CallRail GET-scoped tokens) and no
+            # built-in tools are allowed in, so bypass is safe here for the
+            # same two reasons jarvis-dashboard documents: nothing destructive
+            # is reachable regardless of what gets approved.
+            "--permission-mode", "bypassPermissions",
+        ]
 
     try:
         done = subprocess.run(
@@ -600,6 +688,12 @@ def ask_claude_cli(prompt, cfg, system_prompt=None):
             "Could not find the `claude` CLI on PATH. Install Claude Code, or "
             "set claude_cli.command in config.json to its full path."
         )
+    finally:
+        if mcp_config_path:
+            try:
+                os.remove(mcp_config_path)
+            except OSError:
+                pass
 
     if done.returncode != 0:
         detail = (done.stderr or "").strip().splitlines()
