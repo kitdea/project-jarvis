@@ -8,3 +8,9 @@ node_modules/
 
 __pycache__/
 *.pyc
+
+# server.py's audit trail — user questions/params, not vault content.
+audit.log.jsonl
+
+# scheduled wiki-check run logs
+scripts/logs/

@@ -1211,6 +1211,16 @@ import ForceGraph3D from "3d-force-graph";
     "You're on port " + (location.port || "none (file://)") +
     " — open http://localhost:" + CHAT_PORT + " instead.";
 
+  // server.py stamps window.JARVIS_TOKEN into this page at serve time (see
+  // ViewerHandler._serve_index) and requires it back on every /chat,
+  // /remember, /speak call. Empty string when no JARVIS_TOKEN is configured,
+  // in which case the header is harmless to send anyway.
+  function authHeaders(extra) {
+    var headers = extra || {};
+    headers["X-Jarvis-Token"] = window.JARVIS_TOKEN || "";
+    return headers;
+  }
+
   function showAnswer(text, isError) {
     askAnswer.textContent = "";
     askAnswer.classList.toggle("error", !!isError);
@@ -1542,7 +1552,7 @@ import ForceGraph3D from "3d-force-graph";
 
     fetch("/speak", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ text: text })
     })
       .then(function (res) {
@@ -1732,7 +1742,7 @@ import ForceGraph3D from "3d-force-graph";
 
     fetch("/remember", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ text: text })
     })
       .then(function (res) {
@@ -1810,7 +1820,7 @@ import ForceGraph3D from "3d-force-graph";
 
     fetch("/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify(body)
     })
       .then(function (res) {

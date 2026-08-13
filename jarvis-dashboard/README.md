@@ -1,5 +1,13 @@
 # jarvis-dashboard
 
+**Status: retired (2026-08-13).** Operator confirmed the working Jarvis is
+`server.py` + `viewer/` at the vault root, not this app — this directory
+went untouched between the two most recent commits and was never picked
+back up after `voice-app` (the prototype this was meant to replace) was
+retired. Left in place as reference only; not being evolved further. See
+`Project Jarvis/Layer 5 - Communication Channels.md` ("Local prototype #2")
+and `Project Jarvis/Phase 0 Progress Tracker.md`.
+
 Browser-based local dashboard for Project Jarvis — Step 1 of the rebuild
 that replaces the `voice-app` Electron prototype (see
 `Project Jarvis/Voice App (Local Prototype).md`). Same reasoning core

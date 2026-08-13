@@ -39,5 +39,10 @@ A working local rehearsal of the voice bolt-on existed here, ahead of the VPS/Va
 
 **Relationship to the production plan above:** this is explicitly the local rehearsal for the Vapi/ElevenLabs bolt-on — same core pattern (Agent SDK + restricted MCP tool set + scoped system prompt), running on a dev machine instead of the VPS. Known limitations: no auth/login (single-user only), secrets read from each MCP server's own gitignored `.env` rather than a managed store, and no persistent conversation memory across turns (each request is a fresh Agent SDK query). See `voice-app/README.md` for setup/run instructions.
 
+## Local prototype #2: `jarvis-dashboard` (built as voice-app's successor, retired 2026-08-13)
+*(Source: this vault's own `jarvis-dashboard/` directory, not previously in the wiki.)*
+
+**Status: retired, superseded within this session.** `jarvis-dashboard/README.md` names itself "Step 1 of the rebuild that replaces the `voice-app` Electron prototype" — a browser-based (not Electron) version of the same scoped Agent SDK app, served over WebSocket instead of a desktop window, with the same GHL/CallRail-only MCP scoping and a hardened built-in-tool allow-list (only `WebSearch`/`WebFetch`; `Bash`/`Write`/`Edit`/`NotebookEdit` explicitly disallowed). Its last commit predates `voice-app`'s 2026-08-13 retirement note, and it was never picked back up afterward — operator confirmed 2026-08-13 it is **also** retired, not the working Jarvis referenced in that retirement decision. `server.py` + `viewer/` (vault root; see [[Security and Guardrails]] "Audit everything") is the one that's actually live and under active development. `jarvis-dashboard/` is left in place as reference only, same as `voice-app/`.
+
 ---
 ⬅ Back to [[Project Jarvis - Agentic OS]]

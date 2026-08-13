@@ -1,5 +1,6 @@
 {
   "_comment": "Server-side only. Lives in the project root, NOT in viewer/, so the static file server (which is rooted at viewer/) can never serve it.",
+  "_auth_comment": "The /chat, /remember, /speak shared-secret token is NOT here — it lives in a git-ignored .env at the vault root as JARVIS_TOKEN=..., loaded by server.py's AuthGate. Keeping it out of this file means config.json stays safe to read, copy, or eventually commit without leaking the secret.",
 
   "backend": "claude-cli",
   "model": "claude-sonnet-4-5",

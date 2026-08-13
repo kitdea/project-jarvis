@@ -19,6 +19,19 @@ Four rules shape the layout here:
     a 1980s robot; Piper is a local neural voice with no API key and no
     per-word billing. The model is held resident in a worker subprocess
     (see piper_worker.py) because loading it costs 3x what synthesis does.
+  * Every /chat, /remember, and /speak request is appended to
+    audit.log.jsonl (see AuditLog) — who/what/when/params/outcome, per
+    Project Jarvis/Security and Guardrails.md's "audit everything" rule.
+    Low-stakes today since this binds to 127.0.0.1 only, but the file (not
+    stdout) is what a review can actually replay once this moves off
+    localhost.
+  * Those same three routes also require a shared-secret token (see
+    AuthGate) and are rate-limited per client IP (see RateLimiter). Both are
+    cheap insurance today — anything on 127.0.0.1 can already reach this
+    process — but they are what stands between "this only works because
+    nothing else can reach it" and something safe to put behind a real
+    address once the VPS move in Project Jarvis/Implementation Roadmap.md
+    happens. See Project Jarvis/Phase 0 Progress Tracker.md's checklist.
 """
 
 import argparse
@@ -39,10 +52,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "viewer")
 CONFIG_PATH = os.path.join(HERE, "config.json")
 GRAPH_DATA = os.path.join(ROOT, "graph-data.js")
+AUDIT_LOG_PATH = os.path.join(HERE, "audit.log.jsonl")
+ENV_PATH = os.path.join(HERE, ".env")
 
 MAX_BODY = 64 * 1024
 MAX_QUESTION = 2000
 MAX_CAPTURE = 8000
+
+AUTH_HEADER = "X-Jarvis-Token"
+RATE_LIMIT_WINDOW = 60      # seconds
+RATE_LIMIT_MAX = 30         # requests per client IP per window, across the
+                             # three gated routes combined
 
 # Everything spoken or typed after one of these is the thing to remember.
 REMEMBER_RE = re.compile(
@@ -333,6 +353,120 @@ class Sessions:
             self._data[sid] = turns[-self.max_turns:]
             while len(self._data) > self.max_sessions:
                 self._data.popitem(last=False)
+
+
+SECRET_LIKE_RE = re.compile(
+    r"(?i)\b("
+    r"sk-[a-z0-9_-]{10,}"                 # OpenAI/Anthropic-style API keys
+    r"|[a-z0-9_-]*api[_-]?key[a-z0-9_-]*\s*[:=]\s*\S+"
+    r"|bearer\s+[a-z0-9._-]{10,}"
+    r"|[a-z0-9+/]{32,}={0,2}"             # long base64/hex blobs (tokens, secrets)
+    r")\b"
+)
+
+
+def redact_secrets(text):
+    """Mask substrings in `text` that look like pasted credentials/tokens.
+
+    Security and Guardrails.md: "never echo credentials ... into model
+    context or logs." audit.log.jsonl is git-ignored, but it's meant to be a
+    durable, reviewable record now — so a pasted API key in a chat question
+    shouldn't end up sitting in it verbatim.
+    """
+    return SECRET_LIKE_RE.sub("[REDACTED]", text)
+
+
+class AuditLog:
+    """Append-only JSONL record of every request handled by this process.
+
+    Security and Guardrails.md calls for logging "every tool call (who/what/
+    when/which params) for after-the-fact review." Binding to 127.0.0.1 makes
+    that low-stakes today, but the stdout print statements scattered through
+    the handlers don't survive a restart or a `> /dev/null`, so there was
+    nothing to actually review after the fact. One JSONL line per request
+    gives that a durable home ahead of the VPS move in the roadmap, where the
+    surface stops being localhost-only.
+    """
+
+    def __init__(self, path):
+        self.path = path
+        self._lock = threading.Lock()
+
+    def record(self, route, session_id, client_addr, params, outcome, detail=""):
+        if isinstance(params.get("question"), str):
+            params = dict(params, question=redact_secrets(params["question"]))
+        entry = {
+            "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "route": route,
+            "session_id": session_id,
+            "client": client_addr,
+            "params": params,
+            "outcome": outcome,
+            "detail": detail,
+        }
+        line = json.dumps(entry, ensure_ascii=True)
+        with self._lock:
+            try:
+                with open(self.path, "a", encoding="utf-8") as handle:
+                    handle.write(line + "\n")
+            except OSError as exc:
+                # The audit trail is a review aid, not a request dependency —
+                # a full disk should degrade the log, not the answer.
+                print("  audit log write failed: %s" % exc, flush=True)
+
+
+class AuthGate:
+    """Shared-secret check for /chat, /remember, /speak.
+
+    The token lives in a git-ignored .env at the vault root (JARVIS_TOKEN=...),
+    same convention as the MCP servers' own .env files — never in config.json,
+    which is read but not secret-scoped. Binding to 127.0.0.1 already keeps the
+    open internet out; this is the next layer down, keeping the routes closed
+    to other local users/processes on the same machine and giving the VPS move
+    something real to carry forward instead of "nothing was ever checked."
+
+    No token configured -> gate stays open and logs a warning once at startup,
+    so a fresh checkout still runs (matching PiperTTS's degrade-don't-raise
+    pattern) instead of locking the operator out of their own server.
+    """
+
+    def __init__(self, env_path):
+        env = _load_env_file(env_path)
+        self.token = env.get("JARVIS_TOKEN") or ""
+
+    def configured(self):
+        return bool(self.token)
+
+    def check(self, headers):
+        if not self.token:
+            return True
+        return headers.get(AUTH_HEADER) == self.token
+
+
+class RateLimiter:
+    """Fixed-window request cap per client IP, shared across the gated routes.
+
+    A sliding log is more accurate but this is guarding a single-user local
+    tool against a runaway script or browser tab, not an adversary optimizing
+    around window edges — a plain fixed window is enough and stays O(1) per
+    request instead of keeping a timestamp list per IP.
+    """
+
+    def __init__(self, window_seconds, max_requests):
+        self.window_seconds = window_seconds
+        self.max_requests = max_requests
+        self._lock = threading.Lock()
+        self._counts = {}   # ip -> [window_start, count]
+
+    def allow(self, ip):
+        now = time.time()
+        with self._lock:
+            window_start, count = self._counts.get(ip, (now, 0))
+            if now - window_start >= self.window_seconds:
+                window_start, count = now, 0
+            count += 1
+            self._counts[ip] = (window_start, count)
+            return count <= self.max_requests
 
 
 # Human-readable description of each MCP server this assistant might be wired
@@ -763,6 +897,35 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         # a TTY (e.g. started with setsid and redirected to a file).
         print("  %s" % (fmt % args), flush=True)
 
+    def do_GET(self):
+        # Only index.html needs the token stamped in, so it can pass it back
+        # in the AUTH_HEADER on every /chat, /remember, /speak call the page
+        # makes. Everything else (graph-data.js, css, etc.) still goes through
+        # the stock static handler untouched.
+        route = self.path.split("?")[0]
+        if route in ("/", "/index.html"):
+            self._serve_index()
+            return
+        super().do_GET()
+
+    def _serve_index(self):
+        index_path = os.path.join(ROOT, "index.html")
+        try:
+            with open(index_path, "r", encoding="utf-8") as handle:
+                html = handle.read()
+        except OSError:
+            self._send_json(404, {"error": "index.html missing"}, drained=False)
+            return
+        token_js = "<script>window.JARVIS_TOKEN = %s;</script>\n" % (
+            json.dumps(self.server.auth.token))
+        html = html.replace("</head>", token_js + "</head>", 1)
+        body = html.encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def _send_json(self, status, payload, drained=True):
         """Write a JSON response.
 
@@ -799,14 +962,30 @@ class ViewerHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         route = self.path.split("?")[0]
+        if route not in ("/chat", "/remember", "/speak"):
+            self._send_json(404, {"error": "Not found"}, drained=False)
+            return
+
+        client_ip = self.client_address[0]
+        if not self.server.auth.check(self.headers):
+            self.server.audit.record(route, None, client_ip, {}, "denied",
+                                     "missing/invalid " + AUTH_HEADER)
+            self._send_json(401, {"error": "Missing or invalid " + AUTH_HEADER},
+                            drained=False)
+            return
+        if not self.server.limiter.allow(client_ip):
+            self.server.audit.record(route, None, client_ip, {}, "denied",
+                                     "rate limit exceeded")
+            self._send_json(429, {"error": "Too many requests — slow down a bit."},
+                            drained=False)
+            return
+
         if route == "/chat":
             self._handle_chat()
         elif route == "/remember":
             self._handle_remember()
         elif route == "/speak":
             self._handle_speak()
-        else:
-            self._send_json(404, {"error": "Not found"}, drained=False)
 
     def _handle_speak(self):
         """Return WAV audio for the given text, or 503 so the page falls back.
@@ -834,11 +1013,16 @@ class ViewerHandler(SimpleHTTPRequestHandler):
             audio = tts.synthesize(text)
         except RuntimeError as exc:
             print("  /speak failed: %s" % exc)
+            self.server.audit.record("/speak", None, self.client_address[0],
+                                     {"chars": len(text)}, "error", str(exc))
             self._send_json(503, {"error": "Speech synthesis failed: %s" % exc})
             return
 
         print("  /speak %.2fs  %d KB  %r"
               % (time.time() - started, len(audio) // 1024, text[:48]))
+        self.server.audit.record("/speak", None, self.client_address[0],
+                                 {"chars": len(text)}, "ok",
+                                 "%d KB in %.2fs" % (len(audio) // 1024, time.time() - started))
         self.send_response(200)
         self.send_header("Content-Type", "audio/wav")
         self.send_header("Content-Length", str(len(audio)))
@@ -879,6 +1063,8 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         try:
             label, rel_path, excerpt = write_capture(text, HERE)
         except OSError as exc:
+            self.server.audit.record("/remember", None, self.client_address[0],
+                                     {"chars": len(text)}, "error", str(exc))
             self._send_json(500, {"error": "Could not write the note: %s" % exc})
             return
 
@@ -896,6 +1082,9 @@ class ViewerHandler(SimpleHTTPRequestHandler):
 
         print("  /remember -> %s (node %d, %d relatives)"
               % (rel_path, node["id"], len(related)))
+        self.server.audit.record("/remember", None, self.client_address[0],
+                                 {"chars": len(text)}, "ok",
+                                 "%s (node %d)" % (rel_path, node["id"]))
         self._send_json(200, {
             "answer": confirmation,
             "node": node,
@@ -944,6 +1133,8 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         try:
             answer = ask_claude_cli(prompt, cfg)
         except RuntimeError as exc:
+            self.server.audit.record("/chat", session_id, self.client_address[0],
+                                     {"question": question}, "error", str(exc))
             self._send_json(502, {"error": str(exc), "session_id": session_id})
             return
 
@@ -951,6 +1142,10 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         print("  /chat %.1fs  %d notes%s  %r"
               % (time.time() - started, len(hits),
                  "" if note_question else " (chat)", question[:60]))
+        self.server.audit.record("/chat", session_id, self.client_address[0],
+                                 {"question": question, "notes": hits,
+                                  "tools_allowed": bool(cfg["_mcp_config"]["mcpServers"])},
+                                 "ok", "%.1fs" % (time.time() - started))
         # Small talk reports no nodes at all: the viewer drives both the source
         # chips and the camera off this list, so an empty one leaves the graph
         # exactly where the user left it.
@@ -998,11 +1193,23 @@ def main():
     server.sessions = Sessions(history.get("max_turns", 6),
                                history.get("max_sessions", 50))
     server.tts = PiperTTS(cfg)
+    server.audit = AuditLog(AUDIT_LOG_PATH)
+    server.auth = AuthGate(ENV_PATH)
+    server.limiter = RateLimiter(RATE_LIMIT_WINDOW, RATE_LIMIT_MAX)
 
     print("Knowledge galaxy serving %s" % ROOT)
     print("  %d notes indexed · /chat via `claude -p` (model: %s)"
           % (len(nodes), cfg.get("model", "default")))
     print("  /remember writes to %s%s" % (CAPTURE_DIR, os.sep))
+    print("  audit log: %s" % AUDIT_LOG_PATH)
+    if server.auth.configured():
+        print("  /chat, /remember, /speak require %s" % AUTH_HEADER)
+    else:
+        print("  WARNING: no JARVIS_TOKEN set in %s — /chat, /remember, /speak "
+              "are open to anything that can reach 127.0.0.1:%d" %
+              (ENV_PATH, args.port))
+    print("  rate limit: %d requests / %ds per client IP"
+          % (RATE_LIMIT_MAX, RATE_LIMIT_WINDOW))
     if server.tts.available():
         print("  /speak via local Piper voice: %s" % server.tts.describe())
     else:
