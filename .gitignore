@@ -5,3 +5,6 @@
 # Dependencies — reinstallable from lockfiles, and the bundled Claude Agent SDK
 # and Electron binaries are ~270MB each, which no git remote will accept.
 node_modules/
+
+__pycache__/
+*.pyc
