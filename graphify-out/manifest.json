@@ -1,376 +1,17 @@
 {
-  ".claude/settings.local.json": {
-    "mtime": 1783405338.959631,
-    "ast_hash": "4c8813767b9c2f15d27724ea2b9b385f",
-    "semantic_hash": "4c8813767b9c2f15d27724ea2b9b385f"
-  },
-  ".obsidian/app.json": {
-    "mtime": 1783451135.933703,
-    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
-    "semantic_hash": "99914b932bd37a50b983c5e7c90ae93b"
-  },
-  ".obsidian/appearance.json": {
-    "mtime": 1783451136.0877078,
-    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
-    "semantic_hash": "99914b932bd37a50b983c5e7c90ae93b"
-  },
-  ".obsidian/core-plugins.json": {
-    "mtime": 1783451135.932703,
-    "ast_hash": "bd4e5e8ba3454e5804397b6f8535d3cc",
-    "semantic_hash": "bd4e5e8ba3454e5804397b6f8535d3cc"
-  },
-  ".obsidian/graph.json": {
-    "mtime": 1783451721.263,
-    "ast_hash": "6fd1a4164b147ec06702d1adc37e6528",
-    "semantic_hash": "6fd1a4164b147ec06702d1adc37e6528"
-  },
-  ".obsidian/workspace.json": {
-    "mtime": 1783455028.9455912,
-    "ast_hash": "c430691865a82ee948002733deb3051e",
-    "semantic_hash": "c430691865a82ee948002733deb3051e"
-  },
-  "CLAUDE.md": {
-    "mtime": 1783805779.6321692,
-    "ast_hash": "6cf7a5dcd59b0f45a99439c12fb2e539",
-    "semantic_hash": "6cf7a5dcd59b0f45a99439c12fb2e539"
-  },
-  "Clippings/A Google Ads targeting tactic that cut invalid clicks by 50%.md": {
-    "mtime": 1783388346.6983886,
-    "ast_hash": "e2ed8d0be01522d23ea6bac659a1dacf",
-    "semantic_hash": "e2ed8d0be01522d23ea6bac659a1dacf"
-  },
-  "Clippings/How I Built a Second Brain That Maintains Itself.md": {
-    "mtime": 1783379669.4222064,
-    "ast_hash": "8c7f496784f62825d6ee831ea42410af",
-    "semantic_hash": "8c7f496784f62825d6ee831ea42410af"
-  },
-  "Clippings/How competitors target your branded traffic with Google Ads.md": {
-    "mtime": 1783388313.9828496,
-    "ast_hash": "a65e11026cc5add91ed7465a7255eb15",
-    "semantic_hash": "a65e11026cc5add91ed7465a7255eb15"
-  },
-  "Clippings/How to measure prompt-level visibility in AI search.md": {
-    "mtime": 1783388523.9593098,
-    "ast_hash": "a2a6259826f56f8944b55c6a0581bce0",
-    "semantic_hash": "a2a6259826f56f8944b55c6a0581bce0"
-  },
-  "Clippings/Karpathy - LLM Knowledge Bases (X thread).md": {
-    "mtime": 1783227280.1378927,
-    "ast_hash": "dbbf6c01521ee547a2c4a35e58cc4aef",
-    "semantic_hash": "dbbf6c01521ee547a2c4a35e58cc4aef"
-  },
-  "GOALS.md": {
-    "mtime": 1783227280.1386611,
-    "ast_hash": "164972dd01862b242b8ecc9cfe43c3ee",
-    "semantic_hash": "164972dd01862b242b8ecc9cfe43c3ee"
-  },
-  "Marketing/CallRail Call Audit (June 2026).md": {
-    "mtime": 1783388774.103432,
-    "ast_hash": "583fbeac9effb0dfda06a1d3dc62d1c7",
-    "semantic_hash": "583fbeac9effb0dfda06a1d3dc62d1c7"
-  },
-  "Marketing/Defending Branded Search from Competitor Google Ads Tactics.md": {
-    "mtime": 1783388791.1657133,
-    "ast_hash": "f25086c1cd78cf02b1f0cee225a4f194",
-    "semantic_hash": "f25086c1cd78cf02b1f0cee225a4f194"
-  },
-  "Marketing/Invalid Click Mitigation - Audience Targeting Tactic.md": {
-    "mtime": 1783388782.5145707,
-    "ast_hash": "ec4a00af4131601d130ba9eae4da5d39",
-    "semantic_hash": "ec4a00af4131601d130ba9eae4da5d39"
-  },
-  "Marketing/Marketing - Overview.md": {
-    "mtime": 1786051428.7934446,
-    "ast_hash": "d52086faaa128faf9f76210667e73eb9",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Accelerated Launch Plan (2-Week Sprint).md": {
-    "mtime": 1783227280.1386611,
-    "ast_hash": "04f8b3aa069c01b68e385c959f64f24b",
-    "semantic_hash": "04f8b3aa069c01b68e385c959f64f24b"
-  },
-  "Project Jarvis/AccuLynx.md": {
-    "mtime": 1783666850.1917517,
-    "ast_hash": "8fb01c762febc92be952fa0c1cc871fc",
-    "semantic_hash": "8fb01c762febc92be952fa0c1cc871fc"
-  },
-  "Project Jarvis/CallRail v3.md": {
-    "mtime": 1783635313.901665,
-    "ast_hash": "47f7f9bfeb0e48d02260ad56b01d53a7",
-    "semantic_hash": "47f7f9bfeb0e48d02260ad56b01d53a7"
-  },
-  "Project Jarvis/Caveats.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "103a5af3fc574447c741415c2b2631cf",
-    "semantic_hash": "103a5af3fc574447c741415c2b2631cf"
-  },
-  "Project Jarvis/GoHighLevel v2.md": {
-    "mtime": 1783635019.4725769,
-    "ast_hash": "38f6ad2af83ef4bd86dd8ec80f66abad",
-    "semantic_hash": "38f6ad2af83ef4bd86dd8ec80f66abad"
-  },
-  "Project Jarvis/Google Ads API.md": {
-    "mtime": 1786051422.7043417,
-    "ast_hash": "1679c5c7d8168352707ff3eb18555474",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Implementation Roadmap.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "89bd7c93083871007631825d65404bda",
-    "semantic_hash": "89bd7c93083871007631825d65404bda"
-  },
-  "Project Jarvis/Ingestion Log.md": {
-<<<<<<< HEAD
-    "mtime": 1786051441.311656,
-    "ast_hash": "fbe8561477ade07bba43a1317be08d35",
-    "semantic_hash": ""
-=======
-    "mtime": 1783805795.3204756,
-    "ast_hash": "4ca23370d685afba1f798ce747405d9f",
-    "semantic_hash": "4ca23370d685afba1f798ce747405d9f"
->>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
-  },
-  "Project Jarvis/Layer 1 - Host Infrastructure.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "a9c92a1f5ca26004ff39a9d75fbbe64a",
-    "semantic_hash": "a9c92a1f5ca26004ff39a9d75fbbe64a"
-  },
-  "Project Jarvis/Layer 2 - Agentic Harness.md": {
-    "mtime": 1784664020.906546,
-    "ast_hash": "2c0233251f4db356eb90843af1e6c68d",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Layer 3 - Orchestrator Topology.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "6cbd3e797b384c4d897266f271fcaf58",
-    "semantic_hash": "6cbd3e797b384c4d897266f271fcaf58"
-  },
-  "Project Jarvis/Layer 4 - Connectors Overview.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "9fe27c203789e0d13e41a540b064a5ef",
-    "semantic_hash": "9fe27c203789e0d13e41a540b064a5ef"
-  },
-  "Project Jarvis/Layer 5 - Communication Channels.md": {
-    "mtime": 1786050796.442766,
-    "ast_hash": "568e17cd2b7cb99bc7bf1df1f772d621",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Layer 6 - Skills and Knowledge Injection.md": {
-    "mtime": 1784664026.4216561,
-    "ast_hash": "3a7065b6132cb2ed0761508cca24c8ef",
-    "semantic_hash": ""
-  },
-  "Project Jarvis/Phase 0 Progress Tracker.md": {
-<<<<<<< HEAD
-    "mtime": 1786050817.0231135,
-    "ast_hash": "ff8b09fc498299ad2c77e14364ae619f",
-    "semantic_hash": ""
-=======
-    "mtime": 1783674088.858525,
-    "ast_hash": "79b64ab639845aafabbccbdce4432f26",
-    "semantic_hash": "79b64ab639845aafabbccbdce4432f26"
->>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
-  },
-  "Project Jarvis/PostgreSQL Reporting.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "4ea84aa550c9991f1269921c0912159f",
-    "semantic_hash": "4ea84aa550c9991f1269921c0912159f"
-  },
-  "Project Jarvis/Project Jarvis - Agentic OS.md": {
-<<<<<<< HEAD
-    "mtime": 1784879342.588905,
-    "ast_hash": "68ada816b266031d2e086a185dcd60a7",
-    "semantic_hash": ""
-=======
-    "mtime": 1783672648.3524652,
-    "ast_hash": "f69a39206b137ccad87f9d2720d1bc73",
-    "semantic_hash": "f69a39206b137ccad87f9d2720d1bc73"
->>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
-  },
-  "Project Jarvis/Recommendations.md": {
-    "mtime": 1783685241.4757357,
-    "ast_hash": "d9186073a4df4c925826ac4da6e3adbe",
-    "semantic_hash": "d9186073a4df4c925826ac4da6e3adbe"
-  },
-  "Project Jarvis/Routing Example.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "c26a50c96a2551003879c99b8582a561",
-    "semantic_hash": "c26a50c96a2551003879c99b8582a561"
-  },
-  "Project Jarvis/Security and Guardrails.md": {
-    "mtime": 1783227280.1396954,
-    "ast_hash": "38a670f8010a943fe2c9bf03129e52c0",
-    "semantic_hash": "38a670f8010a943fe2c9bf03129e52c0"
-  },
-  "Project Jarvis/TLDR and Key Findings.md": {
-    "mtime": 1783227280.1406612,
-    "ast_hash": "098d7bbef80346920e7bcb0327f08249",
-    "semantic_hash": "098d7bbef80346920e7bcb0327f08249"
-  },
-  "README.md": {
-    "mtime": 1783227280.1406612,
-    "ast_hash": "829c5b65b1e81964c93ee8bb3e48bd9b",
-    "semantic_hash": "829c5b65b1e81964c93ee8bb3e48bd9b"
-  },
-  "SETUP GUIDE.md": {
-    "mtime": 1783227280.1406612,
-    "ast_hash": "121662020c139e86c38c4a6d4f8ed5bd",
-    "semantic_hash": "121662020c139e86c38c4a6d4f8ed5bd"
-  },
-  "Clippings/Project Jarvis_ Multi-Agent AI Architecture for Shumaker Roofing.pdf": {
-    "mtime": 1783227280.1386611,
-    "ast_hash": "b155d8d132367d38b9a4213ff65e8c87",
-    "semantic_hash": "b155d8d132367d38b9a4213ff65e8c87"
-  },
-  ".claude/settings.json": {
-    "mtime": 1783414340.7056475,
-    "ast_hash": "29447fe2905737f9620c12f5814615f1",
-    "semantic_hash": "29447fe2905737f9620c12f5814615f1"
-  },
-  ".claudian/claudian-settings.json": {
-    "mtime": 1783425761.8859246,
-    "ast_hash": "c330a88db64d6ddf4c3580b13341d103",
-    "semantic_hash": "c330a88db64d6ddf4c3580b13341d103"
-  },
-  ".claudian/sessions/conv-1783428507826-bt4ulhxzf.meta.json": {
-    "mtime": 1783451548.9958456,
-    "ast_hash": "69e4438813f1a0e2d324c0e49bef05ca",
-    "semantic_hash": "69e4438813f1a0e2d324c0e49bef05ca"
-  },
-  ".obsidian/community-plugins.json": {
-    "mtime": 1783451136.3077145,
-    "ast_hash": "d8a9b71407eb4fb79473ab4c04569231",
-    "semantic_hash": "d8a9b71407eb4fb79473ab4c04569231"
-  },
-  ".obsidian/plugins/claudian/data.json": {
-    "mtime": 1783451136.506,
-    "ast_hash": "b3a9f85d048ee432d344dec75b290a89",
-    "semantic_hash": "b3a9f85d048ee432d344dec75b290a89"
-  },
-  ".obsidian/plugins/claudian/main.js": {
-    "mtime": 1783425496.076515,
-    "ast_hash": "4f4f12a56dac887192aad5ab4e0f9a71",
-    "semantic_hash": "4f4f12a56dac887192aad5ab4e0f9a71"
-  },
-  ".obsidian/plugins/claudian/manifest.json": {
-    "mtime": 1783425496.0783296,
-    "ast_hash": "0302ff025dce489a563cdecc01c44742",
-    "semantic_hash": "0302ff025dce489a563cdecc01c44742"
-  },
-  ".obsidian/workspaces.json": {
-    "mtime": 1783425667.63,
-    "ast_hash": "c31c394d6b3f6ae6a89cea4c8f917e0b",
-    "semantic_hash": "c31c394d6b3f6ae6a89cea4c8f917e0b"
-  },
-  "mcp-servers/ghl-mcp-server/package.json": {
-    "mtime": 1783454925.9037864,
-    "ast_hash": "63847ed96f7f23999e5809e1c2c54b39",
-    "semantic_hash": "63847ed96f7f23999e5809e1c2c54b39"
-  },
-  "mcp-servers/ghl-mcp-server/src/ghl-client.ts": {
-    "mtime": 1783454947.8621705,
-    "ast_hash": "e80ccc8561596e0c742af8ba4126c30d",
-    "semantic_hash": "e80ccc8561596e0c742af8ba4126c30d"
-  },
-  "mcp-servers/ghl-mcp-server/src/index.ts": {
-    "mtime": 1783454976.1146648,
-    "ast_hash": "84b3362368f29ca85dbe168601653cce",
-    "semantic_hash": "84b3362368f29ca85dbe168601653cce"
-  },
-  "mcp-servers/ghl-mcp-server/tsconfig.json": {
-    "mtime": 1783454933.9569273,
-    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
-    "semantic_hash": "75a299456a990866e9d2fa1f9d72282b"
-  },
-  "mcp-servers/ghl-mcp-server/README.md": {
-    "mtime": 1783455007.5682163,
-    "ast_hash": "30aa821debfc731c614e4dffcccbadfe",
-    "semantic_hash": "30aa821debfc731c614e4dffcccbadfe"
-  },
-  "Marketing/AI Search Visibility Measurement.md": {
-    "mtime": 1783457368.1706297,
-    "ast_hash": "ac60a577bd449e572b02da2712936242",
-    "semantic_hash": "ac60a577bd449e572b02da2712936242"
-  },
-  "mcp-servers/acculynx-mcp-server/package.json": {
-    "mtime": 1783634289.2608304,
-    "ast_hash": "8b8db8b21ba9ce1db1e91e851bbc4e0d",
-    "semantic_hash": "8b8db8b21ba9ce1db1e91e851bbc4e0d"
-  },
-  "mcp-servers/acculynx-mcp-server/src/acculynx-client.ts": {
-    "mtime": 1783634662.4164066,
-    "ast_hash": "09fe0b92a87104ae16a3ded74cb30dd7",
-    "semantic_hash": "09fe0b92a87104ae16a3ded74cb30dd7"
-  },
-  "mcp-servers/acculynx-mcp-server/src/index.ts": {
-    "mtime": 1783634367.5672147,
-    "ast_hash": "577a0e1c3d0de6a4d2dfdafa14aab276",
-    "semantic_hash": "577a0e1c3d0de6a4d2dfdafa14aab276"
-  },
-  "mcp-servers/acculynx-mcp-server/tsconfig.json": {
-    "mtime": 1783634293.6589081,
-    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
-    "semantic_hash": "75a299456a990866e9d2fa1f9d72282b"
-  },
-  "mcp-servers/callrail-mcp-server/package.json": {
-    "mtime": 1783635209.165855,
-    "ast_hash": "c4c37a6de8f3e5d8cbf54e23b9ecbf0a",
-    "semantic_hash": "c4c37a6de8f3e5d8cbf54e23b9ecbf0a"
-  },
-  "mcp-servers/callrail-mcp-server/src/callrail-client.ts": {
-    "mtime": 1783635229.887213,
-    "ast_hash": "5a211053dd576141b81e78cf47b908a9",
-    "semantic_hash": "5a211053dd576141b81e78cf47b908a9"
-  },
-  "mcp-servers/callrail-mcp-server/src/index.ts": {
-    "mtime": 1783635255.3326528,
-    "ast_hash": "37709cfda4495e9289b7e213d2f3c401",
-    "semantic_hash": "37709cfda4495e9289b7e213d2f3c401"
-  },
-  "mcp-servers/callrail-mcp-server/tsconfig.json": {
-    "mtime": 1783635203.374755,
-    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
-    "semantic_hash": "75a299456a990866e9d2fa1f9d72282b"
-  },
-  "mcp-servers/acculynx-mcp-server/README.md": {
-    "mtime": 1783634383.8055017,
-    "ast_hash": "0e241b65dcc2a092e013b3e6a52bf848",
-    "semantic_hash": "0e241b65dcc2a092e013b3e6a52bf848"
-  },
-  "mcp-servers/callrail-mcp-server/README.md": {
-    "mtime": 1783635277.041028,
-    "ast_hash": "31a8531db261d18ad3489211bc17f3ce",
-    "semantic_hash": "31a8531db261d18ad3489211bc17f3ce"
-  },
-  "Clippings/How to Actually Prompt Fable 5, Straight From the Team That Built It.md": {
-    "mtime": 1783805716.2249403,
-    "ast_hash": "ad5a394a11b9ce54bcc6d0426239de0d",
-    "semantic_hash": "ad5a394a11b9ce54bcc6d0426239de0d"
-  },
-  "Clippings/Karpathy - LLM Wiki (Gist).md": {
-    "mtime": 1783805767.938941,
-    "ast_hash": "b74d3f77b0fc90c4e46b37a3bf2f9c4a",
-    "semantic_hash": "b74d3f77b0fc90c4e46b37a3bf2f9c4a"
-  },
-  "Project Jarvis/Action Items.md": {
-<<<<<<< HEAD
-    "mtime": 1784676788.3595083,
-    "ast_hash": "f6633393d99a09217dc72ddca7a179c9",
-    "semantic_hash": ""
-  },
   "build.py": {
     "mtime": 1786402975.5600162,
     "ast_hash": "0a6691a6878f745e2a916b9bcf3adec3",
     "semantic_hash": ""
   },
   "config.json": {
-    "mtime": 1786419839.7091694,
-    "ast_hash": "4dfb0619577138e931aff4c33dee469d",
+    "mtime": 1786529181.5651364,
+    "ast_hash": "2b38585e8c9567eedafe16c6d8857a1c",
     "semantic_hash": ""
   },
   "jarvis-dashboard/briefs-data.json": {
-    "mtime": 1786401545.879498,
-    "ast_hash": "d751713988987e9331980363e24189ce",
+    "mtime": 1786528955.6893842,
+    "ast_hash": "c16291fe45a71540c159dda964252c78",
     "semantic_hash": ""
   },
   "jarvis-dashboard/briefs.js": {
@@ -389,7 +30,7 @@
     "semantic_hash": ""
   },
   "jarvis-dashboard/public/app.js": {
-    "mtime": 1786367678.249752,
+    "mtime": 1786439256.09815,
     "ast_hash": "84d27f1fdae3ba4aa9ea14546310bb98",
     "semantic_hash": ""
   },
@@ -406,6 +47,66 @@
   "jarvis-dashboard/server.js": {
     "mtime": 1786090965.1249352,
     "ast_hash": "a56da4c8c74f063fa2455f482424df21",
+    "semantic_hash": ""
+  },
+  "mcp-servers/acculynx-mcp-server/package.json": {
+    "mtime": 1783634289.2608304,
+    "ast_hash": "8b8db8b21ba9ce1db1e91e851bbc4e0d",
+    "semantic_hash": ""
+  },
+  "mcp-servers/acculynx-mcp-server/src/acculynx-client.ts": {
+    "mtime": 1783634662.4164066,
+    "ast_hash": "09fe0b92a87104ae16a3ded74cb30dd7",
+    "semantic_hash": ""
+  },
+  "mcp-servers/acculynx-mcp-server/src/index.ts": {
+    "mtime": 1783634367.5672147,
+    "ast_hash": "577a0e1c3d0de6a4d2dfdafa14aab276",
+    "semantic_hash": ""
+  },
+  "mcp-servers/acculynx-mcp-server/tsconfig.json": {
+    "mtime": 1783634293.6589081,
+    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
+    "semantic_hash": ""
+  },
+  "mcp-servers/callrail-mcp-server/package.json": {
+    "mtime": 1783635209.165855,
+    "ast_hash": "c4c37a6de8f3e5d8cbf54e23b9ecbf0a",
+    "semantic_hash": ""
+  },
+  "mcp-servers/callrail-mcp-server/src/callrail-client.ts": {
+    "mtime": 1783635229.887213,
+    "ast_hash": "5a211053dd576141b81e78cf47b908a9",
+    "semantic_hash": ""
+  },
+  "mcp-servers/callrail-mcp-server/src/index.ts": {
+    "mtime": 1783635255.3326528,
+    "ast_hash": "37709cfda4495e9289b7e213d2f3c401",
+    "semantic_hash": ""
+  },
+  "mcp-servers/callrail-mcp-server/tsconfig.json": {
+    "mtime": 1783635203.374755,
+    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
+    "semantic_hash": ""
+  },
+  "mcp-servers/ghl-mcp-server/package.json": {
+    "mtime": 1783454925.9037864,
+    "ast_hash": "63847ed96f7f23999e5809e1c2c54b39",
+    "semantic_hash": ""
+  },
+  "mcp-servers/ghl-mcp-server/src/ghl-client.ts": {
+    "mtime": 1783454947.8621705,
+    "ast_hash": "e80ccc8561596e0c742af8ba4126c30d",
+    "semantic_hash": ""
+  },
+  "mcp-servers/ghl-mcp-server/src/index.ts": {
+    "mtime": 1783454976.1146648,
+    "ast_hash": "84b3362368f29ca85dbe168601653cce",
+    "semantic_hash": ""
+  },
+  "mcp-servers/ghl-mcp-server/tsconfig.json": {
+    "mtime": 1783454933.9569273,
+    "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
     "semantic_hash": ""
   },
   "mcp-servers/semrush-mcp-server/package.json": {
@@ -448,9 +149,14 @@
     "ast_hash": "75a299456a990866e9d2fa1f9d72282b",
     "semantic_hash": ""
   },
+  "piper_worker.py": {
+    "mtime": 1786436429.0004966,
+    "ast_hash": "1f949061b29245952d8d375629ddda3c",
+    "semantic_hash": ""
+  },
   "server.py": {
-    "mtime": 1786419846.5926404,
-    "ast_hash": "77e1c062fe5affbefc9bd6e765d77abf",
+    "mtime": 1786565047.5387661,
+    "ast_hash": "9535ba6d84e5c95c307641bdae730eff",
     "semantic_hash": ""
   },
   "viewer/graph-data.js": {
@@ -478,6 +184,16 @@
     "ast_hash": "37ae46f0bf1c73ba84eea32dcba7a4b1",
     "semantic_hash": ""
   },
+  "CLAUDE.md": {
+    "mtime": 1783805779.6321692,
+    "ast_hash": "6cf7a5dcd59b0f45a99439c12fb2e539",
+    "semantic_hash": ""
+  },
+  "Clippings/A Google Ads targeting tactic that cut invalid clicks by 50%.md": {
+    "mtime": 1783388346.6983886,
+    "ast_hash": "e2ed8d0be01522d23ea6bac659a1dacf",
+    "semantic_hash": ""
+  },
   "Clippings/Google June 2026 Spam Update Is Rolling Out.md": {
     "mtime": 1784593559.2461426,
     "ast_hash": "e9910e658efb73daa746a4583f19ebda",
@@ -493,6 +209,21 @@
     "ast_hash": "6b3eeaf8a9341e8cf78ede4ce5dcab38",
     "semantic_hash": ""
   },
+  "Clippings/How I Built a Second Brain That Maintains Itself.md": {
+    "mtime": 1783379669.4222064,
+    "ast_hash": "8c7f496784f62825d6ee831ea42410af",
+    "semantic_hash": ""
+  },
+  "Clippings/How competitors target your branded traffic with Google Ads.md": {
+    "mtime": 1783388313.9828496,
+    "ast_hash": "a65e11026cc5add91ed7465a7255eb15",
+    "semantic_hash": ""
+  },
+  "Clippings/How to Actually Prompt Fable 5, Straight From the Team That Built It.md": {
+    "mtime": 1783805716.2249403,
+    "ast_hash": "ad5a394a11b9ce54bcc6d0426239de0d",
+    "semantic_hash": ""
+  },
   "Clippings/How to build an AI-powered content gap analysis workflow.md": {
     "mtime": 1784593138.0231154,
     "ast_hash": "d05ae76f9060be95320d6ed3b2912974",
@@ -501,6 +232,21 @@
   "Clippings/How to evaluate Google Ads creative before testing it.md": {
     "mtime": 1784593634.982406,
     "ast_hash": "a2076c251aa8bf492672d6e4abf4cd2a",
+    "semantic_hash": ""
+  },
+  "Clippings/How to measure prompt-level visibility in AI search.md": {
+    "mtime": 1783388523.9593098,
+    "ast_hash": "a2a6259826f56f8944b55c6a0581bce0",
+    "semantic_hash": ""
+  },
+  "Clippings/Karpathy - LLM Knowledge Bases (X thread).md": {
+    "mtime": 1783227280.1378927,
+    "ast_hash": "dbbf6c01521ee547a2c4a35e58cc4aef",
+    "semantic_hash": ""
+  },
+  "Clippings/Karpathy - LLM Wiki (Gist).md": {
+    "mtime": 1783805767.938941,
+    "ast_hash": "b74d3f77b0fc90c4e46b37a3bf2f9c4a",
     "semantic_hash": ""
   },
   "Clippings/Local Services Ads come to Google Ads via Performance Max.md": {
@@ -518,9 +264,29 @@
     "ast_hash": "02a06b505bdd5bf8dd96897ed910078e",
     "semantic_hash": ""
   },
+  "GOALS.md": {
+    "mtime": 1783227280.1386611,
+    "ast_hash": "164972dd01862b242b8ecc9cfe43c3ee",
+    "semantic_hash": ""
+  },
+  "Marketing/AI Search Visibility Measurement.md": {
+    "mtime": 1783457368.1706297,
+    "ast_hash": "ac60a577bd449e572b02da2712936242",
+    "semantic_hash": ""
+  },
   "Marketing/AI-Powered Content Gap Analysis Workflow.md": {
     "mtime": 1784593249.1759698,
     "ast_hash": "b130f33594f740bf6076d169dd5aa53b",
+    "semantic_hash": ""
+  },
+  "Marketing/CallRail Call Audit (June 2026).md": {
+    "mtime": 1783388774.103432,
+    "ast_hash": "583fbeac9effb0dfda06a1d3dc62d1c7",
+    "semantic_hash": ""
+  },
+  "Marketing/Defending Branded Search from Competitor Google Ads Tactics.md": {
+    "mtime": 1783388791.1657133,
+    "ast_hash": "f25086c1cd78cf02b1f0cee225a4f194",
     "semantic_hash": ""
   },
   "Marketing/Google Algorithm Updates Tracker.md": {
@@ -528,9 +294,44 @@
     "ast_hash": "3d3b9af812dbc0fe60a41f4c27a7f857",
     "semantic_hash": ""
   },
+  "Marketing/Invalid Click Mitigation - Audience Targeting Tactic.md": {
+    "mtime": 1783388782.5145707,
+    "ast_hash": "ec4a00af4131601d130ba9eae4da5d39",
+    "semantic_hash": ""
+  },
   "Marketing/MOCA Ad Creative Evaluation Framework.md": {
-    "mtime": 1786051406.7450721,
-    "ast_hash": "31daed6064c3d0dd64dd6536c109a14b",
+    "mtime": 1786583314.2961185,
+    "ast_hash": "12457b9111bc2262f94d56387398af7a",
+    "semantic_hash": ""
+  },
+  "Marketing/Marketing - Overview.md": {
+    "mtime": 1786583308.2226107,
+    "ast_hash": "d52086faaa128faf9f76210667e73eb9",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Accelerated Launch Plan (2-Week Sprint).md": {
+    "mtime": 1783227280.1386611,
+    "ast_hash": "04f8b3aa069c01b68e385c959f64f24b",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/AccuLynx.md": {
+    "mtime": 1783666850.1917517,
+    "ast_hash": "8fb01c762febc92be952fa0c1cc871fc",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Action Items.md": {
+    "mtime": 1784676788.3595083,
+    "ast_hash": "f6633393d99a09217dc72ddca7a179c9",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/CallRail v3.md": {
+    "mtime": 1783635313.901665,
+    "ast_hash": "47f7f9bfeb0e48d02260ad56b01d53a7",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Caveats.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "103a5af3fc574447c741415c2b2631cf",
     "semantic_hash": ""
   },
   "Project Jarvis/Fable 5 Prompting Patterns.md": {
@@ -538,9 +339,104 @@
     "ast_hash": "292d59911ffc201fb508ea45a12a8fcc",
     "semantic_hash": ""
   },
+  "Project Jarvis/GoHighLevel v2.md": {
+    "mtime": 1783635019.4725769,
+    "ast_hash": "38f6ad2af83ef4bd86dd8ec80f66abad",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Google Ads API.md": {
+    "mtime": 1786451054.185563,
+    "ast_hash": "12a3c0ac4f68595eb945653b336a02dc",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Implementation Roadmap.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "89bd7c93083871007631825d65404bda",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Ingestion Log.md": {
+    "mtime": 1786583285.2521064,
+    "ast_hash": "6d70dc8dd4914a16b1d6f0e7c001ead2",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Layer 1 - Host Infrastructure.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "a9c92a1f5ca26004ff39a9d75fbbe64a",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Layer 2 - Agentic Harness.md": {
+    "mtime": 1784664020.906546,
+    "ast_hash": "2c0233251f4db356eb90843af1e6c68d",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Layer 3 - Orchestrator Topology.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "6cbd3e797b384c4d897266f271fcaf58",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Layer 4 - Connectors Overview.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "9fe27c203789e0d13e41a540b064a5ef",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Layer 5 - Communication Channels.md": {
+    "mtime": 1786050796.442766,
+    "ast_hash": "568e17cd2b7cb99bc7bf1df1f772d621",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Layer 6 - Skills and Knowledge Injection.md": {
+    "mtime": 1784664026.4216561,
+    "ast_hash": "3a7065b6132cb2ed0761508cca24c8ef",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Phase 0 Progress Tracker.md": {
+    "mtime": 1786583297.642838,
+    "ast_hash": "ff8b09fc498299ad2c77e14364ae619f",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/PostgreSQL Reporting.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "4ea84aa550c9991f1269921c0912159f",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Project Jarvis - Agentic OS.md": {
+    "mtime": 1784879342.588905,
+    "ast_hash": "68ada816b266031d2e086a185dcd60a7",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Recommendations.md": {
+    "mtime": 1783685241.4757357,
+    "ast_hash": "d9186073a4df4c925826ac4da6e3adbe",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Routing Example.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "c26a50c96a2551003879c99b8582a561",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/Security and Guardrails.md": {
+    "mtime": 1783227280.1396954,
+    "ast_hash": "38a670f8010a943fe2c9bf03129e52c0",
+    "semantic_hash": ""
+  },
+  "Project Jarvis/TLDR and Key Findings.md": {
+    "mtime": 1783227280.1406612,
+    "ast_hash": "098d7bbef80346920e7bcb0327f08249",
+    "semantic_hash": ""
+  },
   "Project Jarvis/Voice App (Local Prototype).md": {
     "mtime": 1784879328.182657,
     "ast_hash": "734b6c7922eb283f4b2107852c2a8304",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1783227280.1406612,
+    "ast_hash": "829c5b65b1e81964c93ee8bb3e48bd9b",
+    "semantic_hash": ""
+  },
+  "SETUP GUIDE.md": {
+    "mtime": 1783227280.1406612,
+    "ast_hash": "121662020c139e86c38c4a6d4f8ed5bd",
     "semantic_hash": ""
   },
   "jarvis-dashboard/README.md": {
@@ -549,13 +445,28 @@
     "semantic_hash": ""
   },
   "jarvis-dashboard/public/index.html": {
-    "mtime": 1786103190.1195037,
+    "mtime": 1786439256.09815,
     "ast_hash": "1e4c107ad84551f3afe1e22912bb0412",
     "semantic_hash": ""
   },
   "jarvis-dashboard/system-prompt.md": {
     "mtime": 1786087998.0234418,
     "ast_hash": "af7492c20094d0c27b2d1a8a4e844d52",
+    "semantic_hash": ""
+  },
+  "mcp-servers/acculynx-mcp-server/README.md": {
+    "mtime": 1783634383.8055017,
+    "ast_hash": "0e241b65dcc2a092e013b3e6a52bf848",
+    "semantic_hash": ""
+  },
+  "mcp-servers/callrail-mcp-server/README.md": {
+    "mtime": 1783635277.041028,
+    "ast_hash": "31a8531db261d18ad3489211bc17f3ce",
+    "semantic_hash": ""
+  },
+  "mcp-servers/ghl-mcp-server/README.md": {
+    "mtime": 1783455007.5682163,
+    "ast_hash": "30aa821debfc731c614e4dffcccbadfe",
     "semantic_hash": ""
   },
   "mcp-servers/semrush-mcp-server/README.md": {
@@ -569,8 +480,8 @@
     "semantic_hash": ""
   },
   "viewer/index.html": {
-    "mtime": 1786419906.1205192,
-    "ast_hash": "7db0a2cdf85846d36a1efa149ab79629",
+    "mtime": 1786476857.4289036,
+    "ast_hash": "99e04500dc00b8be715869a32b089193",
     "semantic_hash": ""
   },
   "voice-app/README.md": {
@@ -587,10 +498,10 @@
     "mtime": 1784878870.3237724,
     "ast_hash": "55d66221f2f7c7d3291405eb987df29a",
     "semantic_hash": ""
-=======
-    "mtime": 1783672341.276338,
-    "ast_hash": "bd4751b262ae7977c8ec479581b8e1ba",
-    "semantic_hash": "bd4751b262ae7977c8ec479581b8e1ba"
->>>>>>> f2df9e5cc78ead8298c33df0ec2fcfa420eca855
+  },
+  "Clippings/Project Jarvis_ Multi-Agent AI Architecture for Shumaker Roofing.pdf": {
+    "mtime": 1783227280.1386611,
+    "ast_hash": "b155d8d132367d38b9a4213ff65e8c87",
+    "semantic_hash": ""
   }
 }

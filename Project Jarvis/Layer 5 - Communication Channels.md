@@ -23,10 +23,12 @@ Recommended later stack:
 
 Vapi's BYO-model approach lets Jarvis remain the LLM brain while Vapi manages the audio plumbing. Budget **~$0.23–0.33/min all-in** for a BYOK Vapi stack. See [[Implementation Roadmap]] Phase 5.
 
-## Local prototype: `voice-app` / "Jarvis Lite" (built 2026-07-24)
+## Local prototype: `voice-app` / "Jarvis Lite" (built 2026-07-24, retired 2026-08-13)
 *(Source: this vault's own `voice-app/` directory, not the Project Jarvis PDF.)*
 
-A working local rehearsal of the voice bolt-on exists today, ahead of the VPS/Vapi production build above. It's an Electron desktop app (`voice-app/main.js` + `renderer/`) that talks to a **scoped slice of Jarvis by chat or voice — Marketing/Strategy/Info only**, via the Claude Agent SDK running locally.
+**Status: retired.** Operator confirmed 2026-08-13 that a working Jarvis already exists and this prototype is no longer needed going forward. It served its purpose — de-risking the Layer 5 architecture before VPS infra existed — and that knowledge is captured below; it's not being evolved further or promoted to production. Left in place as a reference, not actively maintained.
+
+A working local rehearsal of the voice bolt-on existed here, ahead of the VPS/Vapi production build above. It's an Electron desktop app (`voice-app/main.js` + `renderer/`) that talks to a **scoped slice of Jarvis by chat or voice — Marketing/Strategy/Info only**, via the Claude Agent SDK running locally.
 
 **How voice actually works in it:**
 - **Speech-in:** the browser's built-in `webkitSpeechRecognition` (Web Speech API) — no separate STT service or key. Note this isn't fully offline: Chromium sends the audio to Google's recognition servers under the hood, so it needs internet even though no STT credential is configured anywhere.
