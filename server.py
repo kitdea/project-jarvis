@@ -43,6 +43,8 @@ import subprocess
 import tempfile
 import threading
 import time
+import urllib.error
+import urllib.request
 import uuid
 from collections import OrderedDict
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -69,6 +71,14 @@ REMEMBER_RE = re.compile(
     r"^\s*(?:jarvis[\s,]+)?remember\s+(?:that|this|to)?\s*[:,-]?\s*(.+)$",
     re.IGNORECASE | re.DOTALL,
 )
+
+# A switch/change/set/use verb within a few words of a backend name — e.g.
+# "switch to gemini", "use claude instead", "can you switch backend to Claude".
+SWITCH_RE = re.compile(
+    r"\b(?:switch|change|set|use)\b(?:\s+\S+){0,4}?\s+\b(claude|gemini)\b",
+    re.IGNORECASE,
+)
+BACKEND_LABELS = {"claude-cli": "Claude", "gemini": "Gemini"}
 
 # Words too common in this vault to carry any signal about which note is meant.
 STOPWORDS = frozenset("""
@@ -868,6 +878,104 @@ def ask_claude_cli(prompt, cfg, system_prompt=None, allow_tools=True):
     return flatten_markdown(answer)
 
 
+def ask_gemini(prompt, cfg, system_prompt=None, allow_tools=True):
+    """Run the prompt through the Gemini API and return its text.
+
+    allow_tools is accepted for signature parity with ask_claude_cli but is
+    always a no-op here: the GHL/CallRail MCP servers are wired in via
+    claude -p's --mcp-config flag, which is Claude-Code-specific, so a
+    Gemini-backed /chat answers from note context only, no live tool calls.
+    """
+    gem = cfg.get("gemini", {})
+    key_name = gem.get("api_key_env", "GEMINI_API_KEY")
+    # Same convention as JARVIS_TOKEN (AuthGate): read straight out of the
+    # git-ignored .env file rather than requiring it exported into the
+    # process environment.
+    api_key = _load_env_file(ENV_PATH).get(key_name, "") or os.environ.get(key_name, "")
+    if not api_key:
+        raise RuntimeError(
+            "No Gemini API key found. Set %s in .env at the vault root." %
+            gem.get("api_key_env", "GEMINI_API_KEY")
+        )
+
+    model = gem.get("model", "gemini-2.5-flash")
+    url = "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent" % model
+    body = {
+        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "systemInstruction": {
+            "parts": [{"text": system_prompt or cfg["_system_prompt"]}]
+        },
+    }
+
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "x-goog-api-key": api_key,
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=gem.get("timeout_seconds", 60)) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:300]
+        raise RuntimeError("Gemini API failed: %s %s" % (exc.code, detail))
+    except urllib.error.URLError as exc:
+        raise RuntimeError("Gemini API unreachable: %s" % exc.reason)
+
+    try:
+        parts = data["candidates"][0]["content"]["parts"]
+        answer = "".join(p.get("text", "") for p in parts).strip()
+    except (KeyError, IndexError):
+        raise RuntimeError("Gemini API returned an unexpected response shape.")
+    if not answer:
+        raise RuntimeError("The Gemini API returned an empty response.")
+    return flatten_markdown(answer)
+
+
+def ask_model(prompt, cfg, system_prompt=None, allow_tools=True):
+    """Dispatch to the configured backend (config.json's top-level "backend")."""
+    backend = cfg.get("backend", "claude-cli")
+    if backend == "gemini":
+        return ask_gemini(prompt, cfg, system_prompt, allow_tools)
+    return ask_claude_cli(prompt, cfg, system_prompt, allow_tools)
+
+
+def try_backend_switch(question, cfg):
+    """Return a confirmation string if `question` is a backend-switch command
+    ("switch to gemini", "use claude"), else None.
+
+    Mutates cfg["backend"] in place — cfg is the live server.cfg dict shared
+    across request threads, so the change takes effect on the very next
+    /chat call, no restart needed. Not written back to config.json: a
+    restart falls back to whatever backend is on disk there, same as any
+    other in-memory-only runtime toggle in this file (e.g. Sessions).
+    """
+    match = SWITCH_RE.search(question)
+    if not match:
+        return None
+    target = "gemini" if match.group(1).lower() == "gemini" else "claude-cli"
+
+    if target == "gemini":
+        gem = cfg.get("gemini", {})
+        key_name = gem.get("api_key_env", "GEMINI_API_KEY")
+        if not (_load_env_file(ENV_PATH).get(key_name) or os.environ.get(key_name)):
+            return "I can't switch to Gemini, sir — no %s is set in .env." % key_name
+
+    if cfg.get("backend", "claude-cli") == target:
+        return "Already running on %s, sir." % BACKEND_LABELS[target]
+
+    cfg["backend"] = target
+    if target == "gemini":
+        note = (" Note: I lose live GHL and CallRail tool access on Gemini — "
+                 "note-context answers only until you switch back.")
+    else:
+        note = " Live GHL and CallRail tool access is back."
+    return "Switched to %s, sir.%s" % (BACKEND_LABELS[target], note)
+
+
 class ViewerHandler(SimpleHTTPRequestHandler):
     """Serves ROOT and nothing above it, plus the /chat endpoint.
 
@@ -1071,7 +1179,7 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         node = index.add(label, CAPTURE_DIR, rel_path, excerpt)
 
         try:
-            confirmation = ask_claude_cli(
+            confirmation = ask_model(
                 "Just filed this note, titled %r:\n\n%s" % (label, text),
                 cfg, CONFIRM_PROMPT, allow_tools=False,
             )
@@ -1108,6 +1216,18 @@ class ViewerHandler(SimpleHTTPRequestHandler):
             session_id = uuid.uuid4().hex
 
         cfg = self.server.cfg
+
+        switch_reply = try_backend_switch(question, cfg)
+        if switch_reply is not None:
+            self.server.sessions.append(session_id, question, switch_reply)
+            print("  /chat backend -> %s" % cfg.get("backend"))
+            self.server.audit.record("/chat", session_id, self.client_address[0],
+                                     {"question": question}, "ok",
+                                     "backend switch -> %s" % cfg.get("backend"))
+            self._send_json(200, {"answer": switch_reply, "nodes": [],
+                                  "session_id": session_id})
+            return
+
         index = self.server.index
         retrieval = cfg.get("retrieval", {})
 
@@ -1131,7 +1251,7 @@ class ViewerHandler(SimpleHTTPRequestHandler):
 
         started = time.time()
         try:
-            answer = ask_claude_cli(prompt, cfg)
+            answer = ask_model(prompt, cfg)
         except RuntimeError as exc:
             self.server.audit.record("/chat", session_id, self.client_address[0],
                                      {"question": question}, "error", str(exc))
@@ -1197,9 +1317,16 @@ def main():
     server.auth = AuthGate(ENV_PATH)
     server.limiter = RateLimiter(RATE_LIMIT_WINDOW, RATE_LIMIT_MAX)
 
+    backend = cfg.get("backend", "claude-cli")
+    if backend == "gemini":
+        chat_desc = "/chat via Gemini API (model: %s)" % cfg.get("gemini", {}).get("model", "default")
+    else:
+        chat_desc = "/chat via `claude -p` (model: %s)" % cfg.get("model", "default")
     print("Knowledge galaxy serving %s" % ROOT)
-    print("  %d notes indexed · /chat via `claude -p` (model: %s)"
-          % (len(nodes), cfg.get("model", "default")))
+    print("  %d notes indexed · %s" % (len(nodes), chat_desc))
+    if backend == "gemini" and cfg["_mcp_config"]["mcpServers"]:
+        print("  NOTE: backend is gemini — GHL/CallRail MCP tools are wired but "
+              "unreachable from this backend; answers are note-context only.")
     print("  /remember writes to %s%s" % (CAPTURE_DIR, os.sep))
     print("  audit log: %s" % AUDIT_LOG_PATH)
     if server.auth.configured():

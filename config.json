@@ -2,6 +2,7 @@
   "_comment": "Server-side only. Lives in the project root, NOT in viewer/, so the static file server (which is rooted at viewer/) can never serve it.",
   "_auth_comment": "The /chat, /remember, /speak shared-secret token is NOT here — it lives in a git-ignored .env at the vault root as JARVIS_TOKEN=..., loaded by server.py's AuthGate. Keeping it out of this file means config.json stays safe to read, copy, or eventually commit without leaking the secret.",
 
+  "_backend_comment": "Which model answers /chat and /remember. 'claude-cli' (default) or 'gemini'. Switching to 'gemini' drops live GHL/CallRail tool access (see gemini._comment below) — notes-only answers.",
   "backend": "claude-cli",
   "model": "claude-sonnet-4-5",
 
@@ -9,6 +10,13 @@
     "_comment": "Runs /chat through the `claude -p` CLI on your Claude Code subscription: slower than the HTTP API, but no per-token API billing and no API key anywhere.",
     "command": "claude",
     "timeout_seconds": 120
+  },
+
+  "gemini": {
+    "_comment": "Used when backend is 'gemini'. Calls the Gemini API directly (stdlib urllib, no SDK). No MCP/tool access: claude -p's --mcp-config wiring for GHL/CallRail is Claude-Code-specific, so this backend answers from note context only. Put the key in .env at the vault root as GEMINI_API_KEY=... — never in this file.",
+    "model": "gemini-flash-latest",
+    "api_key_env": "GEMINI_API_KEY",
+    "timeout_seconds": 60
   },
 
   "mcp": {
