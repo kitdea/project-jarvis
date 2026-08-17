@@ -5,8 +5,48 @@
     "semantic_hash": ""
   },
   "config.json": {
-    "mtime": 1786613952.3383439,
-    "ast_hash": "d588129981c9a2924ad86198e7099a6a",
+    "mtime": 1786529181.5651364,
+    "ast_hash": "2b38585e8c9567eedafe16c6d8857a1c",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/briefs-data.json": {
+    "mtime": 1786528955.6893842,
+    "ast_hash": "c16291fe45a71540c159dda964252c78",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/briefs.js": {
+    "mtime": 1786090946.304654,
+    "ast_hash": "2a44f805176cabdc6c397fb79aa2bc40",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/graph.js": {
+    "mtime": 1786088780.4101627,
+    "ast_hash": "f48a1f805ef4dba2792829504652d649",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/package.json": {
+    "mtime": 1786088401.9404929,
+    "ast_hash": "55aa404057e5243ca314f6ea2f464944",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/public/app.js": {
+    "mtime": 1786439256.09815,
+    "ast_hash": "84d27f1fdae3ba4aa9ea14546310bb98",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/public/brief-cards.js": {
+    "mtime": 1786091106.571323,
+    "ast_hash": "1bc385ada4830cf4e12988c311ce5855",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/public/graph-panel.js": {
+    "mtime": 1786089255.8580294,
+    "ast_hash": "54138fe06689a4f46ec9739719550ddc",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/server.js": {
+    "mtime": 1786090965.1249352,
+    "ast_hash": "a56da4c8c74f063fa2455f482424df21",
     "semantic_hash": ""
   },
   "mcp-servers/acculynx-mcp-server/package.json": {
@@ -115,13 +155,33 @@
     "semantic_hash": ""
   },
   "server.py": {
-    "mtime": 1786613917.1047537,
-    "ast_hash": "36f41e5f8436ae3a318eebf11415496b",
+    "mtime": 1786565047.5387661,
+    "ast_hash": "9535ba6d84e5c95c307641bdae730eff",
     "semantic_hash": ""
   },
   "viewer/graph-data.js": {
     "mtime": 1786403073.6886983,
     "ast_hash": "c11bdb9b88c3e4afa5bd7d7fe2b9dc47",
+    "semantic_hash": ""
+  },
+  "voice-app/main.js": {
+    "mtime": 1786076874.113559,
+    "ast_hash": "335ce19959bd9856fea9790206dbc436",
+    "semantic_hash": ""
+  },
+  "voice-app/package.json": {
+    "mtime": 1785360421.792772,
+    "ast_hash": "9b9d1ff87e145dc4aeaabf2d48613b89",
+    "semantic_hash": ""
+  },
+  "voice-app/preload.js": {
+    "mtime": 1786076877.8476186,
+    "ast_hash": "71873107bf3c728960ca542f98571498",
+    "semantic_hash": ""
+  },
+  "voice-app/renderer/renderer.js": {
+    "mtime": 1786077196.7517183,
+    "ast_hash": "37ae46f0bf1c73ba84eea32dcba7a4b1",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -295,8 +355,8 @@
     "semantic_hash": ""
   },
   "Project Jarvis/Ingestion Log.md": {
-    "mtime": 1786621456.2733939,
-    "ast_hash": "739913ea8a98af4ae2f7035ef73f134e",
+    "mtime": 1786583285.2521064,
+    "ast_hash": "6d70dc8dd4914a16b1d6f0e7c001ead2",
     "semantic_hash": ""
   },
   "Project Jarvis/Layer 1 - Host Infrastructure.md": {
@@ -320,8 +380,8 @@
     "semantic_hash": ""
   },
   "Project Jarvis/Layer 5 - Communication Channels.md": {
-    "mtime": 1786621433.6860554,
-    "ast_hash": "b04dab23f687b50757a236dec301afe6",
+    "mtime": 1786050796.442766,
+    "ast_hash": "568e17cd2b7cb99bc7bf1df1f772d621",
     "semantic_hash": ""
   },
   "Project Jarvis/Layer 6 - Skills and Knowledge Injection.md": {
@@ -330,8 +390,8 @@
     "semantic_hash": ""
   },
   "Project Jarvis/Phase 0 Progress Tracker.md": {
-    "mtime": 1786621437.7320507,
-    "ast_hash": "dbf9d5d0f40df92f477b991aca96b373",
+    "mtime": 1786583297.642838,
+    "ast_hash": "ff8b09fc498299ad2c77e14364ae619f",
     "semantic_hash": ""
   },
   "Project Jarvis/PostgreSQL Reporting.md": {
@@ -355,8 +415,8 @@
     "semantic_hash": ""
   },
   "Project Jarvis/Security and Guardrails.md": {
-    "mtime": 1786614059.472702,
-    "ast_hash": "441b0b65e442f25e64cb97eb44139cdf",
+    "mtime": 1783227280.1396954,
+    "ast_hash": "38a670f8010a943fe2c9bf03129e52c0",
     "semantic_hash": ""
   },
   "Project Jarvis/TLDR and Key Findings.md": {
@@ -365,13 +425,33 @@
     "semantic_hash": ""
   },
   "Project Jarvis/Voice App (Local Prototype).md": {
-    "mtime": 1786591887.794444,
-    "ast_hash": "25550e32c68feaed00f2808aadfa0aff",
+    "mtime": 1784879328.182657,
+    "ast_hash": "734b6c7922eb283f4b2107852c2a8304",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1786611195.8555188,
-    "ast_hash": "acafb20f997f53ad62fb08d4f87c611c",
+    "mtime": 1783227280.1406612,
+    "ast_hash": "829c5b65b1e81964c93ee8bb3e48bd9b",
+    "semantic_hash": ""
+  },
+  "SETUP GUIDE.md": {
+    "mtime": 1783227280.1406612,
+    "ast_hash": "121662020c139e86c38c4a6d4f8ed5bd",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/README.md": {
+    "mtime": 1786086824.6288912,
+    "ast_hash": "e733c7085f065a7efa41d988eced8ff8",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/public/index.html": {
+    "mtime": 1786439256.09815,
+    "ast_hash": "1e4c107ad84551f3afe1e22912bb0412",
+    "semantic_hash": ""
+  },
+  "jarvis-dashboard/system-prompt.md": {
+    "mtime": 1786087998.0234418,
+    "ast_hash": "af7492c20094d0c27b2d1a8a4e844d52",
     "semantic_hash": ""
   },
   "mcp-servers/acculynx-mcp-server/README.md": {
@@ -400,23 +480,28 @@
     "semantic_hash": ""
   },
   "viewer/index.html": {
-    "mtime": 1786613928.2388887,
-    "ast_hash": "4ecbe577a1630d8bf0e6957523848ab3",
+    "mtime": 1786476857.4289036,
+    "ast_hash": "99e04500dc00b8be715869a32b089193",
+    "semantic_hash": ""
+  },
+  "voice-app/README.md": {
+    "mtime": 1784879091.623414,
+    "ast_hash": "440c0db0857075919d3771ab2021a2d6",
+    "semantic_hash": ""
+  },
+  "voice-app/renderer/index.html": {
+    "mtime": 1786077204.99885,
+    "ast_hash": "bb548f01161c9f1e06442f3da9851100",
+    "semantic_hash": ""
+  },
+  "voice-app/system-prompt.md": {
+    "mtime": 1784878870.3237724,
+    "ast_hash": "55d66221f2f7c7d3291405eb987df29a",
     "semantic_hash": ""
   },
   "Clippings/Project Jarvis_ Multi-Agent AI Architecture for Shumaker Roofing.pdf": {
     "mtime": 1783227280.1386611,
     "ast_hash": "b155d8d132367d38b9a4213ff65e8c87",
-    "semantic_hash": ""
-  },
-  "scripts/daily-wiki-check.sh": {
-    "mtime": 1786610229.3883753,
-    "ast_hash": "d916cef135b6ac679760e26b15e12ffa",
-    "semantic_hash": ""
-  },
-  "test_server.py": {
-    "mtime": 1786621974.051151,
-    "ast_hash": "408c41d5ffec45a8f9b891ea9c4adce9",
     "semantic_hash": ""
   }
 }

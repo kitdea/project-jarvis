@@ -1,16 +1,16 @@
-# Graph Report - project-jarvis  (2026-08-14)
+# Graph Report - project-jarvis  (2026-08-13)
 
 ## Corpus Check
-- 82 files · ~80,026 words
+- 97 files · ~86,265 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 793 nodes · 1039 edges · 73 communities (69 shown, 4 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 2 edges (avg confidence: 0.65)
+- 905 nodes · 1130 edges · 78 communities (75 shown, 3 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f3f0574f`
+- Built from commit: `7a76f160`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,64 +72,59 @@
 - [[_COMMUNITY_Invalid Click Mitigation - Audience Targeting Tactic|Invalid Click Mitigation - Audience Targeting Tactic]]
 - [[_COMMUNITY_Layer 6 — Skills, Vector Stores & Knowledge Injection|Layer 6 — Skills, Vector Stores & Knowledge Injection]]
 - [[_COMMUNITY_Project Jarvis — Agentic OS|Project Jarvis — Agentic OS]]
+- [[_COMMUNITY_voice-app — Jarvis Lite (local prototype)|voice-app — Jarvis Lite (local prototype)]]
 - [[_COMMUNITY_Google June 2026 Spam Update Is Rolling Out|Google June 2026 Spam Update Is Rolling Out.md]]
 - [[_COMMUNITY_Goals|Goals]]
+- [[_COMMUNITY_graph-panel.js|graph-panel.js]]
 - [[_COMMUNITY_Action Items|Action Items]]
 - [[_COMMUNITY_Layer 1 — Host Infrastructure|Layer 1 — Host Infrastructure]]
 - [[_COMMUNITY_Layer 5 — Communication Channels|Layer 5 — Communication Channels]]
 - [[_COMMUNITY_Voice App (Local Prototype)|Voice App (Local Prototype)]]
+- [[_COMMUNITY_system-prompt|system-prompt.md]]
 - [[_COMMUNITY_Google Algorithm Updates Tracker|Google Algorithm Updates Tracker]]
 - [[_COMMUNITY_Layer 2 — Agentic Harness & Core Framework|Layer 2 — Agentic Harness & Core Framework]]
 - [[_COMMUNITY_Phase 0 Progress Tracker|Phase 0 Progress Tracker]]
 - [[_COMMUNITY_Security & Guardrail Protocol|Security & Guardrail Protocol]]
+- [[_COMMUNITY_system-prompt|system-prompt.md]]
 - [[_COMMUNITY_The new SEO rules for bloggers in 2026 Why clarity matters in AI search|The new SEO rules for bloggers in 2026 Why clarity matters in AI search.md]]
 - [[_COMMUNITY_graph-data.js|graph-data.js]]
-- [[_COMMUNITY_README|README.md]]
+- [[_COMMUNITY_preload.js|preload.js]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `JarvisServerFixture` - 26 edges
-2. `main()` - 17 edges
-3. `ViewerHandler` - 15 edges
-4. `AcculynxClient` - 14 edges
-5. `compilerOptions` - 11 edges
-6. `CallrailClient` - 11 edges
-7. `compilerOptions` - 11 edges
-8. `GhlClient` - 11 edges
+1. `AcculynxClient` - 14 edges
+2. `ViewerHandler` - 13 edges
+3. `main()` - 13 edges
+4. `compilerOptions` - 11 edges
+5. `CallrailClient` - 11 edges
+6. `compilerOptions` - 11 edges
+7. `GhlClient` - 11 edges
+8. `compilerOptions` - 11 edges
 9. `compilerOptions` - 11 edges
 10. `compilerOptions` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `main()` --indirect_call--> `ViewerHandler`  [INFERRED]
-  server.py → server.py  _Bridges community 0 → community 27_
-- `main()` --calls--> `load_config()`  [EXTRACTED]
-  server.py → server.py  _Bridges community 3 → community 27_
-- `main()` --calls--> `NoteIndex`  [EXTRACTED]
-  server.py → server.py  _Bridges community 28 → community 27_
-- `main()` --calls--> `Sessions`  [EXTRACTED]
-  server.py → server.py  _Bridges community 19 → community 27_
-- `main()` --calls--> `AuthGate`  [EXTRACTED]
-  server.py → server.py  _Bridges community 16 → community 27_
+- None detected - all connections are within the same source files.
 
 ## Import Cycles
 - None detected.
 
-## Communities (73 total, 4 thin omitted)
+## Communities (78 total, 3 thin omitted)
 
 ### Community 0 - "server.py"
-Cohesion: 0.22
-Nodes (7): Write a capture note, index it live, and describe where it belongs.          The, Serves ROOT and nothing above it, plus the /chat endpoint.      SimpleHTTPReques, Write a JSON response.          `drained=False` marks a path that bailed before, Read and parse the request body, or answer the error and return None., Return WAV audio for the given text, or 503 so the page falls back.          503, ViewerHandler, SimpleHTTPRequestHandler
+Cohesion: 0.06
+Nodes (46): ask_claude_cli(), build_mcp_config(), build_prompt(), build_system_prompt(), capture_title(), flatten_markdown(), is_note_question(), load_config() (+38 more)
 
 ### Community 1 - "Project Jarvis - Agentic OS.md"
-Cohesion: 0.16
-Nodes (20): Caveats, GoHighLevel (GHL) v2, MCP tool layer (built 2026-07-10), Summary, How this log is used, Ingestion Log, Log, 2-agent vs 3-agent recommendation (+12 more)
+Cohesion: 0.14
+Nodes (24): Caveats, GoHighLevel (GHL) v2, MCP tool layer (built 2026-07-10), Summary, How this log is used, Ingestion Log, Log, 2-agent vs 3-agent recommendation (+16 more)
 
 ### Community 2 - "server.js"
-Cohesion: 0.13
-Nodes (9): AuthTests, ChatEndpointTests, free_port(), JarvisServerFixture, RateLimitTests, Stages a throwaway vault dir with a stub `claude` CLI and boots     server.py as, RememberEndpointTests, SpeakEndpointTests (+1 more)
+Cohesion: 0.06
+Nodes (41): clearBriefs(), DATA_FILE, deleteBrief(), fs, getQuery(), listBriefs(), loadStore(), path (+33 more)
 
 ### Community 3 - "app.js"
-Cohesion: 0.16
-Nodes (14): build_prompt(), capture_title(), is_note_question(), load_config(), note_body(), Full note text when it is still on disk, else the prebuilt excerpt.      Paths f, Mask substrings in `text` that look like pasted credentials/tokens.      Securit, Whether this turn should move the camera to the cited notes.      Two ways to fa (+6 more)
+Cohesion: 0.13
+Nodes (23): addMessage(), armMic(), askServer(), beatOrb(), cancelSilenceTimer(), connStatus, form, greetOnce() (+15 more)
 
 ### Community 4 - "AcculynxClient"
 Cohesion: 0.13
@@ -180,8 +175,8 @@ Cohesion: 0.15
 Nodes (8): databaseParam, semrush, server, transport, parseSemicolonDelimited(), SemrushApiError, SemrushClient, SemrushClientConfig
 
 ### Community 16 - "main.js"
-Cohesion: 0.18
-Nodes (8): AuthGate, build_mcp_config(), build_system_prompt(), _load_env_file(), Shared-secret check for /chat, /remember, /speak.      The token lives in a git-, Assemble SYSTEM_PROMPT, naming exactly the MCP servers config.json has     wired, Parse a KEY=value .env file into a dict. Missing file -> {}., Turn config.json's mcp.servers into a claude-cli --mcp-config JSON blob,     plu
+Cohesion: 0.14
+Nodes (10): { app, BrowserWindow, ipcMain }, CALLRAIL_DIR, callrailEnv, fs, GHL_DIR, ghlEnv, MCP_SERVERS, path (+2 more)
 
 ### Community 17 - "build.py"
 Cohesion: 0.26
@@ -192,8 +187,8 @@ Cohesion: 0.15
 Nodes (12): After Google said it had already filtered suspicious activity, this unexpected approach restored campaign profitability., Case study: How we cut invalid clicks by 50%, Common questions about fighting click fraud, How do I see how many invalid clicks I’m getting?, How to test this in your own account, Should I file an investigation with Google?, The tactic: Add audiences set to ‘Targeting’, What click fraud and ‘invalid clicks’ actually are (+4 more)
 
 ### Community 19 - "package.json"
-Cohesion: 0.18
-Nodes (8): ask_claude_cli(), flatten_markdown(), Start the worker if it is not already up. Caller holds the lock., WAV bytes for `text`, or raise RuntimeError. Never returns partial audio., Per-session chat history, in memory only, oldest session evicted first., Reduce the model's answer to one paragraph of plain prose.      The prompt asks, Run the prompt through `claude -p` and return its text.      The prompt goes in, Sessions
+Cohesion: 0.15
+Nodes (12): dependencies, @anthropic-ai/claude-agent-sdk, express, force-graph, ws, description, main, name (+4 more)
 
 ### Community 20 - "compilerOptions"
 Cohesion: 0.15
@@ -224,16 +219,16 @@ Cohesion: 0.17
 Nodes (11): How to Control Effort in Prompts, The Biggest Behavioral Change: Responses Take Longer, The Final Response Instruction, The Memory System Prompt, The Migration Checklist, The Proactivity Problem and How to Constrain It, The Progress Verification Prompt, The Safety Classifier and Fallback (+3 more)
 
 ### Community 27 - "SETUP GUIDE.md"
-Cohesion: 0.21
-Nodes (8): AuditLog, load_notes(), main(), PiperTTS, A resident Piper worker, respawned on demand, serialized by a lock.      Synthes, Whether /speak can plausibly serve audio, checked without spawning., Append-only JSONL record of every request handled by this process.      Security, Pull the node list back out of the generated graph-data.js.      build.py writes
+Cohesion: 0.17
+Nodes (11): BONUS STEP 1: (Mobile 2nd Brain - Claude Dispatch), BONUS STEP 2: (Team 2nd Brain/Projects - Obsidian Sync), STEP 0:, STEP 1:, STEP 2:, STEP 3:, STEP 4:, STEP 5: (+3 more)
 
 ### Community 28 - "package.json"
-Cohesion: 0.24
-Nodes (7): NoteIndex, Keyword index over the notes, with title hits weighted above body hits., Append the postings for one node. Caller holds the lock (or is __init__)., Index a note written since startup and hand back its new node.          The node, Rank notes for `question`, returning ids only., Rank notes for `question` as (score, id) pairs, best first.          A follow-up, tokenize()
+Cohesion: 0.17
+Nodes (11): dependencies, @anthropic-ai/claude-agent-sdk, description, devDependencies, electron, main, name, private (+3 more)
 
 ### Community 29 - "renderer.js"
-Cohesion: 0.50
-Nodes (4): Connector detail pages, Feasibility Matrix, Layer 4 — Connectors & API Feasibility (CRITICAL), Note on Google Ads token approval (corrected critical-path estimate)
+Cohesion: 0.21
+Nodes (10): addMessage(), armMic(), form, input, log, micBtn, resetBtn, sendBtn (+2 more)
 
 ### Community 30 - "Fable 5 Prompting Patterns"
 Cohesion: 0.18
@@ -270,6 +265,10 @@ Nodes (7): CallRail Call Audit (June 2026), Gaps found (flagged, not yet resolve
 ### Community 38 - "How competitors target your branded traffic with Google Ads.md"
 Cohesion: 0.29
 Nodes (6): 1\. Dynamic keyword insertion, 2\. Comparison landing pages, 3\. Brand modifier keywords, Build a proportionate response, How to monitor and respond, Learn how dynamic keyword insertion, comparison pages, and brand modifier keywords influence branded searches, and how to defend against them.
+
+### Community 39 - "brief-cards.js"
+Cohesion: 0.57
+Nodes (6): clearEmptyState(), loadBriefs(), prependCard(), renderCard(), renderEmptyStateIfNeeded(), timeAgo()
 
 ### Community 40 - "Marketing — Overview"
 Cohesion: 0.29
@@ -315,6 +314,10 @@ Nodes (7): Phase 0 — Foundations (week 1), Phase 1 — Read-only Reporting MVP
 Cohesion: 0.33
 Nodes (5): Google May 2026 Core Update Details, Google May 2026 Core Update Quick Facts, Google Tracking Tools On May 2026 Core Update, Previous Broad Core Updates, Previous Helpful Content Update Impact
 
+### Community 51 - "jarvis-dashboard"
+Cohesion: 0.33
+Nodes (5): jarvis-dashboard, Known limitations (same as voice-app, still true here), Scope: Marketing, Strategy, and Info only, Setup, Using it
+
 ### Community 52 - "AI-Powered Content Gap Analysis Workflow"
 Cohesion: 0.33
 Nodes (5): 6-step process, AI-Powered Content Gap Analysis Workflow, Prompt template, Relevance to Shumaker Roofing, The core idea
@@ -335,6 +338,10 @@ Nodes (6): Anti-hallucination patterns, Approach, Goal, Layer 6 — Skills, Vect
 Cohesion: 0.33
 Nodes (6): Connectors (Layer 4 detail), Execution, Other wikis in this vault, Project Jarvis — Agentic OS, The Six Layers, TL;DR
 
+### Community 57 - "voice-app — Jarvis Lite (local prototype)"
+Cohesion: 0.33
+Nodes (5): Known limitations (local prototype, not production), Setup, Using it, voice-app — Jarvis Lite (local prototype), What's wired in
+
 ### Community 58 - "Google June 2026 Spam Update Is Rolling Out.md"
 Cohesion: 0.40
 Nodes (4): Google Tracking Tools On Google June 2026 Spam Update, June 2026 Google Spam Update Quick Facts, Previous Google Spam Updates, SEO Chatter on Google June 2026 Spam Update
@@ -342,6 +349,10 @@ Nodes (4): Google Tracking Tools On Google June 2026 Spam Update, June 2026 Goog
 ### Community 59 - "Goals"
 Cohesion: 0.40
 Nodes (5): Goals, Next horizon — expand beyond the first 2 agents, Open questions to revisit, Primary goal — Project Jarvis go-live, Who I am
+
+### Community 60 - "graph-panel.js"
+Cohesion: 0.90
+Nodes (4): filteredData(), initGraph(), loadGraph(), renderLegend()
 
 ### Community 61 - "Action Items"
 Cohesion: 0.40
@@ -352,12 +363,16 @@ Cohesion: 0.40
 Nodes (5): 24/7 reliability checklist (any host), Layer 1 — Host Infrastructure, Options, Recommendation, Threshold that changes the plan
 
 ### Community 63 - "Layer 5 — Communication Channels"
-Cohesion: 0.33
-Nodes (6): iMessage (secondary, optional), Layer 5 — Communication Channels, Local prototype #2: `jarvis-dashboard` (built as voice-app's successor, retired 2026-08-13), Local prototype: `voice-app` / "Jarvis Lite" (built 2026-07-24, retired 2026-08-13), Slack (primary), Voice (future bolt-on)
+Cohesion: 0.40
+Nodes (5): iMessage (secondary, optional), Layer 5 — Communication Channels, Local prototype: `voice-app` / "Jarvis Lite" (built 2026-07-24), Slack (primary), Voice (future bolt-on)
 
 ### Community 64 - "Voice App (Local Prototype)"
 Cohesion: 0.40
-Nodes (5): Known limitations, Relationship to Layer 5 / Phase 5, Scope: Marketing, Strategy, and Info only, Voice App (Local Prototype), What it was
+Nodes (5): Known limitations, Relationship to Layer 5 / Phase 5, Scope: Marketing, Strategy, and Info only, Voice App (Local Prototype), What it is
+
+### Community 65 - "system-prompt.md"
+Cohesion: 0.50
+Nodes (3): In scope, Out of scope — decline and redirect, Style
 
 ### Community 66 - "Google Algorithm Updates Tracker"
 Cohesion: 0.50
@@ -375,29 +390,29 @@ Nodes (4): Checklist, Log, Phase 0 Progress Tracker, Re-verify (per [[Caveats]])
 Cohesion: 0.50
 Nodes (4): Credential masking & secrets, Enforcing read-only (defense in depth — never rely on the prompt alone), Preventing prompt injection from corrupting API payloads, Security & Guardrail Protocol
 
-### Community 77 - "README.md"
-Cohesion: 0.40
-Nodes (4): Project Jarvis, Running Jarvis, What's here, Working with the wiki
+### Community 70 - "system-prompt.md"
+Cohesion: 0.50
+Nodes (3): In scope, Out of scope — decline and redirect, Style
 
 ## Knowledge Gaps
-- **436 isolated node(s):** `name`, `version`, `description`, `type`, `private` (+431 more)
+- **529 isolated node(s):** `fs`, `path`, `DATA_FILE`, `name`, `version` (+524 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Fable 5 Prompting Patterns` connect `Fable 5 Prompting Patterns` to `Project Jarvis - Agentic OS.md`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Why does `AccuLynx — the flagged "dealbreaker," investigated thoroughly` connect `AccuLynx — the flagged "dealbreaker," investigated thoroughly` to `Project Jarvis - Agentic OS.md`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **Why does `Google Ads API` connect `Google Ads API` to `Project Jarvis - Agentic OS.md`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `Walk `root`, yielding .md paths and pruning noise directories in place.`, `Strip Markdown scaffolding down to readable prose for the side panel.`, `Link notes that reference each other by title or share a wikilink target.      M` to the rest of the system?**
-  _470 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _559 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `server.py` be split into smaller, more focused modules?**
+  _Cohesion score 0.05755693581780538 - nodes in this community are weakly interconnected._
+- **Should `Project Jarvis - Agentic OS.md` be split into smaller, more focused modules?**
+  _Cohesion score 0.13690476190476192 - nodes in this community are weakly interconnected._
 - **Should `server.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.12834224598930483 - nodes in this community are weakly interconnected._
-- **Should `AcculynxClient` be split into smaller, more focused modules?**
-  _Cohesion score 0.12681159420289856 - nodes in this community are weakly interconnected._
-- **Should `How to build an AI-powered content gap analysis workflow.md` be split into smaller, more focused modules?**
-  _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.060129509713228495 - nodes in this community are weakly interconnected._

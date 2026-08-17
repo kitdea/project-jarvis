@@ -31,6 +31,24 @@
   }
   #title p { margin: 5px 0 0; font-size: 12px; color: var(--dim); letter-spacing: .05em; }
 
+  /* ---- backend badge ---- */
+  #backend-badge {
+    position: fixed; top: 26px; right: 32px; z-index: 5;
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--panel); border: 1px solid var(--edge);
+    backdrop-filter: blur(9px);
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--dim); opacity: 0; transition: opacity .3s;
+    pointer-events: none;
+  }
+  #backend-badge.show { opacity: 1; }
+  #backend-badge .dot {
+    width: 7px; height: 7px; border-radius: 50%; flex: none;
+    background: var(--badge-color, var(--accent));
+  }
+  #backend-badge .name { color: var(--text); font-weight: 600; letter-spacing: .06em; }
+
   /* ---- left sidebar: how-to, hub ranking, force sliders ---- */
   #sidebar {
     position: fixed; top: 96px; left: 24px; bottom: 24px; z-index: 5;
@@ -435,6 +453,8 @@
   <h1>Knowledge Graph</h1>
   <p id="subtitle">&nbsp;</p>
 </div>
+
+<div id="backend-badge"><span class="dot"></span><span class="name" id="backend-name"></span></div>
 
 <div id="sidebar">
   <div id="howto">
@@ -1221,6 +1241,26 @@ import ForceGraph3D from "3d-force-graph";
     return headers;
   }
 
+  // ---- backend badge ----------------------------------------------------
+  // Names which model is answering (Claude vs Gemini) in the top-right corner.
+  // Refreshed on load from GET /status, and again from every /chat reply so a
+  // spoken "switch to gemini" updates it live without a page reload.
+  var backendBadge = document.getElementById("backend-badge");
+  var backendName = document.getElementById("backend-name");
+  var BACKEND_COLORS = { "claude-cli": "#B18BFF", "gemini": "#5BC8FF" };
+  function setBackendBadge(backend, label) {
+    if (!label) return;
+    backendName.textContent = label;
+    backendBadge.style.setProperty("--badge-color", BACKEND_COLORS[backend] || "");
+    backendBadge.classList.add("show");
+  }
+  fetch("/status")
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (data) {
+      if (data) setBackendBadge(data.backend, data.backend_label);
+    })
+    .catch(function () {});
+
   function showAnswer(text, isError) {
     askAnswer.textContent = "";
     askAnswer.classList.toggle("error", !!isError);
@@ -1847,6 +1887,7 @@ import ForceGraph3D from "3d-force-graph";
       .then(function (result) {
         if (!result.ok) throw new Error(result.data.error || "Request failed.");
         sessionId = result.data.session_id || sessionId;
+        setBackendBadge(result.data.backend, result.data.backend_label);
         showAnswer(result.data.answer, false);
         showSources(result.data.nodes);
         speak(result.data.answer);

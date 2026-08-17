@@ -1014,7 +1014,16 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         if route in ("/", "/index.html"):
             self._serve_index()
             return
+        if route == "/status":
+            self._serve_status()
+            return
         super().do_GET()
+
+    def _serve_status(self):
+        # No token gate: this just names which backend is live, not a secret.
+        backend = self.server.cfg.get("backend", "claude-cli")
+        self._send_json(200, {"backend": backend,
+                              "backend_label": BACKEND_LABELS.get(backend, backend)})
 
     def _serve_index(self):
         index_path = os.path.join(ROOT, "index.html")
@@ -1224,8 +1233,11 @@ class ViewerHandler(SimpleHTTPRequestHandler):
             self.server.audit.record("/chat", session_id, self.client_address[0],
                                      {"question": question}, "ok",
                                      "backend switch -> %s" % cfg.get("backend"))
+            backend = cfg.get("backend", "claude-cli")
             self._send_json(200, {"answer": switch_reply, "nodes": [],
-                                  "session_id": session_id})
+                                  "session_id": session_id,
+                                  "backend": backend,
+                                  "backend_label": BACKEND_LABELS.get(backend, backend)})
             return
 
         index = self.server.index
@@ -1269,10 +1281,13 @@ class ViewerHandler(SimpleHTTPRequestHandler):
         # Small talk reports no nodes at all: the viewer drives both the source
         # chips and the camera off this list, so an empty one leaves the graph
         # exactly where the user left it.
+        backend = cfg.get("backend", "claude-cli")
         self._send_json(200, {
             "answer": answer,
             "nodes": hits if note_question else [],
             "session_id": session_id,
+            "backend": backend,
+            "backend_label": BACKEND_LABELS.get(backend, backend),
         })
 
 
